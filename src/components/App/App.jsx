@@ -1,17 +1,17 @@
 import Footer from "../Footer/Footer";
-import "./App.css";
+import s from "./App.module.css";
 import AppHeader from "../../AppHeader/AppHeader";
+import CardList from "../CardList/CardList";
 
 function App() {
   return (
-    <>  
-    <AppHeader />
-    <div className="App">
-        <h1>App</h1>
-      </div>
+    <>
+      <AppHeader />
+      <main className="main">
+        <CardList />
+      </main>
 
-    <Footer/>
-    
+      <Footer />
     </>
   );
 }
