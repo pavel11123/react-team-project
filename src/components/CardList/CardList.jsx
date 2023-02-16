@@ -1,10 +1,21 @@
 import React from "react";
-import { Typography, Box, Link } from "@mui/material";
+import { Container } from "@mui/material";
 import s from "./CardList.module.css";
-import CopyrightIcon from "@mui/icons-material/Copyright";
+import RecipeReviewCard from "../Card/Card";
 
 const CardList = () => {
-  return <p>CardList</p>;
+  return (
+    <Container>
+      <div className={s.list__grid}>
+        <RecipeReviewCard />
+        <RecipeReviewCard />
+        <RecipeReviewCard />
+        <RecipeReviewCard />
+        <RecipeReviewCard />
+        <RecipeReviewCard />
+      </div>
+    </Container>
+  );
 };
 
 export default CardList;

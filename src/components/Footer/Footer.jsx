@@ -18,13 +18,13 @@ const Footer = () => {
         }}
         // onClick={preventDefault}
       >
-        <Typography paragraph>Автор проекта:</Typography>
+        <Typography paragraph>Авторы проекта:</Typography>
 
         <Link href="#" underline="hover">
-          Шатров Константин
+          Анастасия Арсений Павел
         </Link>
 
-        <Typography paragraph>2022</Typography>
+        <Typography paragraph>2023</Typography>
         <CopyrightIcon />
       </Box>
     </footer>
