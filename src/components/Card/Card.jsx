@@ -6,7 +6,6 @@ import {
   CardMedia,
   CardContent,
   CardActions,
-  Collapse,
   Avatar,
   IconButton,
 } from "@mui/material";
@@ -14,10 +13,8 @@ import {
 import s from "./Card.module.css";
 
 import { styled } from "@mui/material/styles";
-import { red } from "@mui/material/colors";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 
 const ExpandMore = styled((props) => {
@@ -31,7 +28,14 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-export default function RecipeReviewCard() {
+export default function RecipeReviewCard({
+  image,
+  likes,
+  title,
+  created_at,
+  text,
+  author,
+}) {
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
@@ -39,11 +43,11 @@ export default function RecipeReviewCard() {
   };
 
   return (
-    <Card>
+    <Card className={s.card__hover}>
       <CardHeader
         avatar={
-          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-            R
+          <Avatar aria-label="recipe">
+            <img className={s.avatar__image} src={author.avatar} alt="" />
           </Avatar>
         }
         action={
@@ -51,21 +55,16 @@ export default function RecipeReviewCard() {
             <MoreVertIcon />
           </IconButton>
         }
-        title="Shrimp and Chorizo Paella"
-        subheader="Февраль 16, 2023"
+        title={author.name}
+        subheader={created_at}
       />
-      <CardMedia
-        component="img"
-        height="194"
-        image="https://images.unsplash.com/photo-1617634667039-8e4cb277ab46?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=668&q=80"
-        alt="Paella dish"
-      />
+      <CardMedia component="img" height="194" image={image} alt="Paella dish" />
       <CardContent>
+        <Typography variant="h7" color="title">
+          {title}
+        </Typography>
         <Typography variant="body2" color="text.secondary">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus
-          architecto rem animi? Dolore, deserunt beatae! Sunt quaerat obcaecati
-          doloribus quo culpa sit quidem natus, ea quae harum blanditiis, ex
-          molestias.
+          {text}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
