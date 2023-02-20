@@ -1,5 +1,5 @@
 import Footer from "../Footer/Footer";
-import AppHeader from "../../AppHeader/AppHeader";
+import AppHeader from "../AppHeader/AppHeader";
 import CardList from "../CardList/CardList";
 import s from "./App.module.css";
 
