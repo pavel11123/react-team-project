@@ -1,19 +1,26 @@
 import React from "react";
-import { Container } from "@mui/material";
+import { Container, Stack, Pagination } from "@mui/material";
 import s from "./CardList.module.css";
 import RecipeReviewCard from "../Card/Card";
 import { postData } from "../../assets/posts";
 
 const CardList = () => {
-  // console.log(postData[0].image); // выводится два раза = почему?
+  const [page, setPage] = React.useState(1);
+  const handleChange = (event, value) => {
+    setPage(value);
+  };
+
   return (
     <Container>
       <div className="container__main">
-        <div className={s.list__grid}>
-          {postData.map((el) => {
-            return <RecipeReviewCard key={el._id} {...el} />;
-          })}
-        </div>
+        <Stack spacing={2}>
+          <div className={s.list__grid}>
+            {postData.map((el) => {
+              return <RecipeReviewCard key={el._id} {...el} />;
+            })}
+          </div>
+          <Pagination count={10} page={page} onChange={handleChange} />
+        </Stack>
       </div>
     </Container>
   );
