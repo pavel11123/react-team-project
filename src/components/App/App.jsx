@@ -1,10 +1,25 @@
-import "./App.css";
+import Footer from "../Footer/Footer";
+import AppHeader from "../AppHeader/AppHeader";
+import CardList from "../CardList/CardList";
+import s from "./App.module.css";
+import InfoHeader from "../InfoHeader/InfoHeader";
 
 function App() {
   return (
-    <div className="App">
-      <h1>App</h1>
-    </div>
+    <>
+      <AppHeader />
+      <main className="main">
+        <section className="section__main">
+          <InfoHeader />
+        </section>
+
+        <section className="section__main">
+          <CardList />
+        </section>
+      </main>
+
+      <Footer />
+    </>
   );
 }
 
