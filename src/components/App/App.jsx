@@ -4,9 +4,8 @@ import CardList from "../CardList/CardList";
 import s from "./App.module.css";
 import InfoHeader from "../InfoHeader/InfoHeader";
 
-// import Card from "../Card/Card";
-
 function App() {
+
   return (
     <>
       <AppHeader />
