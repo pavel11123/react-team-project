@@ -2,37 +2,27 @@ import React, { useEffect, useState } from "react";
 import { Container, Stack, Pagination } from "@mui/material";
 import s from "./CardList.module.css";
 import RecipeReviewCard from "../Card/Card";
-import { postData } from "../../assets/posts";
+import api from "../../utils/api";
 
 const CardList = () => {
-  const [page, setPage] = React.useState(1);
   const [posts, setPosts] = useState([]);
-  const [countPagination, setCountPagination] = useState(1);
+  const [currentUser, setCurrentUser] = useState(null);
+  const [page, setPage] = React.useState(1);
+  const [countPagination, setCountPagination] = useState(10);
 
   useEffect(() => {
-    doFetch();
+    Promise.all([api.getUserInfo(), api.getPostsList(page)])
+      .then(([userData, postData]) => {
+        setCurrentUser(userData);
+        setPosts(postData.posts);
+        setCountPagination(Math.ceil(postData.total / 10));
+      })
+      .catch((err) => console.log(err));
   }, [page]);
 
   const handleChange = (event, value) => {
     setPage(value);
   };
-
-  async function doFetch() {
-    const response = await fetch(
-      `https://api.react-learning.ru/posts/paginate?page=${page}&limit=10`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization:
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2U3NjhjMDU5Yjk4YjAzOGY3N2I1MTIiLCJncm91cCI6ImZyb250MTAiLCJpYXQiOjE2NzYxMTAwNzMsImV4cCI6MTcwNzY0NjA3M30.luanAfhT-QPcFluquX55gosHGNa0vl_x42wo9mBy3h8",
-        },
-      }
-    );
-
-    const { posts, total } = await response.json();
-    setPosts(posts);
-    setCountPagination(Math.ceil(total / 10));
-  }
 
   return (
     <Container>
@@ -43,11 +33,15 @@ const CardList = () => {
               return <RecipeReviewCard key={el._id} {...el} />;
             })}
           </div>
-          <Pagination
-            count={countPagination}
-            page={page}
-            onChange={handleChange}
-          />
+          <div className={s.pagination}>
+            <Pagination
+              count={countPagination}
+              page={page}
+              onChange={handleChange}
+              showFirstButton
+              showLastButton
+            />
+          </div>
         </Stack>
       </div>
     </Container>
