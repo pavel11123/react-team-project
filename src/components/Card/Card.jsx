@@ -10,12 +10,20 @@ import {
   IconButton,
 } from "@mui/material";
 
+
 import s from "./Card.module.css";
 
 import { styled } from "@mui/material/styles";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+
+import dayjs from "dayjs";
+import 'dayjs/locale/ru';
+import relativeTime from 'dayjs/plugin/relativeTime';
+
+dayjs.locale('ru')
+dayjs.extend(relativeTime);
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -56,7 +64,7 @@ export default function RecipeReviewCard({
           </IconButton>
         }
         title={author.name}
-        subheader={created_at}
+        subheader={dayjs(created_at).fromNow()}
       />
       <CardMedia component="img" height="194" image={image} alt="Paella dish" />
       <CardContent>
