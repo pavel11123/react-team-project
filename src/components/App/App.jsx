@@ -5,6 +5,7 @@ import s from "./App.module.css";
 import InfoHeader from "../InfoHeader/InfoHeader";
 
 function App() {
+
   return (
     <>
       <AppHeader />
