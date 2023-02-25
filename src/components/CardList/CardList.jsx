@@ -15,7 +15,7 @@ const CardList = () => {
       .then(([userData, postData]) => {
         setCurrentUser(userData);
         setPosts(postData.posts);
-        setCountPagination(Math.ceil(postData.total / 10));
+        setCountPagination(Math.ceil(postData.total / 12));
       })
       .catch((err) => console.log(err));
   }, [page]);
