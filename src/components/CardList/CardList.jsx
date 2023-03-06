@@ -1,19 +1,48 @@
-import React from "react";
-import { Container } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { Container, Stack, Pagination } from "@mui/material";
 import s from "./CardList.module.css";
 import RecipeReviewCard from "../Card/Card";
-import { postData } from "../../assets/posts";
+import api from "../../utils/api";
 
 const CardList = () => {
-  // console.log(postData[0].image); // выводится два раза = почему?
+  const [posts, setPosts] = useState([]);
+  const [currentUser, setCurrentUser] = useState(null);
+  const [page, setPage] = React.useState(1);
+  const [countPagination, setCountPagination] = useState(10);
+
+  useEffect(() => {
+    Promise.all([api.getUserInfo(), api.getPostsList(page)])
+      .then(([userData, postData]) => {
+        setCurrentUser(userData);
+        setPosts(postData.posts);
+        setCountPagination(Math.ceil(postData.total / 12));
+      })
+      .catch((err) => console.log(err));
+  }, [page]);
+
+  const handleChange = (event, value) => {
+    setPage(value);
+  };
+
   return (
     <Container>
       <div className="container__main">
-        <div className={s.list__grid}>
-          {postData.map((el) => {
-            return <RecipeReviewCard key={el._id} {...el} />;
-          })}
-        </div>
+        <Stack spacing={2}>
+          <div className={s.list__grid}>
+            {posts.map((el) => {
+              return <RecipeReviewCard key={el._id} {...el} />;
+            })}
+          </div>
+          <div className={s.pagination}>
+            <Pagination
+              count={countPagination}
+              page={page}
+              onChange={handleChange}
+              showFirstButton
+              showLastButton
+            />
+          </div>
+        </Stack>
       </div>
     </Container>
   );
