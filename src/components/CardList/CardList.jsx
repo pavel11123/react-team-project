@@ -1,25 +1,9 @@
-import React, { useEffect, useState } from "react";
 import { Container, Stack, Pagination } from "@mui/material";
 import s from "./CardList.module.css";
 import RecipeReviewCard from "../Card/Card";
-import api from "../../utils/api";
 
-const CardList = () => {
-  const [posts, setPosts] = useState([]);
-  const [currentUser, setCurrentUser] = useState(null);
-  const [page, setPage] = React.useState(1);
-  const [countPagination, setCountPagination] = useState(10);
-
-  useEffect(() => {
-    Promise.all([api.getUserInfo(), api.getPostsList(page)])
-      .then(([userData, postData]) => {
-        setCurrentUser(userData);
-        setPosts(postData.posts);
-        setCountPagination(Math.ceil(postData.total / 12));
-      })
-      .catch((err) => console.log(err));
-  }, [page]);
-
+const CardList = ({ posts, page, setPage, countPagination }) => {
+  
   const handleChange = (event, value) => {
     setPage(value);
   };
