@@ -22,7 +22,7 @@ function App() {
       .catch((err) => console.log(err));
   }, [page]);
 
-
+// Обновление пользователя
   const handleUpdataUser = (userUpdate) => {
     api.setUserInfo(userUpdate).then((newUserData) => {
       setCurrentUser(newUserData);
