@@ -1,0 +1,13 @@
+.user {
+   display: flex;
+   align-items: center;
+   gap: 15px;
+}
+
+@media (max-width: 700px) {
+    .user {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+    }
+}
