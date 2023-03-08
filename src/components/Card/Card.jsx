@@ -45,12 +45,13 @@ export default function RecipeReviewCard({
   author,
 }) {
   const [expanded, setExpanded] = React.useState(false);
-
+  
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
   return (
+  
     <Card className={s.card__hover}>
       <CardHeader
         avatar={
@@ -78,6 +79,7 @@ export default function RecipeReviewCard({
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
           <FavoriteIcon />
+          {likes.length !== 0 && <span>{likes.length}</span>}
         </IconButton>
         <IconButton aria-label="share">
           <ShareIcon />
