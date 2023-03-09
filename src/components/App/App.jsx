@@ -3,7 +3,7 @@ import AppHeader from "../AppHeader/AppHeader";
 import CardList from "../CardList/CardList";
 import s from "./App.module.css";
 import InfoHeader from "../InfoHeader/InfoHeader";
-import {useState, useEffect} from 'react';
+import { useState, useEffect } from "react";
 import api from "../../utils/api";
 
 function App() {
@@ -11,6 +11,8 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [page, setPage] = useState(1);
   const [countPagination, setCountPagination] = useState(10);
+
+  // console.log(currentUser._id);
 
   useEffect(() => {
     Promise.all([api.getUserInfo(), api.getPostsList(page)])
@@ -22,12 +24,31 @@ function App() {
       .catch((err) => console.log(err));
   }, [page]);
 
-// Обновление пользователя
+  // console.log(posts[0]._id);
+
+  // Обновление пользователя
   const handleUpdataUser = (userUpdate) => {
     api.setUserInfo(userUpdate).then((newUserData) => {
       setCurrentUser(newUserData);
-    })
-  }
+    });
+  };
+
+  // console.log(posts);
+
+  // likes
+  const handlePostLike = (post) => {
+    // console.log(posts[0].likes);
+    const isLiked = post.likes.some((id) => id === currentUser._id);
+
+    api.changeLikePost(post._id, isLiked).then((newPost) => {
+      const newPosts = posts.map((post) => {
+        // console.log("Старая карточка", post);
+        // console.log("Новая карточка", newPost);
+        return post._id === newPost._id ? newPost : post;
+      });
+      setPosts(newPosts);
+    });
+  };
 
   return (
     <>
@@ -38,7 +59,14 @@ function App() {
         </section>
 
         <section className="section__main">
-          <CardList posts={posts} page={page} setPage={setPage} countPagination={countPagination} />
+          <CardList
+            posts={posts}
+            page={page}
+            setPage={setPage}
+            countPagination={countPagination}
+            onPostLike={handlePostLike}
+            currentUser={currentUser}
+          />
         </section>
       </main>
 
