@@ -12,6 +12,7 @@ class Api {
         return fetch(`${this._baseUrl}/posts/paginate?page=${page}&limit=12`, {
             headers: this._headers,
         }).then(onResponse)
+        
     }
 
     getUserInfo() {
