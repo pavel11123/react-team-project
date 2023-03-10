@@ -2,8 +2,14 @@ import { Container, Stack, Pagination } from "@mui/material";
 import s from "./CardList.module.css";
 import RecipeReviewCard from "../Card/Card";
 
-const CardList = ({ posts, page, setPage, countPagination }) => {
-  
+const CardList = ({
+  posts,
+  page,
+  setPage,
+  countPagination,
+  currentUser,
+  onPostLike,
+}) => {
   const handleChange = (event, value) => {
     setPage(value);
   };
@@ -14,7 +20,14 @@ const CardList = ({ posts, page, setPage, countPagination }) => {
         <Stack spacing={2}>
           <div className={s.list__grid}>
             {posts.map((el) => {
-              return <RecipeReviewCard key={el._id} {...el} />;
+              return (
+                <RecipeReviewCard
+                  key={el._id}
+                  {...el}
+                  onPostLike={onPostLike}
+                  currentUser={currentUser}
+                />
+              );
             })}
           </div>
           <div className={s.pagination}>

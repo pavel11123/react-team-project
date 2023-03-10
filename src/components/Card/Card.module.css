@@ -19,3 +19,10 @@
   -ms-transform: scale(1.01);
   -o-transform: scale(1.01);
 }
+
+.favourite {
+}
+
+.favourite_active {
+  fill: red;
+}

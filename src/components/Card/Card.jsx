@@ -10,7 +10,6 @@ import {
   IconButton,
 } from "@mui/material";
 
-
 import s from "./Card.module.css";
 
 import { styled } from "@mui/material/styles";
@@ -18,11 +17,13 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 
-import dayjs from "dayjs";
-import 'dayjs/locale/ru';
-import relativeTime from 'dayjs/plugin/relativeTime';
+// import { pink } from "@mui/material/colors";
 
-dayjs.locale('ru')
+import dayjs from "dayjs";
+import "dayjs/locale/ru";
+import relativeTime from "dayjs/plugin/relativeTime";
+
+dayjs.locale("ru");
 dayjs.extend(relativeTime);
 
 const ExpandMore = styled((props) => {
@@ -43,15 +44,25 @@ export default function RecipeReviewCard({
   created_at,
   text,
   author,
+  currentUser,
+  onPostLike,
+  _id,
 }) {
   const [expanded, setExpanded] = React.useState(false);
-  
+
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
+  const isLiked = likes.some((id) => id === currentUser?._id);
+  const handleLikeClick = () => {
+    // console.log("click");
+    // console.log(likes);
+    // console.log(isLiked);
+    onPostLike({ _id, likes });
+  };
+
   return (
-  
     <Card className={s.card__hover}>
       <CardHeader
         avatar={
@@ -78,7 +89,11 @@ export default function RecipeReviewCard({
       </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
+          <FavoriteIcon
+            className={isLiked ? s.favourite_active : s.favourite}
+            onClick={handleLikeClick}
+          />
+          {/* <FavoriteIcon sx={{ color: pink[500] }} /> */}
           {likes.length !== 0 && <span>{likes.length}</span>}
         </IconButton>
         <IconButton aria-label="share">
