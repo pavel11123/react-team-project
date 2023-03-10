@@ -17,7 +17,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 
-// import { pink } from "@mui/material/colors";
+import { grey, red } from "@mui/material/colors";
 
 import dayjs from "dayjs";
 import "dayjs/locale/ru";
@@ -56,9 +56,9 @@ export default function RecipeReviewCard({
 
   const isLiked = likes.some((id) => id === currentUser?._id);
   const handleLikeClick = () => {
-    // console.log("click");
-    // console.log(likes);
-    // console.log(isLiked);
+    console.log("click");
+    console.log(likes);
+    console.log(isLiked);
     onPostLike({ _id, likes });
   };
 
@@ -90,10 +90,10 @@ export default function RecipeReviewCard({
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
           <FavoriteIcon
-            className={isLiked ? s.favourite_active : s.favourite}
+            // className={isLiked ? s.favourite_active : s.favourite}
             onClick={handleLikeClick}
+            sx={isLiked ? { color: red[500] } : { color: grey[500] }}
           />
-          {/* <FavoriteIcon sx={{ color: pink[500] }} /> */}
           {likes.length !== 0 && <span>{likes.length}</span>}
         </IconButton>
         <IconButton aria-label="share">
