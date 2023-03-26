@@ -1,17 +1,22 @@
 import { Container, Stack, Pagination } from "@mui/material";
 import s from "./CardList.module.css";
 import RecipeReviewCard from "../Card/Card";
-
+import { useContext } from "react";
+import { CardContext } from "../../context/cardContext";
+import { UserContext } from "../../context/userContext";
 const CardList = ({
   posts,
   page,
   setPage,
   countPagination,
-  currentUser,
-  onPostLike,
+  
+  
 }) => {
+  const { user: currentUser } = useContext(UserContext);
+const { onPostLike } = useContext(CardContext);
   const handleChange = (event, value) => {
     setPage(value);
+
   };
 
   return (
