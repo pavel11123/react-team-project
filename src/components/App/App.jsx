@@ -1,7 +1,6 @@
 import Footer from "../Footer/Footer";
 import AppHeader from "../AppHeader/AppHeader";
 import CardList from "../CardList/CardList";
-import s from "./App.module.css";
 import InfoHeader from "../InfoHeader/InfoHeader";
 import { useState, useEffect, useCallback } from "react";
 import api from "../../utils/api";
@@ -11,7 +10,9 @@ import FavouritesPostPage from "../../pages/FavouritesPostPage/FavouritesPostPag
 import PostPage from "../../pages/PostPage/PostPage";
 import {CardContext} from "../../context/cardContext";
 import {UserContext} from "../../context/userContext";
-import CatalogPage from "../../pages/CatalogPage/CatalogPage";
+
+import Post from "../Post/Post";
+
 
 function App() {
   const [posts, setPosts] = useState([]);
@@ -28,27 +29,14 @@ function App() {
       .then(([userData, postData]) => {
         setCurrentUser(userData);
         setPosts(postData.posts);
+        const favouritesPosts = postData.posts.filter(item => isLiked(item.likes, userData._id));
+                setFavourites(favouritesPosts);
         setCountPagination(Math.ceil(postData.total / 12));
       })
       .catch((err) => console.log(err));
   }, [page]);
 
-//   useEffect(() => {
-//     setIsLoading(true);
-//     Promise.all([api.getUserInfo(), api.getPostList()])
-//         .then(([userData, postData]) => {
-//             setCurrentUser(userData);
-//             setPosts(postData.posts);
-//             const favouritesPosts = postData.posts.filter(item => isLiked(item.likes, userData._id));
-//             setFavourites(favouritesPosts);
-//         })
-//         .catch(err => console.error(err))
-//         .finally(() => {
-//             setIsLoading(false);
-//         })
-// }, []);
 
-  // console.log(posts[0]._id);
 
   // Обновление пользователя
   const handleUpdataUser = (userUpdate) => {
@@ -56,8 +44,6 @@ function App() {
       setCurrentUser(newUserData);
     });
   };
-
-  // console.log(posts);
 
   // likes
   // const handlePostLike = (post) => {
@@ -75,9 +61,9 @@ function App() {
     
   //   });
 
-    const handlePostLike = useCallback((postById) => {
-        const liked = isLiked(postById.likes, currentUser._id); 
-        return api.changeLikePost(postById._id, liked).then((newPost) => { 
+    const handlePostLike = useCallback((postLikes) => {
+        const liked = isLiked(postLikes.likes, currentUser._id); 
+        return api.changeLikePost(postLikes._id, liked).then((newPost) => { 
             const newPosts = posts.map((post) => {
                 return post._id === newPost._id ? newPost : post;
             })
@@ -95,6 +81,8 @@ function App() {
     }, [posts, currentUser])
     console.log('favourites---------->' ,favourites);
     
+    
+    
   // };
 
   return (
@@ -110,7 +98,7 @@ function App() {
             
             <Routes>
            
-              <Route index element ={<CatalogPage posts={posts}
+              <Route index element ={<CardList posts={posts}
               page={page}
               setPage={setPage}
               countPagination={countPagination}

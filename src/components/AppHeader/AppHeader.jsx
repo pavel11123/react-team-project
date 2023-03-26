@@ -19,7 +19,7 @@ const AppHeader = ({user, updateUserHandle}) => {
   
   const handleClickButtonEdit = (e) => {
     e.preventDefault();
-    updateUserHandle({name: "Анастасия Мысник", about: 'Препод'})
+    updateUserHandle({name: "Анастасия Мысник", about: 'Ученик'})
   }
 
   return (

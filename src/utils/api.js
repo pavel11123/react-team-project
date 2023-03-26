@@ -40,6 +40,14 @@ class Api {
       headers: this._headers,
     }).then(onResponse);
   }
+
+  addNewPost(data) {
+    return fetch(`${this._baseUrl}/posts`, {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: this._headers,
+    }).then(onResponse);
+  }
 }
 
 const config = {
