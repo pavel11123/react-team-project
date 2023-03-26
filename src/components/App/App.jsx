@@ -1,7 +1,6 @@
 import Footer from "../Footer/Footer";
 import AppHeader from "../AppHeader/AppHeader";
 import CardList from "../CardList/CardList";
-import s from "./App.module.css";
 import InfoHeader from "../InfoHeader/InfoHeader";
 import { useState, useEffect } from "react";
 import api from "../../utils/api";
@@ -33,8 +32,6 @@ function App() {
     });
   };
 
-  // console.log(posts);
-
   // likes
   const handlePostLike = (post) => {
     // console.log(posts[0].likes);
@@ -54,8 +51,9 @@ function App() {
     <>
       <AppHeader user={currentUser} updateUserHandle={handleUpdataUser} />
       <main className="main">
+
         <section className="section__main">
-          <InfoHeader />
+          <InfoHeader/>
         </section>
 
         <section className="section__main">
