@@ -13,7 +13,7 @@ const CardList = ({
   
 }) => {
   const { user: currentUser } = useContext(UserContext);
-const { onPostLike } = useContext(CardContext);
+const { handleLike } = useContext(CardContext);
   const handleChange = (event, value) => {
     setPage(value);
 
@@ -29,7 +29,7 @@ const { onPostLike } = useContext(CardContext);
                 <RecipeReviewCard
                   key={el._id}
                   {...el}
-                  onPostLike={onPostLike}
+                  onPostLike={handleLike}
                   currentUser={currentUser}
                 />
               );

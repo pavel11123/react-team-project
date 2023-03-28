@@ -79,7 +79,7 @@ function App() {
             return newPost
         })
     }, [posts, currentUser])
-    console.log('favourites---------->' ,favourites);
+    // console.log('favourites---------->' ,favourites);
     
     
     
@@ -87,7 +87,7 @@ function App() {
 
   return (
     <UserContext.Provider value={{user: currentUser, isLoading}}>
-      <CardContext.Provider value={{posts, favourites, onPostLike: handlePostLike, isLoading}}>
+      <CardContext.Provider value={{posts, favourites, handleLike: handlePostLike, isLoading}}>
         <AppHeader user={currentUser} updateUserHandle={handleUpdataUser} />
         <main className="main">
           <section className="section__main">

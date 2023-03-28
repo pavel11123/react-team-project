@@ -47,23 +47,23 @@ const RecipeReviewCard = ({
   created_at,
   text,
   author,
-  
+  currentUser,
   _id,
 }) => {
   
   const [expanded, setExpanded] = React.useState(false);
-  const { user: currentUser } = useContext(UserContext);
+  // const { user: currentUser } = useContext(UserContext);
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
   const liked = isLiked(likes, currentUser?._id);
-  const { onPostLike } = useContext(CardContext);
+  const { handleLike } = useContext(CardContext);
   const handleLikeClick = () => {
     // console.log("click");
     // console.log("likes" ,likes);
     // console.log(isLiked);
-    onPostLike({ _id, likes })
+    handleLike({ _id, likes })
     
   };
 
