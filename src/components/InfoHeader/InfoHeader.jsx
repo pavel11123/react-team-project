@@ -9,6 +9,9 @@ const InfoHeader = () => {
       <div className="container__main">
         <BasicModal />
       </div>
+      <div>
+        
+      </div>
     </Container>
   );
 };

@@ -18,10 +18,14 @@ import ShareIcon from "@mui/icons-material/Share";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 
 import { grey, red } from "@mui/material/colors";
-
+import { isLiked } from "../../utils/posts";
+import { useContext } from "react";
+import { UserContext } from "../../context/userContext";
+import { CardContext } from "../../context/cardContext";
 import dayjs from "dayjs";
 import "dayjs/locale/ru";
 import relativeTime from "dayjs/plugin/relativeTime";
+import { Link } from "react-router-dom";
 
 dayjs.locale("ru");
 dayjs.extend(relativeTime);
@@ -36,8 +40,7 @@ const ExpandMore = styled((props) => {
     duration: theme.transitions.duration.shortest,
   }),
 }));
-
-export default function RecipeReviewCard({
+const RecipeReviewCard = ({
   image,
   likes,
   title,
@@ -45,21 +48,23 @@ export default function RecipeReviewCard({
   text,
   author,
   currentUser,
-  onPostLike,
   _id,
-}) {
+}) => {
+  
   const [expanded, setExpanded] = React.useState(false);
-
+  // const { user: currentUser } = useContext(UserContext);
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
-  const isLiked = likes.some((id) => id === currentUser?._id);
+  const liked = isLiked(likes, currentUser?._id);
+  const { handleLike } = useContext(CardContext);
   const handleLikeClick = () => {
-    console.log("click");
-    console.log(likes);
-    console.log(isLiked);
-    onPostLike({ _id, likes });
+    // console.log("click");
+    // console.log("likes" ,likes);
+    // console.log(isLiked);
+    handleLike({ _id, likes })
+    
   };
 
   return (
@@ -78,7 +83,9 @@ export default function RecipeReviewCard({
         title={author.name}
         subheader={dayjs(created_at).fromNow()}
       />
-      <CardMedia component="img" height="194" image={image} alt="Paella dish" />
+      <Link to={`/post/${_id}`}>
+        <CardMedia component="img" height="194" image={image} alt="Paella dish" />
+      </Link>
       <CardContent>
         <Typography variant="h7" color="title">
           {title}
@@ -92,7 +99,7 @@ export default function RecipeReviewCard({
           <FavoriteIcon
             // className={isLiked ? s.favourite_active : s.favourite}
             onClick={handleLikeClick}
-            sx={isLiked ? { color: red[500] } : { color: grey[500] }}
+            sx={liked ? { color: red[500] } : { color: grey[500] }}
           />
           {likes.length !== 0 && <span>{likes.length}</span>}
         </IconButton>
@@ -109,3 +116,6 @@ export default function RecipeReviewCard({
     </Card>
   );
 }
+
+
+export default RecipeReviewCard

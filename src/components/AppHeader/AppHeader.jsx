@@ -11,6 +11,8 @@ import CookieIcon from "@mui/icons-material/Cookie";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import { Link } from "react-router-dom";
 
 
 const AppHeader = ({user, updateUserHandle}) => {
@@ -24,17 +26,19 @@ const AppHeader = ({user, updateUserHandle}) => {
     <AppBar position="sticky">
       <Container>
         <Toolbar>
-          <IconButton
-            edge="start"
-            size="large"
-            color="inherit"
-            aria-label="menu"
-          >
-            <CookieIcon />
-          </IconButton>
-          <Typography variant="h6" sx={{ flexGrow: 1 }}>
-            React-team-project
-          </Typography>
+          
+            <IconButton
+              edge="start"
+              size="large"
+              color="inherit"
+              aria-label="menu"
+            >
+              <Link to ='/' ><CookieIcon /></Link>
+            </IconButton>
+            <Typography variant="h6" sx={{ flexGrow: 1 }}>
+              React-team-project
+            </Typography>
+        
           <IconButton edge="start" size="large" color="inherit">
             <AccountCircleIcon />
           </IconButton>
@@ -45,6 +49,9 @@ const AppHeader = ({user, updateUserHandle}) => {
             <Button variant="contained" onClick={handleClickButtonEdit}>Изменить</Button>
           </Stack>
           </div>
+          <Link to="/favourites">
+          <IconButton size="large" color="inherit"><FavoriteIcon /></IconButton>
+          </Link>
         </Toolbar>
       </Container>
     </AppBar>
