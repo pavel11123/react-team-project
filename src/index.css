@@ -74,6 +74,30 @@ hr {
   margin: 0 auto;
 }
 
+.d-fl {
+  display: flex;
+}
+
+.d-fl-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.d-fl-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.d-fl-wrap {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.d-fl-wrap--reverse {
+  display: flex;
+  flex-wrap: wrap-reverse;
+}
+
 .visually-hidden {
   position: absolute;
   width: 1px;
@@ -115,6 +139,6 @@ hr {
   flex: 1 1 auto;
 }
 
-.section__main {
+[class*="__section"] {
   margin: 30px 0;
 }

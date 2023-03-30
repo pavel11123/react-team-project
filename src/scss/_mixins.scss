@@ -1,0 +1,76 @@
+@use "sass:math";
+
+//REM
+@function rem($px) {
+  $result: ($px / 16) + rem;
+  @return $result;
+}
+
+// Grids
+@mixin grid($type: fit, $min: 280px, $max: 1fr, $gap: 30px) {
+  display: grid;
+  gap: $gap;
+  grid-template-columns: repeat(auto-#{$type}, minmax($min, $max));
+}
+
+// Адаптивная формула для текста в Rem
+$maxWidth: 1440;
+@mixin adaptiv-font($min: 16, $maxF: 20, $minWidth: 320) {
+  $minF: $min / 16;
+  font-size: calc(
+    #{$minF + rem} + (#{$maxF} - #{$minF * 16}) * ((100vw - #{$minWidth + px}) /
+          (#{$maxWidth} - #{$minWidth}))
+  );
+}
+
+// Адаптивная формула для line-height в Rem
+$maxWidth: 1440;
+@mixin adaptiv-lineHeight($min: 16, $maxF: 20, $minWidth: 320) {
+  $minF: $min / 16;
+  line-height: calc(
+    #{$minF + rem} + (#{$maxF} - #{$minF * 16}) * ((100vw - #{$minWidth + px}) /
+          (#{$maxWidth} - #{$minWidth}))
+  );
+}
+
+// Адаптивная формула для ширины блоков в Px
+@mixin adaptiv-block($min: 16, $maxF: 20, $maxWidth: 1440, $minWidth: 320) {
+  width: calc(
+    #{$min + px} + (#{$maxF} - #{$min}) * ((100vw - #{$minWidth + px}) /
+          (#{$maxWidth} - #{$minWidth}))
+  );
+}
+
+// Адаптивная формула для calc в px
+@function adaptiv-number($min: 16, $maxF: 20, $maxWidth: 1440, $minWidth: 320) {
+  $result: calc(
+    #{$min + px} + (#{$maxF} - #{$min}) * ((100vw - #{$minWidth + px}) /
+          (#{$maxWidth} - #{$minWidth}))
+  );
+  @return $result;
+}
+
+// img
+@mixin img($type: contain) {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: $type;
+}
+
+// Адаптивная формула для текста в Rem
+@function adaptiv-num-rem(
+  $min: 16,
+  $maxF: 20,
+  $maxWidth: 1440,
+  $minWidth: 320
+) {
+  $minF: $min / 16;
+  $result: calc(
+    #{$minF + rem} + (#{$maxF} - #{$minF * 16}) * ((100vw - #{$minWidth + px}) /
+          (#{$maxWidth} - #{$minWidth}))
+  );
+  @return $result;
+}

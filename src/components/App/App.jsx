@@ -12,6 +12,7 @@ import { CardContext } from "../../context/cardContext";
 import { UserContext } from "../../context/userContext";
 
 import Post from "../Post/Post";
+import NotFoundPage from "../../pages/NotFoundPage/NotFoundPage";
 
 function App() {
   const [posts, setPosts] = useState([]);
@@ -92,11 +93,11 @@ function App() {
       >
         <AppHeader user={currentUser} updateUserHandle={handleUpdataUser} />
         <main className="main">
-          <section className="section__main">
+          <section className="modal__section">
             <InfoHeader />
           </section>
 
-          <section className="section__main">
+          <section className="main__section">
             <Routes>
               <Route
                 index
@@ -113,6 +114,7 @@ function App() {
               />
               <Route path="/post/:postId" element={<PostPage />} />
               <Route path="/favourites" element={<FavouritesPostPage />} />
+              <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </section>
         </main>
