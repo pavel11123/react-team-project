@@ -1,0 +1,15 @@
+.avatar__image {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+
+  .post__container {
+    display: grid;
+    grid-template-columns: minmax(400px, 600px) minmax(200px, 350px);;
+    gap: 5px;
+    overflow: hidden;
+}
+.card-white {
+    
+}

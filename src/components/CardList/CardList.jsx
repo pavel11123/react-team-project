@@ -1,27 +1,22 @@
-import React, { useEffect, useState } from "react";
 import { Container, Stack, Pagination } from "@mui/material";
 import s from "./CardList.module.css";
 import RecipeReviewCard from "../Card/Card";
-import api from "../../utils/api";
-
-const CardList = () => {
-  const [posts, setPosts] = useState([]);
-  const [currentUser, setCurrentUser] = useState(null);
-  const [page, setPage] = React.useState(1);
-  const [countPagination, setCountPagination] = useState(10);
-
-  useEffect(() => {
-    Promise.all([api.getUserInfo(), api.getPostsList(page)])
-      .then(([userData, postData]) => {
-        setCurrentUser(userData);
-        setPosts(postData.posts);
-        setCountPagination(Math.ceil(postData.total / 12));
-      })
-      .catch((err) => console.log(err));
-  }, [page]);
-
+import { useContext } from "react";
+import { CardContext } from "../../context/cardContext";
+import { UserContext } from "../../context/userContext";
+const CardList = ({
+  posts,
+  page,
+  setPage,
+  countPagination,
+  
+  
+}) => {
+  const { user: currentUser } = useContext(UserContext);
+const { handleLike } = useContext(CardContext);
   const handleChange = (event, value) => {
     setPage(value);
+
   };
 
   return (
@@ -30,7 +25,14 @@ const CardList = () => {
         <Stack spacing={2}>
           <div className={s.list__grid}>
             {posts.map((el) => {
-              return <RecipeReviewCard key={el._id} {...el} />;
+              return (
+                <RecipeReviewCard
+                  key={el._id}
+                  {...el}
+                  onPostLike={handleLike}
+                  currentUser={currentUser}
+                />
+              );
             })}
           </div>
           <div className={s.pagination}>
