@@ -148,6 +148,6 @@ hr {
 .main__section {
   flex: 1 1 auto;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  /* justify-content: center;
+  align-items: center; */
 }

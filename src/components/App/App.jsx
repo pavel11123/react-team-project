@@ -11,6 +11,7 @@ import PostPage from "../../pages/PostPage/PostPage";
 import { CardContext } from "../../context/cardContext";
 import { UserContext } from "../../context/userContext";
 import NotFoundPage from "../../pages/NotFoundPage/NotFoundPage";
+import HomePage from "../../pages/HomePage/HomePage";
 
 function App() {
   const [posts, setPosts] = useState([]);
@@ -90,13 +91,14 @@ function App() {
         <AppHeader user={currentUser} updateUserHandle={handleUpdataUser} />
         <main className="main">
           <Routes>
-            <Route path="/" element={<InfoHeader />} />
+            <Route path="/cards" element={<InfoHeader />} />
           </Routes>
 
           <section className="main__section">
             <Routes>
+              <Route index element={<HomePage />} />
               <Route
-                index
+                path="/cards"
                 element={
                   <CardList
                     posts={posts}
