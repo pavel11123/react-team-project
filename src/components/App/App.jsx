@@ -10,8 +10,6 @@ import FavouritesPostPage from "../../pages/FavouritesPostPage/FavouritesPostPag
 import PostPage from "../../pages/PostPage/PostPage";
 import { CardContext } from "../../context/cardContext";
 import { UserContext } from "../../context/userContext";
-
-import Post from "../Post/Post";
 import NotFoundPage from "../../pages/NotFoundPage/NotFoundPage";
 
 function App() {
@@ -21,8 +19,6 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [page, setPage] = useState(1);
   const [countPagination, setCountPagination] = useState(10);
-
-  // console.log(currentUser._id);
 
   useEffect(() => {
     Promise.all([api.getUserInfo(), api.getPostsList(page)])
@@ -93,9 +89,9 @@ function App() {
       >
         <AppHeader user={currentUser} updateUserHandle={handleUpdataUser} />
         <main className="main">
-          <section className="modal__section">
-            <InfoHeader />
-          </section>
+          <Routes>
+            <Route path="/" element={<InfoHeader />} />
+          </Routes>
 
           <section className="main__section">
             <Routes>

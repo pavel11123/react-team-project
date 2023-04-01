@@ -9,7 +9,7 @@ export default function NotFound() {
   return (
     <>
       <Container>
-        <div className="d-fl-col">
+        <div className={cn(s.wrapper, "d-fl-col")}>
           <div className={cn(s.img, "d-fl")}>
             <img src={notFoundImg} alt="По вашему запросу ничего не найдено!" />
           </div>

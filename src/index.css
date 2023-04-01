@@ -137,8 +137,17 @@ hr {
 
 .main {
   flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
 }
 
 [class*="__section"] {
   margin: 30px 0;
+}
+
+.main__section {
+  flex: 1 1 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
