@@ -5,14 +5,13 @@ import BasicModal from "../Modal/Modal";
 
 const InfoHeader = () => {
   return (
-    <Container>
-      <div className="container__main">
-        <BasicModal />
-      </div>
-      <div>
-        
-      </div>
-    </Container>
+    <section className="modal__section">
+      <Container>
+        <div className="container__main">
+          <BasicModal />
+        </div>
+      </Container>
+    </section>
   );
 };
 
