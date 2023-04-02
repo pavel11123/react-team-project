@@ -26,6 +26,12 @@ class Api {
     }).then(onResponse);
   }
 
+  getSlide() {
+    return fetch(`${this._baseUrl}/posts`, {
+      headers: this._headers,
+    }).then(onResponse);
+  }
+
   setUserInfo(dataUser) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",

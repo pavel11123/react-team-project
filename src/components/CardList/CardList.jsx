@@ -4,19 +4,11 @@ import RecipeReviewCard from "../Card/Card";
 import { useContext } from "react";
 import { CardContext } from "../../context/cardContext";
 import { UserContext } from "../../context/userContext";
-const CardList = ({
-  posts,
-  page,
-  setPage,
-  countPagination,
-  
-  
-}) => {
+const CardList = ({ posts, page, setPage, countPagination }) => {
   const { user: currentUser } = useContext(UserContext);
-const { handleLike } = useContext(CardContext);
+  const { handleLike } = useContext(CardContext);
   const handleChange = (event, value) => {
     setPage(value);
-
   };
 
   return (

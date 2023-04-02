@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 export default function NotFound() {
   return (
     <>
-      <Container>
+      <Container className={s.container}>
         <div className={cn(s.wrapper, "d-fl-col")}>
           <div className={cn(s.img, "d-fl")}>
             <img src={notFoundImg} alt="По вашему запросу ничего не найдено!" />

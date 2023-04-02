@@ -12,6 +12,7 @@ html {
 
 .start__block {
   justify-content: space-between;
+  gap: rem(30);
 }
 
 .start__info {
@@ -31,24 +32,24 @@ html {
 
 .subtitle {
   font-weight: 600;
-  font-size: rem(24);
-  line-height: rem(33);
+  font-size: clamp(rem(18), 1.67vw, rem(24));
+  line-height: clamp(rem(22), 2.29vw, rem(33));
   letter-spacing: 0.1em;
   color: $colorMainBlue;
 }
 
 .title {
   font-weight: 700;
-  font-size: rem(80);
-  line-height: rem(80);
+  font-size: clamp(rem(40), 5.56vw, rem(80));
+  line-height: clamp(rem(40), 5.56vw, rem(80));
   text-transform: uppercase;
   color: $colorMainBlue;
 }
 
 .description {
   font-weight: 400;
-  font-size: rem(16);
-  line-height: rem(28);
+  font-size: clamp(rem(14), 0.83vw, rem(16));
+  line-height: clamp(rem(20), 1.11vw, rem(28));
   letter-spacing: -0.02em;
   opacity: 0.9;
 }

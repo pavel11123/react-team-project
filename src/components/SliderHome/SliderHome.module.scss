@@ -1,0 +1,31 @@
+@use "sass:math";
+
+@import "../../scss/mixins";
+@import "../../scss/fonts";
+@import "../../scss/variables";
+
+html {
+  @media (max-width: 360px) {
+    font-size: calc(100vw / 360 * 16);
+  }
+}
+
+.slider__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
+}
+
+.slider {
+  margin: rem(50) 0;
+  position: relative;
+}
+
+.title {
+  font-weight: 600;
+  font-size: clamp(rem(18), 1.67vw, rem(24));
+  line-height: clamp(rem(22), 2.29vw, rem(33));
+  letter-spacing: 0.1em;
+  color: $colorMainBlue;
+  padding: rem(15) rem(5);
+}
