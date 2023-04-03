@@ -6,6 +6,7 @@ import Slider from "react-slick";
 import React from "react";
 import { useContext } from "react";
 import { SlideContext } from "../../context/slideContext";
+import { Link } from "react-router-dom";
 
 export default function SliderHome() {
   const { slide } = useContext(SlideContext);
@@ -42,12 +43,19 @@ export default function SliderHome() {
   return (
     <>
       <div className={s.slider}>
-        <h3 className={s.title}> Наши посты</h3>
+        <div className={cn(s.header, "d-fl")}>
+          <h3 className={s.title}>Our posts</h3>
+          <Link to="/cards" className={s.link}>
+            Show more
+          </Link>
+        </div>
+
         <Slider {...settings}>
           {slide.map((el) => {
             return <Slide key={el._id} {...el} />;
           })}
         </Slider>
+        {console.log(slide)}
       </div>
     </>
   );

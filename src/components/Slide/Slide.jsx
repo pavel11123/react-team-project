@@ -7,7 +7,15 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 
-export default function Slide({ image, author, text, _id, title, tags }) {
+export default function Slide({
+  image,
+  author,
+  text,
+  _id,
+  title,
+  tags,
+  created_at,
+}) {
   return (
     <>
       <Card className={cn(s.card, "d-fl-col")}>
@@ -20,12 +28,15 @@ export default function Slide({ image, author, text, _id, title, tags }) {
             alt={title}
           />
           <CardContent className={s.content}>
-            <Typography variant="body3" color="text.secondary">
-              {author.name}
-            </Typography>
-            <Typography gutterBottom variant="h5" component="div">
-              {title}
-            </Typography>
+            <div className={cn(s.content__info, "d-fl")}>
+              <Typography className={s.author}>{author.name}</Typography>
+              <Typography className={s.date}>
+                {created_at.substr(0, 10)}
+              </Typography>
+            </div>
+
+            <Typography className={s.title}>{title}</Typography>
+
             <Typography
               className={s.description}
               variant="body1"
@@ -33,7 +44,10 @@ export default function Slide({ image, author, text, _id, title, tags }) {
             >
               {text}
             </Typography>
-            <span className={s.tags}>{tags}</span>
+
+            <span className={tags.length > 0 ? s.tags__active : s.tags}>
+              {tags}
+            </span>
           </CardContent>
         </CardActionArea>
       </Card>

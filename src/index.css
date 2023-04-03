@@ -148,6 +148,10 @@ hr {
 }
 
 /* slider */
+.slick-slider {
+  padding: 15px 0;
+}
+
 .slick-track {
   display: flex;
 }
@@ -167,7 +171,7 @@ hr {
 .slick-next,
 .slick-prev {
   position: absolute;
-  top: 0;
+  top: 18px;
   right: 0;
   font-size: 0;
   width: 30px;

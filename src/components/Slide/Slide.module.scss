@@ -38,18 +38,65 @@ html {
   flex-direction: column;
 }
 
+.content__info {
+  justify-content: space-between;
+}
+
+.author {
+  font-family: "Josefin Sans";
+  font-style: normal;
+  font-weight: 400 !important;
+  font-size: 12px !important;
+  line-height: 12px !important;
+  text-transform: capitalize;
+  color: $colorMainBlack;
+}
+
+.title {
+  font-family: "Josefin Sans";
+  font-style: normal;
+  font-weight: 600 !important;
+  font-size: 18px !important;
+  line-height: 18px !important;
+  color: $colorMainBlack;
+  padding: rem(10) 0;
+}
+
+.date {
+  font-family: "Josefin Sans";
+  font-style: normal;
+  font-weight: 400 !important;
+  font-size: 12px !important;
+  line-height: 12px !important;
+  text-transform: capitalize;
+  color: $colorMainBlack;
+}
+
+.description {
+  font-family: "Josefin Sans";
+  margin-bottom: rem(10);
+  font-weight: 400 !important;
+  font-size: 14px !important;
+  line-height: 16px !important;
+}
+
 .tags {
-  margin-top: auto;
-  background-color: #039103;
-  padding: rem(5) rem(10);
-  color: #ffffff;
-  font-size: rem(12);
-  line-height: rem(16);
-  font-weight: 600;
-  align-self: flex-start;
-  border-radius: rem(5);
-  -webkit-border-radius: rem(5);
-  -moz-border-radius: rem(5);
-  -ms-border-radius: rem(5);
-  -o-border-radius: rem(5);
+  display: none;
+
+  &__active {
+    display: block;
+    align-self: flex-start;
+    margin-top: auto;
+    background-color: #fdc500;
+    padding: rem(5) rem(10);
+    color: #000000;
+    font-size: rem(12);
+    line-height: rem(16);
+    font-weight: 600;
+    border-radius: rem(5);
+    -webkit-border-radius: rem(5);
+    -moz-border-radius: rem(5);
+    -ms-border-radius: rem(5);
+    -o-border-radius: rem(5);
+  }
 }

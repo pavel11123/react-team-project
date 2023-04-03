@@ -21,7 +21,7 @@ const AppHeader = ({ user, updateUserHandle }) => {
   };
 
   return (
-    <AppBar position="sticky">
+    <AppBar position="sticky" className={s.header}>
       <Container>
         <Toolbar className={s.toolbar}>
           <IconButton

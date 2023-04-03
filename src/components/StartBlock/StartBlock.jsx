@@ -12,7 +12,7 @@ export default function StartBlock() {
         <div className={cn(s.start__info, "d-fl-col")}>
           <div className={cn(s.info__wrapepr, "d-fl-col")}>
             <div className={s.title__wrapper}>
-              <p className={s.subtitle}>Веб студия</p>
+              <p className={s.subtitle}>Web studio</p>
               <h1 className={s.title}>
                 React <br />
                 Team-Project
@@ -25,6 +25,10 @@ export default function StartBlock() {
               aliquid unde natus quis incidunt at nihil recusandae perferendis
               eveniet eos ipsum officia!
             </p>
+
+            <Link to="/cards" className={s.link}>
+              Let's get started
+            </Link>
           </div>
         </div>
         <div className={cn(s.start__img, "d-fl-col")}>
