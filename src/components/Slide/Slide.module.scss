@@ -80,13 +80,17 @@ html {
   line-height: 16px !important;
 }
 
+.tags__wrapper {
+  margin-top: auto;
+  gap: rem(5);
+}
+
 .tags {
   display: none;
 
   &__active {
     display: block;
     align-self: flex-start;
-    margin-top: auto;
     background-color: #fdc500;
     padding: rem(5) rem(10);
     color: #000000;

@@ -35,19 +35,30 @@ export default function Slide({
               </Typography>
             </div>
 
-            <Typography className={s.title}>{title}</Typography>
+            <Typography className={s.title}>
+              {title.length >= 20 ? title.substr(0, 20) + "..." : title}
+            </Typography>
 
             <Typography
               className={s.description}
               variant="body1"
               color="text.secondary"
             >
-              {text}
+              {text.length >= 100 ? text.substr(0, 100) + "..." : text}
             </Typography>
-
-            <span className={tags.length > 0 ? s.tags__active : s.tags}>
-              {tags}
-            </span>
+            <div className={cn(s.tags__wrapper, "d-fl-wrap")}>
+              {tags.map((el) => {
+                return (
+                  <span
+                    className={cn(s.tags, {
+                      [s.tags__active]: tags.length > 0,
+                    })}
+                  >
+                    {el.length >= 15 ? el.substr(0, 15) : el}
+                  </span>
+                );
+              })}
+            </div>
           </CardContent>
         </CardActionArea>
       </Card>

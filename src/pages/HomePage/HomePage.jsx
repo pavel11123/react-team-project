@@ -4,6 +4,7 @@ import SliderHome from "../../components/SliderHome/SliderHome";
 import s from "./HomePage.module.scss";
 import cn from "classnames";
 import { Container } from "@mui/material";
+import Feedback from "../../components/Feedback/Feedback";
 
 export default function HomePage() {
   return (
@@ -13,6 +14,7 @@ export default function HomePage() {
           <div className="d-fl-col">
             <StartBlock />
             <SliderHome />
+            <Feedback />
           </div>
         </div>
       </Container>
