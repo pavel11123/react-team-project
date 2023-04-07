@@ -6,6 +6,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
+import ModalEdit from "../ModalEdit/ModalEdit";
 
 export default function Slide({
   image,
@@ -19,6 +20,7 @@ export default function Slide({
   return (
     <>
       <Card className={cn(s.card, "d-fl-col")}>
+        <ModalEdit />
         <CardActionArea className={cn(s.card__wrapper)}>
           <CardMedia
             className={s.img}
@@ -27,6 +29,7 @@ export default function Slide({
             image={image}
             alt={title}
           />
+
           <CardContent className={s.content}>
             <div className={cn(s.content__info, "d-fl")}>
               <Typography className={s.author}>{author.name}</Typography>

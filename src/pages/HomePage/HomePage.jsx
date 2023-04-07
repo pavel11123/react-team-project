@@ -5,6 +5,7 @@ import s from "./HomePage.module.scss";
 import cn from "classnames";
 import { Container } from "@mui/material";
 import Feedback from "../../components/Feedback/Feedback";
+import About from "../../components/About/About";
 
 export default function HomePage() {
   return (
@@ -15,6 +16,7 @@ export default function HomePage() {
             <StartBlock />
             <SliderHome />
             <Feedback />
+            <About />
           </div>
         </div>
       </Container>
