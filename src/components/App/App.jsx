@@ -67,7 +67,7 @@ function App() {
           setFavourites((prevState) => [...prevState, newPost]);
         } else {
           setFavourites((prevState) =>
-            prevState.filter((post) => post._id !== newPosts._id)
+            prevState.filter((post) => post._id !== newPost._id)
           );
         }
 
