@@ -14,6 +14,7 @@ import { SlideContext } from "../../context/slideContext";
 import NotFoundPage from "../../pages/NotFoundPage/NotFoundPage";
 import HomePage from "../../pages/HomePage/HomePage";
 
+
 function App() {
   const [posts, setPosts] = useState([]);
   const [slide, setSlide] = useState([]);
@@ -46,6 +47,14 @@ function App() {
     });
   };
 
+  const handleDeletePost = async (postId) => {
+    console.log('works---->', postId);
+    await api.deletePost(postId).then((newPost) => {
+      const newPosts = posts.filter((e)=> (e._id !== newPost._id));
+      setPosts([...newPosts]);
+    });
+  };
+
   const handlePostLike = useCallback(
     (postLikes) => {
       const liked = isLiked(postLikes.likes, currentUser._id);
@@ -72,7 +81,7 @@ function App() {
   return (
     <UserContext.Provider value={{ user: currentUser, isLoading }}>
       <CardContext.Provider
-        value={{ posts, favourites, handleLike: handlePostLike, isLoading }}
+        value={{ posts, favourites, handleLike: handlePostLike, isLoading, handleDeletePost }}
       >
         <AppHeader user={currentUser} updateUserHandle={handleUpdataUser} />
         <main className="main">

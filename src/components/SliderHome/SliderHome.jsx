@@ -55,7 +55,7 @@ export default function SliderHome() {
             return <Slide key={el._id} {...el} />;
           })}
         </Slider>
-        {console.log(slide)}
+        {console.log('slide---->', slide)}
       </div>
     </>
   );
