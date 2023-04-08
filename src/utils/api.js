@@ -26,6 +26,12 @@ class Api {
     }).then(onResponse);
   }
 
+  getSlide() {
+    return fetch(`${this._baseUrl}/posts`, {
+      headers: this._headers,
+    }).then(onResponse);
+  }
+
   setUserInfo(dataUser) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
@@ -48,6 +54,14 @@ class Api {
       headers: this._headers,
     }).then(onResponse);
   }
+
+  deletePost(postId) {
+    return fetch(`${this._baseUrl}/posts/${postId}`, {
+      method: "DELETE",
+      headers: this._headers,
+    }).then(onResponse);
+  }
+
 }
 
 const config = {

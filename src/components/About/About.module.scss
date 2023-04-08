@@ -1,0 +1,86 @@
+@use "sass:math";
+
+@import "../../scss/mixins";
+@import "../../scss/fonts";
+@import "../../scss/variables";
+
+html {
+  @media (max-width: 360px) {
+    font-size: calc(100vw / 360 * 16);
+  }
+}
+
+.aboutWrapper {
+  margin: rem(150) 0;
+}
+
+.title {
+  font-size: clamp(rem(18), 1.67vw, rem(24));
+  line-height: clamp(rem(22), 2.29vw, rem(33));
+  color: $colorMainBlue;
+  padding: rem(15) rem(5);
+
+  font-family: "Josefin Sans";
+  font-style: normal;
+  font-weight: 700;
+}
+
+.list {
+  gap: rem(40);
+  margin-top: rem(100);
+  justify-content: center;
+}
+
+.card {
+  background-image: #ffffff;
+  box-shadow: 0 rem(5) rem(10) rgba(0, 0, 0, 0.1);
+  border-radius: rem(8);
+  -webkit-border-radius: rem(8);
+  -moz-border-radius: rem(8);
+  -ms-border-radius: rem(8);
+  -o-border-radius: rem(8);
+  position: relative;
+  padding: rem(80) rem(30) rem(30) rem(30);
+}
+
+.img {
+  width: rem(96);
+  height: rem(96);
+  position: absolute;
+  top: rem(-48);
+  left: 50%;
+  margin-left: rem(-48);
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}
+
+.description {
+  font-family: "Josefin Sans";
+  margin-bottom: rem(10);
+  font-weight: 400;
+  font-size: rem(14);
+  line-height: rem(16);
+  max-width: rem(275);
+}
+
+.info {
+  padding-top: rem(15);
+  h5 {
+    font-family: "Josefin Sans";
+    font-weight: 600;
+    font-size: rem(14);
+    line-height: rem(16);
+    padding: 0 0 rem(5) 0;
+  }
+
+  span {
+    font-family: "Josefin Sans";
+    font-weight: 500;
+    font-size: rem(12);
+    line-height: rem(14);
+  }
+}

@@ -10,29 +10,32 @@ import FavouritesPostPage from "../../pages/FavouritesPostPage/FavouritesPostPag
 import PostPage from "../../pages/PostPage/PostPage";
 import { CardContext } from "../../context/cardContext";
 import { UserContext } from "../../context/userContext";
+import { SlideContext } from "../../context/slideContext";
+import NotFoundPage from "../../pages/NotFoundPage/NotFoundPage";
+import HomePage from "../../pages/HomePage/HomePage";
 
-import Post from "../Post/Post";
 
 function App() {
   const [posts, setPosts] = useState([]);
+  const [slide, setSlide] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [favourites, setFavourites] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
   const [page, setPage] = useState(1);
   const [countPagination, setCountPagination] = useState(10);
 
-  // console.log(currentUser._id);
-
   useEffect(() => {
-    Promise.all([api.getUserInfo(), api.getPostsList(page)])
-      .then(([userData, postData]) => {
+    Promise.all([api.getUserInfo(), api.getPostsList(page), api.getSlide()])
+      .then(([userData, postData, slideData]) => {
         setCurrentUser(userData);
         setPosts(postData.posts);
+        setSlide(slideData);
         const favouritesPosts = postData.posts.filter((item) =>
           isLiked(item.likes, userData._id)
         );
         setFavourites(favouritesPosts);
         setCountPagination(Math.ceil(postData.total / 12));
+        // console.log(setSlide);
       })
       .catch((err) => console.log(err));
   }, [page]);
@@ -44,20 +47,13 @@ function App() {
     });
   };
 
-  // likes
-  // const handlePostLike = (post) => {
-  //   // console.log(posts[0].likes);
-  //   const isLiked = post.likes.some((id) => id === currentUser._id);
-
-  //   api.changeLikePost(post._id, isLiked).then((newPost) => {
-  //     const newPosts = posts.map((post) => {
-  //       // console.log("Старая карточка", post);
-  //       // console.log("Новая карточка", newPost);
-  //       return post._id === newPost._id ? newPost : post;
-  //     });
-  //     setPosts(newPosts);
-
-  //   });
+  const handleDeletePost = async (postId) => {
+    console.log('works---->', postId);
+    await api.deletePost(postId).then((newPost) => {
+      const newPosts = posts.filter((e)=> (e._id !== newPost._id));
+      setPosts([...newPosts]);
+    });
+  };
 
   const handlePostLike = useCallback(
     (postLikes) => {
@@ -81,39 +77,40 @@ function App() {
     },
     [posts, currentUser]
   );
-  // console.log('favourites---------->' ,favourites);
-
-  // };
 
   return (
     <UserContext.Provider value={{ user: currentUser, isLoading }}>
       <CardContext.Provider
-        value={{ posts, favourites, handleLike: handlePostLike, isLoading }}
+        value={{ posts, favourites, handleLike: handlePostLike, isLoading, handleDeletePost }}
       >
         <AppHeader user={currentUser} updateUserHandle={handleUpdataUser} />
         <main className="main">
-          <section className="section__main">
-            <InfoHeader />
-          </section>
+          <Routes>
+            <Route path="/cards" element={<InfoHeader />} />
+          </Routes>
 
-          <section className="section__main">
-            <Routes>
-              <Route
-                index
-                element={
-                  <CardList
-                    posts={posts}
-                    page={page}
-                    setPage={setPage}
-                    countPagination={countPagination}
-                    onPostLike={handlePostLike}
-                    currentUser={currentUser}
-                  />
-                }
-              />
-              <Route path="/post/:postId" element={<PostPage />} />
-              <Route path="/favourites" element={<FavouritesPostPage />} />
-            </Routes>
+          <section className="main__section">
+            <SlideContext.Provider value={{ slide }}>
+              <Routes>
+                <Route index element={<HomePage />} />
+                <Route
+                  path="/cards"
+                  element={
+                    <CardList
+                      posts={posts}
+                      page={page}
+                      setPage={setPage}
+                      countPagination={countPagination}
+                      onPostLike={handlePostLike}
+                      currentUser={currentUser}
+                    />
+                  }
+                />
+                <Route path="/post/:postId" element={<PostPage />} />
+                <Route path="/favourites" element={<FavouritesPostPage />} />
+                <Route path="*" element={<NotFoundPage />} />
+              </Routes>
+            </SlideContext.Provider>
           </section>
         </main>
 

@@ -74,6 +74,30 @@ hr {
   margin: 0 auto;
 }
 
+.d-fl {
+  display: flex;
+}
+
+.d-fl-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.d-fl-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.d-fl-wrap {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.d-fl-wrap--reverse {
+  display: flex;
+  flex-wrap: wrap-reverse;
+}
+
 .visually-hidden {
   position: absolute;
   width: 1px;
@@ -97,11 +121,6 @@ hr {
   overflow: hidden;
 }
 
-.container__main {
-  padding-left: 16px;
-  padding-right: 16px;
-}
-
 @media (min-width: 600px) {
   .container__main {
     padding-left: 24px;
@@ -113,8 +132,63 @@ hr {
 
 .main {
   flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
 }
 
-.section__main {
+[class*="__section"] {
   margin: 30px 0;
+}
+
+.main__section {
+  flex: 1 1 auto;
+  display: flex;
+  /* justify-content: center;
+  align-items: center; */
+}
+
+/* slider */
+.slick-slider {
+  padding: 15px 0;
+}
+
+.slick-track {
+  display: flex;
+}
+
+.slick-slide {
+  display: flex;
+}
+
+.slick-slide > div {
+  display: flex;
+  flex: 1 1 auto;
+}
+
+.slick-arrow {
+}
+
+.slick-next,
+.slick-prev {
+  position: absolute;
+  top: 18px;
+  right: 0;
+  font-size: 0;
+  width: 30px;
+  height: 30px;
+}
+
+.slick-next {
+  background-image: url("../src/assets/image/arrowNext.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.slick-prev {
+  background-image: url("../src/assets/image/arrowPrev.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  right: 40px;
 }

@@ -1,4 +1,5 @@
 import React from "react";
+
 import {
   Typography,
   Card,
@@ -50,9 +51,7 @@ const RecipeReviewCard = ({
   currentUser,
   _id,
 }) => {
-  
   const [expanded, setExpanded] = React.useState(false);
-  // const { user: currentUser } = useContext(UserContext);
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
@@ -60,11 +59,7 @@ const RecipeReviewCard = ({
   const liked = isLiked(likes, currentUser?._id);
   const { handleLike } = useContext(CardContext);
   const handleLikeClick = () => {
-    // console.log("click");
-    // console.log("likes" ,likes);
-    // console.log(isLiked);
-    handleLike({ _id, likes })
-    
+    handleLike({ _id, likes });
   };
 
   return (
@@ -84,7 +79,12 @@ const RecipeReviewCard = ({
         subheader={dayjs(created_at).fromNow()}
       />
       <Link to={`/post/${_id}`}>
-        <CardMedia component="img" height="194" image={image} alt="Paella dish" />
+        <CardMedia
+          component="img"
+          height="194"
+          image={image}
+          alt="Paella dish"
+        />
       </Link>
       <CardContent>
         <Typography variant="h7" color="title">
@@ -97,7 +97,6 @@ const RecipeReviewCard = ({
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
           <FavoriteIcon
-            // className={isLiked ? s.favourite_active : s.favourite}
             onClick={handleLikeClick}
             sx={liked ? { color: red[500] } : { color: grey[500] }}
           />
@@ -115,7 +114,6 @@ const RecipeReviewCard = ({
       </CardActions>
     </Card>
   );
-}
+};
 
-
-export default RecipeReviewCard
+export default RecipeReviewCard;
