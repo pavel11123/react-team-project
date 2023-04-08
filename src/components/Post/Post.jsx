@@ -1,8 +1,11 @@
 import { Container } from "@mui/system";
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import s from "./Post.module.css";
-import RecipeReviewCard from "../Card/Card";
+import ModalDelete from "./../Modal/ModalDelete";
+import { CardContext } from "../../context/cardContext";
+
+
 import {
   Typography,
   Card,
@@ -31,6 +34,7 @@ const Post = ({
   _id,
 }) => {
   const navigate = useNavigate();
+  const { handleDeletePost } = useContext(CardContext);
 
   return (
     <Container>
@@ -82,6 +86,7 @@ const Post = ({
             <IconButton aria-label="share">
               <ShareIcon />
             </IconButton>
+               <ModalDelete handleDeletePost={() => handleDeletePost(_id)}/>
           </CardActions>
         </Box>
       </Card>
