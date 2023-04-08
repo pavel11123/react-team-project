@@ -1,0 +1,22 @@
+@use "sass:math";
+
+@import "../../scss/mixins";
+@import "../../scss/fonts";
+@import "../../scss/variables";
+
+html {
+  @media (max-width: 360px) {
+    font-size: calc(100vw / 360 * 16);
+  }
+}
+
+.settings {
+  position: absolute !important;
+  top: rem(5);
+  right: rem(5);
+  z-index: 1000;
+
+  svg {
+    fill: #fff;
+  }
+}

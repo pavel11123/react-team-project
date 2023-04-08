@@ -121,11 +121,6 @@ hr {
   overflow: hidden;
 }
 
-.container__main {
-  padding-left: 16px;
-  padding-right: 16px;
-}
-
 @media (min-width: 600px) {
   .container__main {
     padding-left: 24px;
@@ -148,6 +143,52 @@ hr {
 .main__section {
   flex: 1 1 auto;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  /* justify-content: center;
+  align-items: center; */
+}
+
+/* slider */
+.slick-slider {
+  padding: 15px 0;
+}
+
+.slick-track {
+  display: flex;
+}
+
+.slick-slide {
+  display: flex;
+}
+
+.slick-slide > div {
+  display: flex;
+  flex: 1 1 auto;
+}
+
+.slick-arrow {
+}
+
+.slick-next,
+.slick-prev {
+  position: absolute;
+  top: 18px;
+  right: 0;
+  font-size: 0;
+  width: 30px;
+  height: 30px;
+}
+
+.slick-next {
+  background-image: url("../src/assets/image/arrowNext.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.slick-prev {
+  background-image: url("../src/assets/image/arrowPrev.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  right: 40px;
 }

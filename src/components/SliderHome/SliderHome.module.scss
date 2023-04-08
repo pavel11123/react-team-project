@@ -1,0 +1,84 @@
+@use "sass:math";
+
+@import "../../scss/mixins";
+@import "../../scss/fonts";
+@import "../../scss/variables";
+
+html {
+  @media (max-width: 360px) {
+    font-size: calc(100vw / 360 * 16);
+  }
+}
+
+.slider__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
+}
+
+.slider {
+  margin: rem(50) 0;
+  position: relative;
+}
+
+.header {
+  justify-content: space-between;
+  align-items: center;
+  padding-right: rem(100);
+}
+
+.title {
+  // font-weight: 600;
+  font-size: clamp(rem(18), 1.67vw, rem(24));
+  line-height: clamp(rem(22), 2.29vw, rem(33));
+  color: $colorMainBlue;
+  padding: rem(15) rem(5);
+
+  font-family: "Josefin Sans";
+  font-style: normal;
+  font-weight: 700;
+}
+
+.link {
+  font-family: "Josefin Sans";
+  font-weight: 500;
+  font-size: clamp(rem(14), 0.83vw, rem(16));
+  line-height: clamp(rem(20), 1.11vw, rem(28));
+  display: flex;
+  align-items: center;
+
+  &::after {
+    content: "";
+    margin-left: rem(15);
+    display: block;
+    width: rem(35);
+    height: rem(15);
+    background-image: url("./image/arrow.svg");
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    transition: 0.3s;
+    -webkit-transition: 0.3s;
+    -moz-transition: 0.3s;
+    -ms-transition: 0.3s;
+    -o-transition: 0.3s;
+  }
+
+  &:hover::after {
+    transform: translateX(rem(5));
+    -webkit-transform: translateX(rem(5));
+    -moz-transform: translateX(rem(5));
+    -ms-transform: translateX(rem(5));
+    -o-transform: translateX(rem(5));
+  }
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  transition: 0.3s;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -ms-transition: 0.3s;
+  -o-transition: 0.3s;
+}
