@@ -1,6 +1,5 @@
 import s from "./SliderHome.module.scss";
 import cn from "classnames";
-import { Container } from "@mui/material";
 import Slide from "../Slide/Slide";
 import Slider from "react-slick";
 import React from "react";
@@ -52,10 +51,11 @@ export default function SliderHome() {
 
         <Slider {...settings}>
           {slide.map((el) => {
-            return <Slide key={el._id} {...el} />;
+            if (el.author._id === "63ecab9c59b98b038f77b633") {
+              return <Slide key={el._id} {...el} />;
+            }
           })}
         </Slider>
-        {console.log('slide---->', slide)}
       </div>
     </>
   );
