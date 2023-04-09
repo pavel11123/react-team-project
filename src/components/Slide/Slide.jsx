@@ -7,6 +7,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 import ModalEdit from "../ModalEdit/ModalEdit";
+import { Link } from "react-router-dom";
 
 export default function Slide({
   image,
@@ -21,49 +22,51 @@ export default function Slide({
     <>
       <Card className={cn(s.card, "d-fl-col")}>
         <ModalEdit />
-        <CardActionArea className={cn(s.card__wrapper)}>
-          <CardMedia
-            className={s.img}
-            component="img"
-            height="200"
-            image={image}
-            alt={title}
-          />
+        <Link to={`/post/${_id}`}>
+          <CardActionArea className={cn(s.card__wrapper)}>
+            <CardMedia
+              className={s.img}
+              component="img"
+              height="200"
+              image={image}
+              alt={title}
+            />
 
-          <CardContent className={s.content}>
-            <div className={cn(s.content__info, "d-fl")}>
-              <Typography className={s.author}>{author.name}</Typography>
-              <Typography className={s.date}>
-                {created_at.substr(0, 10)}
+            <CardContent className={s.content}>
+              <div className={cn(s.content__info, "d-fl")}>
+                <Typography className={s.author}>{author.name}</Typography>
+                <Typography className={s.date}>
+                  {created_at.substr(0, 10)}
+                </Typography>
+              </div>
+
+              <Typography className={s.title}>
+                {title.length >= 20 ? title.substr(0, 20) + "..." : title}
               </Typography>
-            </div>
 
-            <Typography className={s.title}>
-              {title.length >= 20 ? title.substr(0, 20) + "..." : title}
-            </Typography>
-
-            <Typography
-              className={s.description}
-              variant="body1"
-              color="text.secondary"
-            >
-              {text.length >= 100 ? text.substr(0, 100) + "..." : text}
-            </Typography>
-            <div className={cn(s.tags__wrapper, "d-fl-wrap")}>
-              {tags.map((el) => {
-                return (
-                  <span
-                    className={cn(s.tags, {
-                      [s.tags__active]: tags.length > 0,
-                    })}
-                  >
-                    {el.length >= 15 ? el.substr(0, 15) : el}
-                  </span>
-                );
-              })}
-            </div>
-          </CardContent>
-        </CardActionArea>
+              <Typography
+                className={s.description}
+                variant="body1"
+                color="text.secondary"
+              >
+                {text.length >= 100 ? text.substr(0, 100) + "..." : text}
+              </Typography>
+              <div className={cn(s.tags__wrapper, "d-fl-wrap")}>
+                {tags.map((el) => {
+                  return (
+                    <span
+                      className={cn(s.tags, {
+                        [s.tags__active]: tags.length > 0,
+                      })}
+                    >
+                      {el.length >= 15 ? el.substr(0, 15) : el}
+                    </span>
+                  );
+                })}
+              </div>
+            </CardContent>
+          </CardActionArea>
+        </Link>
       </Card>
     </>
   );
