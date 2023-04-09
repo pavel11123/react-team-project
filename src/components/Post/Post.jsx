@@ -5,6 +5,7 @@ import s from "./Post.module.scss";
 import ModalDelete from "./../Modal/ModalDelete";
 import { CardContext } from "../../context/cardContext";
 import cn from "classnames";
+import { grey, red } from "@mui/material/colors";
 
 import {
   Typography,
@@ -20,21 +21,18 @@ import {
 } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
+import { isLiked } from "../../utils/posts";
 
 import dayjs from "dayjs";
-const Post = ({
-  image,
-  likes,
-  title,
-  text,
-  author,
-  currentUser,
-  created_at,
-  onPostLike,
-  _id,
-}) => {
+const Post = ({ image, likes, title, text, author, created_at, _id }) => {
   const navigate = useNavigate();
-  const { handleDeletePost } = useContext(CardContext);
+  const { handleDeletePost, currentUser } = useContext(CardContext);
+
+  const liked = isLiked(likes, currentUser?._id);
+  const { handleLike } = useContext(CardContext);
+  const handleLikeClick = () => {
+    handleLike({ _id, likes });
+  };
 
   return (
     <Container>
@@ -78,8 +76,11 @@ const Post = ({
 
           <CardActions disableSpacing>
             <IconButton aria-label="add to favorites">
-              <FavoriteIcon />
-              {/* {likes.length !== 0 && <span>{likes.length}</span>} */}
+              <FavoriteIcon
+                onClick={handleLikeClick}
+                sx={liked ? { color: red[500] } : { color: grey[500] }}
+              />
+              {likes?.length !== 0 && <span>{likes?.length}</span>}
             </IconButton>
             <IconButton aria-label="share">
               <ShareIcon />
