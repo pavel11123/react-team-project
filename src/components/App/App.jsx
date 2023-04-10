@@ -55,18 +55,18 @@ function App() {
   };
 
   const handlePostLike = useCallback(
-    (postLikes) => {
-      const liked = isLiked(postLikes.likes, currentUser._id);
-      return api.changeLikePost(postLikes._id, liked).then((newPost) => {
+    (product) => {
+      const liked = isLiked(product.likes, currentUser._id);
+      return api.changeLikePost(product._id, liked).then((newPost) => {
         const newPosts = posts.map((post) => {
           return post._id === newPost._id ? newPost : post;
         });
 
         if (!liked) {
-          setFavourites((prevState) => [...prevState, newPost]);
+          setFavourites(prevState => [...prevState, newPost]);
         } else {
-          setFavourites((prevState) =>
-            prevState.filter((post) => post._id !== newPost._id)
+          setFavourites(prevState =>
+            prevState.filter(post => post._id !== newPost._id)
           );
         }
 
@@ -107,7 +107,6 @@ function App() {
                       page={page}
                       setPage={setPage}
                       countPagination={countPagination}
-                      onPostLike={handlePostLike}
                       currentUser={currentUser}
                     />
                   }
