@@ -24,7 +24,7 @@ import ShareIcon from "@mui/icons-material/Share";
 import { isLiked } from "../../utils/posts";
 
 import dayjs from "dayjs";
-const Post = ({ image, likes, title, text, author, created_at, _id }) => {
+const Post = ({ image, likes, title, text, author, created_at, _id, onProductLike }) => {
   const navigate = useNavigate();
   const { handleDeletePost, currentUser } = useContext(CardContext);
 
@@ -77,8 +77,8 @@ const Post = ({ image, likes, title, text, author, created_at, _id }) => {
           <CardActions disableSpacing>
             <IconButton aria-label="add to favorites">
               <FavoriteIcon
-                onClick={handleLikeClick}
                 sx={liked ? { color: red[500] } : { color: grey[500] }}
+                onClick={onProductLike}
               />
               {likes?.length !== 0 && <span>{likes?.length}</span>}
             </IconButton>
