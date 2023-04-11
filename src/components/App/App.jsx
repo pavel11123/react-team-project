@@ -14,7 +14,6 @@ import { SlideContext } from "../../context/slideContext";
 import NotFoundPage from "../../pages/NotFoundPage/NotFoundPage";
 import HomePage from "../../pages/HomePage/HomePage";
 
-
 function App() {
   const [posts, setPosts] = useState([]);
   const [slide, setSlide] = useState([]);
@@ -48,26 +47,26 @@ function App() {
   };
 
   const handleDeletePost = async (postId) => {
-    console.log('works---->', postId);
+    console.log("works---->", postId);
     await api.deletePost(postId).then((newPost) => {
-      const newPosts = posts.filter((e)=> (e._id !== newPost._id));
+      const newPosts = posts.filter((e) => e._id !== newPost._id);
       setPosts([...newPosts]);
     });
   };
 
   const handlePostLike = useCallback(
-    (postLikes) => {
-      const liked = isLiked(postLikes.likes, currentUser._id);
-      return api.changeLikePost(postLikes._id, liked).then((newPost) => {
+    (product) => {
+      const liked = isLiked(product.likes, currentUser._id);
+      return api.changeLikePost(product._id, liked).then((newPost) => {
         const newPosts = posts.map((post) => {
           return post._id === newPost._id ? newPost : post;
         });
 
         if (!liked) {
-          setFavourites((prevState) => [...prevState, newPost]);
+          setFavourites(prevState => [...prevState, newPost]);
         } else {
-          setFavourites((prevState) =>
-            prevState.filter((post) => post._id !== newPosts._id)
+          setFavourites(prevState =>
+            prevState.filter(post => post._id !== newPost._id)
           );
         }
 
@@ -81,7 +80,14 @@ function App() {
   return (
     <UserContext.Provider value={{ user: currentUser, isLoading }}>
       <CardContext.Provider
-        value={{ posts, favourites, handleLike: handlePostLike, isLoading, handleDeletePost }}
+        value={{
+          posts,
+          favourites,
+          handleLike: handlePostLike,
+          isLoading,
+          handleDeletePost,
+          currentUser,
+        }}
       >
         <AppHeader user={currentUser} updateUserHandle={handleUpdataUser} />
         <main className="main">
@@ -101,7 +107,6 @@ function App() {
                       page={page}
                       setPage={setPage}
                       countPagination={countPagination}
-                      onPostLike={handlePostLike}
                       currentUser={currentUser}
                     />
                   }

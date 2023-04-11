@@ -17,6 +17,12 @@ html {
   position: relative;
 }
 
+.link {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+}
+
 .card__wrapper {
   display: flex !important;
   flex-direction: column;
@@ -30,6 +36,7 @@ html {
 .description {
   max-height: rem(70);
   overflow: hidden;
+  padding-bottom: rem(5);
 }
 
 .content {
