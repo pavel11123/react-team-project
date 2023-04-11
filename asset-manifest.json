@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/react-team-project/static/css/main.5fb86d6c.css",
-    "main.js": "/react-team-project/static/js/main.1591f439.js",
+    "main.css": "/react-team-project/static/css/main.802ff4b5.css",
+    "main.js": "/react-team-project/static/js/main.f0bdaa9b.js",
     "static/media/mainSculpture.png": "/react-team-project/static/media/mainSculpture.c9a21126a3ca0276b723.png",
     "static/media/notFound.svg": "/react-team-project/static/media/notFound.996fb798508040f36bf83344fb2bc1d8.svg",
     "static/media/girl.png": "/react-team-project/static/media/girl.8471bf43dc65cfdf45d9.png",
@@ -9,11 +9,11 @@
     "static/media/arrow.svg": "/react-team-project/static/media/arrow.a3b981cc6933314a6086.svg",
     "static/media/arrowPrev.svg": "/react-team-project/static/media/arrowPrev.d03f87bf3f94141e4e15.svg",
     "static/media/arrowNext.svg": "/react-team-project/static/media/arrowNext.3821668be7588a6899ea.svg",
-    "main.5fb86d6c.css.map": "/react-team-project/static/css/main.5fb86d6c.css.map",
-    "main.1591f439.js.map": "/react-team-project/static/js/main.1591f439.js.map"
+    "main.802ff4b5.css.map": "/react-team-project/static/css/main.802ff4b5.css.map",
+    "main.f0bdaa9b.js.map": "/react-team-project/static/js/main.f0bdaa9b.js.map"
   },
   "entrypoints": [
-    "static/css/main.5fb86d6c.css",
-    "static/js/main.1591f439.js"
+    "static/css/main.802ff4b5.css",
+    "static/js/main.f0bdaa9b.js"
   ]
 }
