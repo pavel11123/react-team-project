@@ -4,14 +4,13 @@ import { CardContext } from "../../context/cardContext";
 import CardList from "../../components/CardList/CardList";
 
 const FavouritesPage = () => {
+  const { favourites } = useContext(CardContext);
 
-    const { favourites } = useContext(CardContext);
+  return (
+    <>
+      <CardList posts={favourites} />
+    </>
+  );
+};
 
-    return (
-        <>
-            <CardList posts={favourites} />
-        </>
-    );
-  };
-
-  export default FavouritesPage;
+export default FavouritesPage;
