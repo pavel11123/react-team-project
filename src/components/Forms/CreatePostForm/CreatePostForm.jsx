@@ -3,6 +3,8 @@ import { useForm } from "react-hook-form";
 import s from "./CreatePostForm.module.css";
 import cn from "classnames";
 import api from "../../../utils/api";
+import Stack from '@mui/material/Stack';
+import CloseIcon from '@mui/icons-material/Close';
 
 const CreatePostForm = ({handleClose}) => {
 
@@ -18,6 +20,9 @@ const CreatePostForm = ({handleClose}) => {
 
     return (
         <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
+            <Stack direction="row" justifyContent="flex-end">
+                <CloseIcon onClick={handleClose}/>
+            </Stack>
             <h3 className={s.title}>Создать пост</h3>
             <input className={s.input}
                 {...register('image', {
