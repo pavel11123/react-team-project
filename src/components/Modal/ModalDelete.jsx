@@ -5,6 +5,9 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import DeleteIcon from '@mui/icons-material/Delete';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import Stack from '@mui/material/Stack';
+import CloseIcon from '@mui/icons-material/Close';
+import { useNavigate } from "react-router-dom";
 
 const style = {
   position: 'absolute',
@@ -23,9 +26,12 @@ export default function ModalDelete({handleDeletePost, _id}) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  const navigate = useNavigate();
+
   const deletePostOnClick = () => {
     handleDeletePost();
     handleClose(true);
+    navigate(-1);
   }
 
   return (
@@ -46,14 +52,21 @@ export default function ModalDelete({handleDeletePost, _id}) {
           <Typography id="modal-modal-title" variant="h6" component="h2" margin="25px">
           Подтвердите удаление поста
           </Typography>
-          
-        <Button 
+        <Stack direction="row" spacing={2} justifyContent="center">
+          <Button 
             variant="outlined" 
             startIcon={<DeleteIcon />}
             onClick={deletePostOnClick}
             >
             УДАЛИТЬ
-        </Button>
+          </Button>
+          <Button variant="outlined"
+            startIcon={<CloseIcon />}
+            onClick={handleClose}
+          >
+            ОТМЕНА
+          </Button>
+        </Stack>
         </Box>
       </Modal>
     </div>
