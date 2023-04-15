@@ -19,10 +19,11 @@ const CreatePostForm = ({handleClose}) => {
     }
 
     return (
-        <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
-            <Stack direction="row" justifyContent="flex-end">
+        <>
+        <Stack className={s.icon} direction="row" justifyContent="flex-end">
                 <CloseIcon onClick={handleClose}/>
-            </Stack>
+        </Stack>
+        <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
             <h3 className={s.title}>Создать пост</h3>
             <input className={s.input}
                 {...register('image', {
@@ -52,6 +53,7 @@ const CreatePostForm = ({handleClose}) => {
             <button className={s.button} type='reset'>Отмена</button>
             <button className={s.button} >Создать</button>
         </form>
+        </>
     )
 };
 

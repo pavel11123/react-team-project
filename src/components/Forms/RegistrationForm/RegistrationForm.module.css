@@ -1,0 +1,58 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 400px;
+    margin: 0 auto;
+}
+
+.title {
+    text-align: center;
+    font-size: 2rem;
+}
+
+.errorMessage {
+    color: red;
+    margin: 0;
+}
+
+.description {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 14px;
+    color: #6d6c6c;
+    margin: 0;
+}
+
+.resetPassword:hover {
+    opacity: .8;
+}
+
+.resetPassword {
+    text-align: right;
+}
+
+.form__eyeWrapper {
+    position: relative;
+
+}
+
+.form__eye {
+    position: absolute;
+    right: 200px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    color: #6d6c6c;
+    top: 0;
+    z-index: 10;
+    cursor: pointer;
+}
+
+.icon {
+    cursor: pointer;
+}
+
+.icon:hover {
+    opacity: .6;
+}
