@@ -11,23 +11,27 @@ const onResponse = (res) => {
 };
 
 class Api {
-  constructor({ baseUrl, headers, freshToken }) {
+  constructor({ baseUrl, headers }) {
     this._headers = headers;
     this._baseUrl = baseUrl;
-    this._freshToken = freshToken;
+    // this._freshToken = freshToken;
   }
 
-  getPostsList(page) {
+  getPostsList(page, token) {
     return fetch(`${this._baseUrl}/posts/paginate?page=${page}&limit=12`, {
-      headers: {...this._headers, ...this._freshToken()},
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
     }).then(onResponse);
   }
 
-  getUserInfo() {
+  getUserInfo(token) {
     console.log('headers>>>', this._headers)
-    return fetch(`${this._baseUrl}/users/me`, {
-      ...this._freshToken(),
-    }).then(onResponse);
+    return fetch(`${this._baseUrl}/users/me`, {headers: {
+      "Content-Type": "application/json",
+          Authorization: token,
+      },}).then(onResponse);
   }
 
   getPostById(idPost) {
@@ -36,9 +40,12 @@ class Api {
     }).then(onResponse);
   }
 
-  getSlide() {
+  getSlide(token) {
     return fetch(`${this._baseUrl}/posts`, {
-      headers: {...this._headers, ...this._freshToken},
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
     }).then(onResponse);
   }
 

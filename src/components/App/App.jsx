@@ -31,23 +31,46 @@ function App() {
 
   const [activeModal, setActiveModal] = useState(false);
   const [isAuth, setIsAuth] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const token = localStorage.getItem('token');
 
   useEffect(() => {
-    Promise.all([api.getUserInfo(), api.getPostsList(page), api.getSlide()])
-      .then(([userData, postData, slideData]) => {
-        setCurrentUser(userData);
-        setPosts(postData.posts);
-        setSlide(slideData);
-        const favouritesPosts = slideData.filter((item) =>
-          isLiked(item.likes, userData._id)
-        );
-        setFavourites(favouritesPosts);
-        setCountPagination(Math.ceil(postData.total / 12));
-        // console.log(setSlide);
-      })
-      .catch((err) => console.log(err));
-  }, [page]);
+      if (token) {
+        Promise.all([api.getUserInfo(token), api.getPostsList(page, token), api.getSlide(token)])
+          .then(([userData, postData, slideData]) => {
+            setCurrentUser(userData);
+              setIsAuth(true);
+            setPosts(postData.posts);
+            setSlide(slideData);
+            const favouritesPosts = slideData.filter((item) =>
+              isLiked(item.likes, userData._id)
+            );
+            setFavourites(favouritesPosts);
+            setCountPagination(Math.ceil(postData.total / 12));
+            // console.log(setSlide);
+          })
+          .catch((err) => {
+              console.log(err)
+              setIsAuth(false);
+          });
+          }
+  }, [page, token]);
 
+
+
+    // useEffect(()=> {
+    //
+    //     // const authPath = ['/reset-password', '/registration']
+    //     if(token) {
+    //         setIsAuth(true);
+    //     }
+    //     // нельзя войти без регистрации
+    //     // else if (!authPath.includes(location.pathname)){
+    //     //   navigate('/login');
+    //     // }
+    // }, [navigate, token]);
   // Обновление пользователя
   const handleUpdataUser = (userUpdate) => {
     api.setUserInfo(userUpdate).then((newUserData) => {
@@ -86,22 +109,7 @@ function App() {
     [posts, currentUser]
   );
 
-  const navigate = useNavigate();
-  const location = useLocation();
 
-  useEffect(()=> {
-    const token = localStorage.getItem('token');
-    console.log({ token });
-    console.log({ location });
-    // const authPath = ['/reset-password', '/registration']
-    if(token) {
-      setIsAuth(true);
-    } 
-    // нельзя войти без регистрации
-    // else if (!authPath.includes(location.pathname)){
-    //   navigate('/login');
-    // }
-  }, [navigate]);
 
   return (
     <UserContext.Provider value={{ user: currentUser, isLoading }}>
@@ -117,7 +125,7 @@ function App() {
       >
         <AppHeader user={currentUser} updateUserHandle={handleUpdataUser} setActiveModal={setActiveModal}/>
 
-        {isAuth ? 
+        {token || isAuth ?
         <main className="main">
           <Routes>
             <Route path="/cards" element={<InfoHeader />} />
@@ -142,24 +150,24 @@ function App() {
                 <Route path="/post/:postId" element={<PostPage />} />
                 <Route path="/favourites" element={<FavouritesPostPage />} />
                 <Route path="*" element={<NotFoundPage />} />
-                <Route 
-                  path="/registration" 
+                <Route
+                  path="/registration"
                   element={
                   <ModalRegistration activeModal={activeModal} setActiveModal={setActiveModal}>
                     <RegistrationForm setActiveModal={setActiveModal}/>
                   </ModalRegistration>
                 }
                 />
-                <Route 
-                  path="/login" 
+                <Route
+                  path="/login"
                   element={
                   <ModalRegistration activeModal={activeModal} setActiveModal={setActiveModal}>
                     <LoginForm setActiveModal={setActiveModal}/>
                   </ModalRegistration>
                 }
                 />
-                <Route 
-                  path="/reset-password" 
+                <Route
+                  path="/reset-password"
                   element={
                   <ModalRegistration activeModal={activeModal} setActiveModal={setActiveModal}>
                     <ResetPasswordForm />
@@ -172,26 +180,28 @@ function App() {
         </main>
         :
         <div className={s.notAuth}>Пожалуйста, авторизуйтесь!
-          <img src={notRegistration} className={s.img} alt="Пожалуйста, авторизуйтесь!" /> 
+          <img src={notRegistration} className={s.img} alt="Пожалуйста, авторизуйтесь!" />
+        </div>
+        }
         <Routes>
-          <Route 
-            path="/registration" 
+          <Route
+            path="/registration"
             element={
             <ModalRegistration activeModal={activeModal} setActiveModal={setActiveModal}>
               <RegistrationForm setActiveModal={setActiveModal}/>
             </ModalRegistration>
                 }
           />
-          <Route 
-            path="/login" 
+          <Route
+            path="/login"
             element={
             <ModalRegistration activeModal={activeModal} setActiveModal={setActiveModal}>
               <LoginForm setActiveModal={setActiveModal}/>
             </ModalRegistration>
                 }
           />
-          <Route 
-            path="/reset-password" 
+          <Route
+            path="/reset-password"
             element={
             <ModalRegistration activeModal={activeModal} setActiveModal={setActiveModal}>
                 <ResetPasswordForm />
@@ -199,8 +209,7 @@ function App() {
                 }
           />
           </Routes>
-        </div>
-        }
+
         <Footer />
       </CardContext.Provider>
     </UserContext.Provider>
