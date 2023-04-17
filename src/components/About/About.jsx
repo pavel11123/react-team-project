@@ -3,14 +3,54 @@ import s from "./About.module.scss";
 import cn from "classnames";
 import girl from "./image/girl.png";
 import man from "./image/man.png";
+import { motion } from "framer-motion";
+
+const oneBlockAbout = {
+  hidden: {
+    opacity: 0,
+  },
+  visible: (custom) => ({
+    opacity: 1,
+    transition: { duration: 0.7, delay: custom * 0.3 },
+  }),
+};
+
+const twoBlockAbout = {
+  hidden: {
+    opacity: 0,
+  },
+  visible: (custom) => ({
+    opacity: 1,
+    transition: { duration: 0.7, delay: custom * 0.3 },
+  }),
+};
+
+const threeBlockAbout = {
+  hidden: {
+    opacity: 0,
+  },
+  visible: (custom) => ({
+    opacity: 1,
+    transition: { duration: 0.7, delay: custom * 0.3 },
+  }),
+};
 
 export default function About() {
   return (
     <>
-      <div className={cn(s.aboutWrapper, "d-fl-col")}>
+      <motion.div
+        className={cn(s.aboutWrapper, "d-fl-col")}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
         <h3 className={s.title}>Development Team</h3>
         <div className={cn(s.list, "d-fl-wrap")}>
-          <div className={cn(s.card, "d-fl-col")}>
+          <motion.div
+            className={cn(s.card, "d-fl-col")}
+            variants={oneBlockAbout}
+            custom={2}
+          >
             <div className={cn(s.img)}>
               <img src={girl} alt="girl" />
             </div>
@@ -24,9 +64,13 @@ export default function About() {
               <h5>Anastasia Mysnik</h5>
               <span>Front-end developer</span>
             </div>
-          </div>
+          </motion.div>
 
-          <div className={cn(s.card, "d-fl-col")}>
+          <motion.div
+            className={cn(s.card, "d-fl-col")}
+            variants={twoBlockAbout}
+            custom={2.5}
+          >
             <div className={cn(s.img)}>
               <img src={man} alt="girl" />
             </div>
@@ -40,9 +84,13 @@ export default function About() {
               <h5>Arseny Filimonov</h5>
               <span>Front-end developer</span>
             </div>
-          </div>
+          </motion.div>
 
-          <div className={cn(s.card, "d-fl-col")}>
+          <motion.div
+            className={cn(s.card, "d-fl-col")}
+            variants={threeBlockAbout}
+            custom={3}
+          >
             <div className={cn(s.img)}>
               <img src={man} alt="girl" />
             </div>
@@ -56,9 +104,9 @@ export default function About() {
               <h5>Pavel Korobko</h5>
               <span>Front-end developer</span>
             </div>
-          </div>
+          </motion.div>
         </div>
-      </div>
+      </motion.div>
     </>
   );
 }
