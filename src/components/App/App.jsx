@@ -5,7 +5,7 @@ import InfoHeader from "../InfoHeader/InfoHeader";
 import { useState, useEffect, useCallback } from "react";
 import api from "../../utils/api";
 import { isLiked } from "../../utils/posts";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import FavouritesPostPage from "../../pages/FavouritesPostPage/FavouritesPostPage";
 import PostPage from "../../pages/PostPage/PostPage";
 import { CardContext } from "../../context/cardContext";
@@ -13,6 +13,12 @@ import { UserContext } from "../../context/userContext";
 import { SlideContext } from "../../context/slideContext";
 import NotFoundPage from "../../pages/NotFoundPage/NotFoundPage";
 import HomePage from "../../pages/HomePage/HomePage";
+import RegistrationForm from "../Forms/RegistrationForm/RegistrationForm";
+import ModalRegistration from "../ModalRegistration/ModalRegistration";
+import LoginForm from "../Forms/LoginForm/LoginForm";
+import ResetPasswordForm from "../Forms/ResetPasswordForm/ResetPasswordForm";
+import s from "./App.module.css";
+import notRegistration from "./image/images.jpg";
 
 function App() {
   const [posts, setPosts] = useState([]);
@@ -23,22 +29,48 @@ function App() {
   const [page, setPage] = useState(1);
   const [countPagination, setCountPagination] = useState(10);
 
-  useEffect(() => {
-    Promise.all([api.getUserInfo(), api.getPostsList(page), api.getSlide()])
-      .then(([userData, postData, slideData]) => {
-        setCurrentUser(userData);
-        setPosts(postData.posts);
-        setSlide(slideData);
-        const favouritesPosts = postData.posts.filter((item) =>
-          isLiked(item.likes, userData._id)
-        );
-        setFavourites(favouritesPosts);
-        setCountPagination(Math.ceil(postData.total / 12));
-        // console.log(setSlide);
-      })
-      .catch((err) => console.log(err));
-  }, [page]);
+  const [activeModal, setActiveModal] = useState(false);
+  const [isAuth, setIsAuth] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
+  const token = localStorage.getItem('token');
+
+  useEffect(() => {
+      if (token) {
+        Promise.all([api.getUserInfo(token), api.getPostsList(page, token), api.getSlide(token)])
+          .then(([userData, postData, slideData]) => {
+            setCurrentUser(userData);
+              setIsAuth(true);
+            setPosts(postData.posts);
+            setSlide(slideData);
+            const favouritesPosts = slideData.filter((item) =>
+              isLiked(item.likes, userData._id)
+            );
+            setFavourites(favouritesPosts);
+            setCountPagination(Math.ceil(postData.total / 12));
+            // console.log(setSlide);
+          })
+          .catch((err) => {
+              console.log(err)
+              setIsAuth(false);
+          });
+          }
+  }, [page, token]);
+
+
+
+    // useEffect(()=> {
+    //
+    //     // const authPath = ['/reset-password', '/registration']
+    //     if(token) {
+    //         setIsAuth(true);
+    //     }
+    //     // нельзя войти без регистрации
+    //     // else if (!authPath.includes(location.pathname)){
+    //     //   navigate('/login');
+    //     // }
+    // }, [navigate, token]);
   // Обновление пользователя
   const handleUpdataUser = (userUpdate) => {
     api.setUserInfo(userUpdate).then((newUserData) => {
@@ -77,6 +109,8 @@ function App() {
     [posts, currentUser]
   );
 
+
+
   return (
     <UserContext.Provider value={{ user: currentUser, isLoading }}>
       <CardContext.Provider
@@ -89,7 +123,9 @@ function App() {
           currentUser,
         }}
       >
-        <AppHeader user={currentUser} updateUserHandle={handleUpdataUser} />
+        <AppHeader user={currentUser} updateUserHandle={handleUpdataUser} setActiveModal={setActiveModal}/>
+
+        {token || isAuth ?
         <main className="main">
           <Routes>
             <Route path="/cards" element={<InfoHeader />} />
@@ -98,7 +134,7 @@ function App() {
           <section className="main__section">
             <SlideContext.Provider value={{ slide }}>
               <Routes>
-                <Route index element={<HomePage />} />
+                <Route index element={<HomePage/>} />
                 <Route
                   path="/cards"
                   element={
@@ -114,10 +150,65 @@ function App() {
                 <Route path="/post/:postId" element={<PostPage />} />
                 <Route path="/favourites" element={<FavouritesPostPage />} />
                 <Route path="*" element={<NotFoundPage />} />
+                <Route
+                  path="/registration"
+                  element={
+                  <ModalRegistration activeModal={activeModal} setActiveModal={setActiveModal}>
+                    <RegistrationForm setActiveModal={setActiveModal}/>
+                  </ModalRegistration>
+                }
+                />
+                <Route
+                  path="/login"
+                  element={
+                  <ModalRegistration activeModal={activeModal} setActiveModal={setActiveModal}>
+                    <LoginForm setActiveModal={setActiveModal}/>
+                  </ModalRegistration>
+                }
+                />
+                <Route
+                  path="/reset-password"
+                  element={
+                  <ModalRegistration activeModal={activeModal} setActiveModal={setActiveModal}>
+                    <ResetPasswordForm />
+                  </ModalRegistration>
+                }
+                />
               </Routes>
             </SlideContext.Provider>
           </section>
         </main>
+        :
+        <div className={s.notAuth}>Пожалуйста, авторизуйтесь!
+          <img src={notRegistration} className={s.img} alt="Пожалуйста, авторизуйтесь!" />
+        </div>
+        }
+        <Routes>
+          <Route
+            path="/registration"
+            element={
+            <ModalRegistration activeModal={activeModal} setActiveModal={setActiveModal}>
+              <RegistrationForm setActiveModal={setActiveModal}/>
+            </ModalRegistration>
+                }
+          />
+          <Route
+            path="/login"
+            element={
+            <ModalRegistration activeModal={activeModal} setActiveModal={setActiveModal}>
+              <LoginForm setActiveModal={setActiveModal}/>
+            </ModalRegistration>
+                }
+          />
+          <Route
+            path="/reset-password"
+            element={
+            <ModalRegistration activeModal={activeModal} setActiveModal={setActiveModal}>
+                <ResetPasswordForm />
+            </ModalRegistration>
+                }
+          />
+          </Routes>
 
         <Footer />
       </CardContext.Provider>

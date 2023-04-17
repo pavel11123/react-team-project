@@ -81,3 +81,10 @@ textarea:focus {
     margin: 0 auto;
   }
 
+.icon {
+    cursor: pointer;
+}
+
+.icon:hover {
+    opacity: .6;
+}

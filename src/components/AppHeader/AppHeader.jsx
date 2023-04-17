@@ -13,8 +13,9 @@ import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { Link } from "react-router-dom";
+import LoginIcon from '@mui/icons-material/Login';
 
-const AppHeader = ({ user, updateUserHandle }) => {
+const AppHeader = ({ user, updateUserHandle, setActiveModal }) => {
   const handleClickButtonEdit = (e) => {
     e.preventDefault();
     updateUserHandle({ name: "Анастасия Мысник", about: "Ученик" });
@@ -59,6 +60,11 @@ const AppHeader = ({ user, updateUserHandle }) => {
             <Link to="/favourites" className={s.favourites}>
               <IconButton size="large" color="inherit">
                 <FavoriteIcon />
+              </IconButton>
+            </Link>
+            <Link to={"/registration"} onClick={()=>setActiveModal(true)}>
+              <IconButton size="large" color="inherit">
+                <LoginIcon fontSize="medium"/> 
               </IconButton>
             </Link>
           </div>
