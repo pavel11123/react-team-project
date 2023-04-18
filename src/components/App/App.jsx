@@ -19,6 +19,7 @@ import LoginForm from "../Forms/LoginForm/LoginForm";
 import ResetPasswordForm from "../Forms/ResetPasswordForm/ResetPasswordForm";
 import s from "./App.module.css";
 import notRegistration from "./image/images.jpg";
+import ProfilePage from "../../pages/ProfilePage/ProfilePage";
 
 function App() {
   const [posts, setPosts] = useState([]);
@@ -114,7 +115,9 @@ function App() {
   );
 
   return (
-    <UserContext.Provider value={{ user: currentUser, isLoading }}>
+    <UserContext.Provider
+      value={{ user: currentUser, isLoading, handleUpdataUser, setActiveModal }}
+    >
       <CardContext.Provider
         value={{
           posts,
@@ -123,6 +126,8 @@ function App() {
           isLoading,
           handleDeletePost,
           currentUser,
+          handleUpdataUser,
+          setActiveModal,
         }}
       >
         <AppHeader
@@ -155,6 +160,7 @@ function App() {
                   />
                   <Route path="/post/:postId" element={<PostPage />} />
                   <Route path="/favourites" element={<FavouritesPostPage />} />
+                  <Route path="/profile" element={<ProfilePage />} />
                   <Route path="*" element={<NotFoundPage />} />
                   <Route
                     path="/registration"

@@ -13,7 +13,7 @@ import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { Link } from "react-router-dom";
-import LoginIcon from '@mui/icons-material/Login';
+import LoginIcon from "@mui/icons-material/Login";
 
 const AppHeader = ({ user, updateUserHandle, setActiveModal }) => {
   const handleClickButtonEdit = (e) => {
@@ -40,14 +40,17 @@ const AppHeader = ({ user, updateUserHandle, setActiveModal }) => {
           </Typography>
 
           <div className={s.toolbarInfo}>
-            <IconButton
-              className={s.userIcon}
-              edge="start"
-              size="large"
-              color="inherit"
-            >
-              <AccountCircleIcon />
-            </IconButton>
+            <Link to="/profile">
+              <IconButton
+                className={s.userIcon}
+                edge="start"
+                size="large"
+                color="inherit"
+              >
+                <AccountCircleIcon />
+              </IconButton>
+            </Link>
+
             <div className={s.user}>
               {user?.email && <span>{user?.email}</span>}
               {user?.name && <span>{user?.name}</span>}
@@ -62,9 +65,9 @@ const AppHeader = ({ user, updateUserHandle, setActiveModal }) => {
                 <FavoriteIcon />
               </IconButton>
             </Link>
-            <Link to={"/registration"} onClick={()=>setActiveModal(true)}>
+            <Link to={"/registration"} onClick={() => setActiveModal(true)}>
               <IconButton size="large" color="inherit">
-                <LoginIcon fontSize="medium"/> 
+                <LoginIcon fontSize="medium" />
               </IconButton>
             </Link>
           </div>
