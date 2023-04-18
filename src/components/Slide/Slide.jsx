@@ -8,6 +8,8 @@ import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 import ModalEdit from "../ModalEdit/ModalEdit";
 import { Link } from "react-router-dom";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 export default function Slide({
   image,
@@ -34,8 +36,10 @@ export default function Slide({
 
             <CardContent className={s.content}>
               <div className={cn(s.content__info, "d-fl")}>
-                <Typography className={s.author}>{author.name}</Typography>
-                <Typography className={s.date}>
+                <Typography className={s.author || <Skeleton />}>
+                  {author.name}
+                </Typography>
+                <Typography className={s.date || <Skeleton />}>
                   {created_at.substr(0, 10)}
                 </Typography>
               </div>
