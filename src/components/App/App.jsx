@@ -34,29 +34,34 @@ function App() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const token = localStorage.getItem('token');
-  console.log("tokenApp--->", token);
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
-      if (token) {
-        Promise.all([api.getUserInfo(token), api.getPostsList(page, token), api.getSlide(token)])
-          .then(([userData, postData, slideData]) => {
-            setCurrentUser(userData);
-            setIsAuth(true);
-            setPosts(postData.posts);
-            setSlide(slideData);
-            const favouritesPosts = slideData.filter((item) =>
-              isLiked(item.likes, userData._id)
-            );
-            setFavourites(favouritesPosts);
-            setCountPagination(Math.ceil(postData.total / 12));
-            // console.log(setSlide);
-          })
-          .catch((err) => {
-              console.log(err)
-              setIsAuth(false);
-          });
-          }
+    if (token) {
+      Promise.all([
+        api.getUserInfo(token),
+        api.getPostsList(page, token),
+        api.getSlide(token),
+      ])
+        .then(([userData, postData, slideData]) => {
+          setCurrentUser(userData);
+          setIsAuth(true);
+          setPosts(postData.posts);
+          setSlide(slideData);
+          const favouritesPosts = slideData.filter((item) =>
+            isLiked(item.likes, userData._id)
+          );
+          setFavourites(favouritesPosts);
+          setCountPagination(Math.ceil(postData.total / 12));
+        })
+        .catch((err) => {
+          console.log(err);
+          setIsAuth(false);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    }
   }, [page, token]);
 
   // Обновление пользователя
@@ -83,10 +88,10 @@ function App() {
         });
 
         if (!liked) {
-          setFavourites(prevState => [...prevState, newPost]);
+          setFavourites((prevState) => [...prevState, newPost]);
         } else {
-          setFavourites(prevState =>
-            prevState.filter(post => post._id !== newPost._id)
+          setFavourites((prevState) =>
+            prevState.filter((post) => post._id !== newPost._id)
           );
         }
 
@@ -140,43 +145,84 @@ function App() {
           token,
         }}
       >
-        <AppHeader user={currentUser} updateUserHandle={handleUpdataUser} setActiveModal={setActiveModal}/>
+        <AppHeader
+          user={currentUser}
+          updateUserHandle={handleUpdataUser}
+          setActiveModal={setActiveModal}
+        />
 
-        {token || isAuth ?
-        <main className="main">
-          <Routes>
-            <Route path="/cards" element={<InfoHeader />} />
-          </Routes>
+        {token || isAuth ? (
+          <main className="main">
+            <Routes>
+              <Route path="/cards" element={<InfoHeader />} />
+            </Routes>
 
-          <section className="main__section">
-            <SlideContext.Provider value={{ slide }}>
-              <Routes>
-                <Route index element={<HomePage/>} />
-                <Route
-                  path="/cards"
-                  element={
-                    <CardList
-                      posts={posts}
-                      page={page}
-                      setPage={setPage}
-                      countPagination={countPagination}
-                      currentUser={currentUser}
-                    />
-                  }
-                />
-                <Route path="/post/:postId" element={<PostPage />} />
-                <Route path="/favourites" element={<FavouritesPostPage />} />
-                <Route path="*" element={<NotFoundPage />} />
-                {authRoutes}
-              </Routes>
-            </SlideContext.Provider>
-          </section>
-        </main>
-        :
-        <div className={s.notAuth}>Пожалуйста, авторизуйтесь!
-          <img src={notRegistration} className={s.img} alt="Пожалуйста, авторизуйтесь!" />
-        </div>
-        }
+            <section className="main__section">
+              <SlideContext.Provider value={{ slide, isLoading }}>
+                <Routes>
+                  <Route index element={<HomePage />} />
+                  <Route
+                    path="/cards"
+                    element={
+                      <CardList
+                        posts={posts}
+                        page={page}
+                        setPage={setPage}
+                        countPagination={countPagination}
+                        currentUser={currentUser}
+                      />
+                    }
+                  />
+                  <Route path="/post/:postId" element={<PostPage />} />
+                  <Route path="/favourites" element={<FavouritesPostPage />} />
+                  <Route path="*" element={<NotFoundPage />} />
+                  <Route
+                    path="/registration"
+                    element={
+                      <ModalRegistration
+                        activeModal={activeModal}
+                        setActiveModal={setActiveModal}
+                      >
+                        <RegistrationForm setActiveModal={setActiveModal} />
+                      </ModalRegistration>
+                    }
+                  />
+                  <Route
+                    path="/login"
+                    element={
+                      <ModalRegistration
+                        activeModal={activeModal}
+                        setActiveModal={setActiveModal}
+                      >
+                        <LoginForm setActiveModal={setActiveModal} />
+                      </ModalRegistration>
+                    }
+                  />
+                  <Route
+                    path="/reset-password"
+                    element={
+                      <ModalRegistration
+                        activeModal={activeModal}
+                        setActiveModal={setActiveModal}
+                      >
+                        <ResetPasswordForm />
+                      </ModalRegistration>
+                    }
+                  />
+                </Routes>
+              </SlideContext.Provider>
+            </section>
+          </main>
+        ) : (
+          <div className={s.notAuth}>
+            Пожалуйста, авторизуйтесь!
+            <img
+              src={notRegistration}
+              className={s.img}
+              alt="Пожалуйста, авторизуйтесь!"
+            />
+          </div>
+        )}
         <Routes>
         {authRoutes}
         </Routes>

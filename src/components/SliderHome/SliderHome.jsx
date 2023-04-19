@@ -6,9 +6,10 @@ import React from "react";
 import { useContext } from "react";
 import { SlideContext } from "../../context/slideContext";
 import { Link } from "react-router-dom";
+import SkeletonSlide from "../SkeletonSlide/SkeletonSlide";
 
 export default function SliderHome() {
-  const { slide } = useContext(SlideContext);
+  const { slide, isLoading } = useContext(SlideContext);
 
   const settings = {
     dots: false,
@@ -16,6 +17,8 @@ export default function SliderHome() {
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2000,
 
     responsive: [
       {
@@ -48,13 +51,16 @@ export default function SliderHome() {
             Show more
           </Link>
         </div>
-
         <Slider {...settings}>
-          {slide.map((el) => {
-            if (el.author._id === "63ecab9c59b98b038f77b633") {
-              return <Slide key={el._id} {...el} />;
-            }
-          })}
+          {isLoading ? (
+            <SkeletonSlide slideSkeleton={8} />
+          ) : (
+            slide.map((el) => {
+              if (el.author._id === "63ecab9c59b98b038f77b633") {
+                return <Slide key={el._id} {...el} />;
+              }
+            })
+          )}
         </Slider>
       </div>
     </>
