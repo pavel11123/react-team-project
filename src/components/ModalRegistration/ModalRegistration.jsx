@@ -3,6 +3,7 @@ import s from "./ModalRegistration.module.css";
 import cn from "classnames";
 
 const ModalRegistration = ({activeModal, children, setActiveModal}) => {
+    
     return (
         <>
         <div className={cn(s.modal, {

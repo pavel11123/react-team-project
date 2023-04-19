@@ -64,17 +64,6 @@ function App() {
     }
   }, [page, token]);
 
-  // useEffect(()=> {
-  //
-  //     // const authPath = ['/reset-password', '/registration']
-  //     if(token) {
-  //         setIsAuth(true);
-  //     }
-  //     // нельзя войти без регистрации
-  //     // else if (!authPath.includes(location.pathname)){
-  //     //   navigate('/login');
-  //     // }
-  // }, [navigate, token]);
   // Обновление пользователя
   const handleUpdataUser = (userUpdate) => {
     api.setUserInfo(userUpdate).then((newUserData) => {
@@ -82,9 +71,9 @@ function App() {
     });
   };
 
-  const handleDeletePost = async (postId) => {
+  const handleDeletePost = async (postId, token) => {
     console.log("works---->", postId);
-    await api.deletePost(postId).then((newPost) => {
+    await api.deletePost(postId, token).then((newPost) => {
       const newPosts = posts.filter((e) => e._id !== newPost._id);
       setPosts([...newPosts]);
     });
@@ -93,7 +82,7 @@ function App() {
   const handlePostLike = useCallback(
     (product) => {
       const liked = isLiked(product.likes, currentUser._id);
-      return api.changeLikePost(product._id, liked).then((newPost) => {
+      return api.changeLikePost(product._id, liked, token).then((newPost) => {
         const newPosts = posts.map((post) => {
           return post._id === newPost._id ? newPost : post;
         });
@@ -113,16 +102,45 @@ function App() {
     [posts, currentUser]
   );
 
+  const authRoutes = <>   
+    <Route
+        path="/login"
+        element={
+        <ModalRegistration activeModal={activeModal} setActiveModal={setActiveModal}>
+            <LoginForm setActiveModal={setActiveModal}/>
+        </ModalRegistration>
+        }
+    />
+    <Route
+        path="/registration"
+        element={
+        <ModalRegistration activeModal={activeModal} setActiveModal={setActiveModal}>
+            <RegistrationForm setActiveModal={setActiveModal}/>
+        </ModalRegistration>
+        }
+    />
+    <Route
+        path="/reset-password"
+        element={
+        <ModalRegistration activeModal={activeModal} setActiveModal={setActiveModal}>
+            <ResetPasswordForm setActiveModal={setActiveModal}/>
+        </ModalRegistration>
+        }
+    />
+  </>
+
   return (
-    <UserContext.Provider value={{ user: currentUser, isLoading }}>
+    <UserContext.Provider value={{ user: currentUser, isLoading,  isAuth }}>
       <CardContext.Provider
         value={{
           posts,
+          setPosts,
           favourites,
           handleLike: handlePostLike,
           isLoading,
           handleDeletePost,
           currentUser,
+          token,
         }}
       >
         <AppHeader
@@ -156,39 +174,7 @@ function App() {
                   <Route path="/post/:postId" element={<PostPage />} />
                   <Route path="/favourites" element={<FavouritesPostPage />} />
                   <Route path="*" element={<NotFoundPage />} />
-                  <Route
-                    path="/registration"
-                    element={
-                      <ModalRegistration
-                        activeModal={activeModal}
-                        setActiveModal={setActiveModal}
-                      >
-                        <RegistrationForm setActiveModal={setActiveModal} />
-                      </ModalRegistration>
-                    }
-                  />
-                  <Route
-                    path="/login"
-                    element={
-                      <ModalRegistration
-                        activeModal={activeModal}
-                        setActiveModal={setActiveModal}
-                      >
-                        <LoginForm setActiveModal={setActiveModal} />
-                      </ModalRegistration>
-                    }
-                  />
-                  <Route
-                    path="/reset-password"
-                    element={
-                      <ModalRegistration
-                        activeModal={activeModal}
-                        setActiveModal={setActiveModal}
-                      >
-                        <ResetPasswordForm />
-                      </ModalRegistration>
-                    }
-                  />
+                  {authRoutes}
                 </Routes>
               </SlideContext.Provider>
             </section>
@@ -204,39 +190,7 @@ function App() {
           </div>
         )}
         <Routes>
-          <Route
-            path="/registration"
-            element={
-              <ModalRegistration
-                activeModal={activeModal}
-                setActiveModal={setActiveModal}
-              >
-                <RegistrationForm setActiveModal={setActiveModal} />
-              </ModalRegistration>
-            }
-          />
-          <Route
-            path="/login"
-            element={
-              <ModalRegistration
-                activeModal={activeModal}
-                setActiveModal={setActiveModal}
-              >
-                <LoginForm setActiveModal={setActiveModal} />
-              </ModalRegistration>
-            }
-          />
-          <Route
-            path="/reset-password"
-            element={
-              <ModalRegistration
-                activeModal={activeModal}
-                setActiveModal={setActiveModal}
-              >
-                <ResetPasswordForm />
-              </ModalRegistration>
-            }
-          />
+          {authRoutes}
         </Routes>
 
         <Footer />
