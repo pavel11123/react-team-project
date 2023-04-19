@@ -104,32 +104,30 @@ function App() {
 
   const authRoutes = <>   
     <Route
-                  path="/login"
-                  element={
-                  <ModalRegistration activeModal={activeModal} setActiveModal={setActiveModal}>
-                    <LoginForm setActiveModal={setActiveModal}/>
-                  </ModalRegistration>
-                }
-                />
-                <Route
-                  path="/registration"
-                  element={
-                  <ModalRegistration activeModal={activeModal} setActiveModal={setActiveModal}>
-                    <RegistrationForm setActiveModal={setActiveModal}/>
-                  </ModalRegistration>
-                }
-                />
-                <Route
-                  path="/reset-password"
-                  element={
-                  <ModalRegistration activeModal={activeModal} setActiveModal={setActiveModal}>
-                    <ResetPasswordForm setActiveModal={setActiveModal}/>
-                  </ModalRegistration>
-                }
-                />
+        path="/login"
+        element={
+        <ModalRegistration activeModal={activeModal} setActiveModal={setActiveModal}>
+            <LoginForm setActiveModal={setActiveModal}/>
+        </ModalRegistration>
+        }
+    />
+    <Route
+        path="/registration"
+        element={
+        <ModalRegistration activeModal={activeModal} setActiveModal={setActiveModal}>
+            <RegistrationForm setActiveModal={setActiveModal}/>
+        </ModalRegistration>
+        }
+    />
+    <Route
+        path="/reset-password"
+        element={
+        <ModalRegistration activeModal={activeModal} setActiveModal={setActiveModal}>
+            <ResetPasswordForm setActiveModal={setActiveModal}/>
+        </ModalRegistration>
+        }
+    />
   </>
-
-
 
   return (
     <UserContext.Provider value={{ user: currentUser, isLoading,  isAuth }}>
@@ -176,39 +174,7 @@ function App() {
                   <Route path="/post/:postId" element={<PostPage />} />
                   <Route path="/favourites" element={<FavouritesPostPage />} />
                   <Route path="*" element={<NotFoundPage />} />
-                  <Route
-                    path="/registration"
-                    element={
-                      <ModalRegistration
-                        activeModal={activeModal}
-                        setActiveModal={setActiveModal}
-                      >
-                        <RegistrationForm setActiveModal={setActiveModal} />
-                      </ModalRegistration>
-                    }
-                  />
-                  <Route
-                    path="/login"
-                    element={
-                      <ModalRegistration
-                        activeModal={activeModal}
-                        setActiveModal={setActiveModal}
-                      >
-                        <LoginForm setActiveModal={setActiveModal} />
-                      </ModalRegistration>
-                    }
-                  />
-                  <Route
-                    path="/reset-password"
-                    element={
-                      <ModalRegistration
-                        activeModal={activeModal}
-                        setActiveModal={setActiveModal}
-                      >
-                        <ResetPasswordForm />
-                      </ModalRegistration>
-                    }
-                  />
+                  {authRoutes}
                 </Routes>
               </SlideContext.Provider>
             </section>
@@ -224,7 +190,7 @@ function App() {
           </div>
         )}
         <Routes>
-        {authRoutes}
+          {authRoutes}
         </Routes>
 
         <Footer />
