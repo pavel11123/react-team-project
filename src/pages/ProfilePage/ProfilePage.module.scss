@@ -10,6 +10,11 @@ html {
   }
 }
 
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(rem(400), 1fr));
+}
+
 .wrapper,
 .info {
   gap: rem(20);
@@ -22,7 +27,7 @@ html {
 
 .card {
   flex: 1 1 auto;
-  max-width: rem(542);
+  // max-width: rem(542);
 }
 
 .img {
@@ -45,10 +50,42 @@ html {
 .description,
 .email {
   gap: rem(10);
+  align-items: center;
 }
 
 .name,
 .description,
 .email {
   border-bottom: rem(1) solid #0000001b;
+  gap: rem(15);
+}
+
+.subtitle {
+  flex: 1 1 auto;
+  max-width: rem(90);
+}
+
+.headerCard {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.search {
+  gap: rem(5);
+  align-self: center;
+}
+
+.contentCard {
+  margin-top: rem(50);
+  gap: rem(50);
+}
+
+.contentCardBlock {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chip {
+  flex: 1 1 auto;
+  max-width: rem(80) !important;
 }

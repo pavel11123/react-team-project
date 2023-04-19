@@ -27,6 +27,15 @@ class Api {
     }).then(onResponse);
   }
 
+  getUsers(token) {
+    return fetch(`${this._baseUrl}/users`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+    }).then(onResponse);
+  }
+
   getUserInfo(token) {
     // console.log('headers>>>', this._headers)
     return fetch(`${this._baseUrl}/users/me`, {

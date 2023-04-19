@@ -16,11 +16,6 @@ import { Link } from "react-router-dom";
 import LoginIcon from "@mui/icons-material/Login";
 
 const AppHeader = ({ user, updateUserHandle, setActiveModal }) => {
-  const handleClickButtonEdit = (e) => {
-    e.preventDefault();
-    updateUserHandle({ name: "Анастасия Мысник", about: "Ученик" });
-  };
-
   return (
     <AppBar position="sticky" className={s.header}>
       <Container>
@@ -50,16 +45,6 @@ const AppHeader = ({ user, updateUserHandle, setActiveModal }) => {
                 <AccountCircleIcon />
               </IconButton>
             </Link>
-
-            <div className={s.user}>
-              {user?.email && <span>{user?.email}</span>}
-              {user?.name && <span>{user?.name}</span>}
-              <Stack spacing={2} direction="row">
-                <Button variant="contained" onClick={handleClickButtonEdit}>
-                  Изменить
-                </Button>
-              </Stack>
-            </div>
             <Link to="/favourites" className={s.favourites}>
               <IconButton size="large" color="inherit">
                 <FavoriteIcon />
