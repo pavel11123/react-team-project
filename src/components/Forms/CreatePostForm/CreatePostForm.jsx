@@ -1,23 +1,32 @@
-import React from "react";
+import React, { useCallback, useContext } from "react";
 import { useForm } from "react-hook-form";
 import s from "./CreatePostForm.module.css";
 import cn from "classnames";
 import api from "../../../utils/api";
 import Stack from '@mui/material/Stack';
 import CloseIcon from '@mui/icons-material/Close';
+import { CardContext } from "../../../context/cardContext";
+
 
 const CreatePostForm = ({handleClose}) => {
-
+   
     const { register, handleSubmit, formState, reset} = useForm();
-
-    const onSubmit = async (data) => {
-        const newPost = await api.addNewPost({...data, tags: data.tags.split(",")});
-        console.log({newPost});
-        console.log(data);
-        // reset();
-        handleClose(true);
-    }
-
+    const { token, posts, setPosts } =  useContext(CardContext);
+    console.log("token1--->", token);
+       
+    // const onSubmit = async (data, token) => {
+    //     const newPost = await api.addNewPost({...data, tags: data.tags.split(",")}, token);
+    //     console.log({newPost});
+    //     console.log(data);
+    //     handleClose(true);
+    // }
+        const onSubmit = (data) => {
+              return api.addNewPost({...data, tags: data.tags.split(",")}, token).then((newPost) => {
+                setPosts([...posts, newPost]);
+                handleClose(true);
+                })
+            };
+        
     return (
         <>
         <Stack className={s.icon} direction="row" justifyContent="flex-end">

@@ -9,9 +9,9 @@ import { useContext } from "react";
 
 const PostPage = () => {
   const { postId } = useParams();
-  const { handleLike } = useContext(CardContext);
+  const { handleLike, token } = useContext(CardContext);
 
-  const handleGetPost = useCallback(() => api.getPostById(postId), [postId]);
+  const handleGetPost = useCallback(() => api.getPostById(postId, token), [postId, token]);
   const { data: post, setData: setPost } = useApi(handleGetPost);
    
   const handleProductLike = useCallback(() => {

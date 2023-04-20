@@ -1,5 +1,5 @@
 import s from "./AppHeader.module.css";
-import React from "react";
+import React, { useContext } from "react";
 import {
   AppBar,
   Container,
@@ -12,10 +12,20 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import LoginIcon from "@mui/icons-material/Login";
+import { UserContext } from "../../context/userContext";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 const AppHeader = ({ user, updateUserHandle, setActiveModal }) => {
+  const { isAuth } = useContext(UserContext);
+
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/login");
+  };
   return (
     <AppBar position="sticky" className={s.header}>
       <Container>
@@ -50,11 +60,17 @@ const AppHeader = ({ user, updateUserHandle, setActiveModal }) => {
                 <FavoriteIcon />
               </IconButton>
             </Link>
-            <Link to={"/registration"} onClick={() => setActiveModal(true)}>
-              <IconButton size="large" color="inherit">
-                <LoginIcon fontSize="medium" />
+            {!isAuth ? (
+              <Link to={"/login"} onClick={() => setActiveModal(true)}>
+                <IconButton size="large" color="inherit">
+                  <LoginIcon fontSize="medium" />
+                </IconButton>
+              </Link>
+            ) : (
+              <IconButton size="large" color="inherit" onClick={handleLogout}>
+                <LogoutIcon fontSize="medium" />
               </IconButton>
-            </Link>
+            )}
           </div>
         </Toolbar>
       </Container>

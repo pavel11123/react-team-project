@@ -30,7 +30,7 @@ const LoginForm = ({ setActiveModal }) => {
           localStorage.setItem('token', result.token);
           navigate('/');
          } catch (error) {
-            console.log();
+            console.log('error>>>', error.message);
          }
     };
 
@@ -56,9 +56,9 @@ const LoginForm = ({ setActiveModal }) => {
 
     return (
         <>
-        <Stack className={s.icon} direction="row" justifyContent="flex-end">
+        {/* <Stack className={s.icon} direction="row" justifyContent="flex-end">
         <CloseIcon fontSize="smoll"/>
-        </Stack>
+        </Stack> */}
         <form className={s.form} onSubmit={handleSubmit(sendData)}>
             <h3 className={s.title}>Вход</h3>
 
@@ -69,6 +69,7 @@ const LoginForm = ({ setActiveModal }) => {
             {errors?.email && (
                 <p className={s.errorMessage}>{errors.email?.message}</p>
             )}
+            
             <div className={s.form__eyeWrapper}>
             <Input
                 type={ type ? 'text' : 'password'}
@@ -88,7 +89,7 @@ const LoginForm = ({ setActiveModal }) => {
 
             <Link 
                 to="/reset-password" 
-                className={cn(s.description, s.resetPassword)}
+                className={cn(s.links, s.resetPassword)}
                 // state={linkState}
             >Восстановить пароль</Link>
 
