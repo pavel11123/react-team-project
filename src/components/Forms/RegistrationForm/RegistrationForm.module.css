@@ -24,6 +24,15 @@
     margin: 0;
 }
 
+.links {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 14px;
+    color: #6d6c6c;
+    margin: 0;
+    cursor: pointer;
+}
+
 .resetPassword:hover {
     opacity: .8;
 }
@@ -56,3 +65,4 @@
 .icon:hover {
     opacity: .6;
 }
+

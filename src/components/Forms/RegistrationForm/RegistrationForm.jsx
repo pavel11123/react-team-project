@@ -11,7 +11,7 @@ import Button from '@mui/material/Button';
 import { useNavigate } from "react-router-dom";
 import api from "../../../utils/api";
 
-const RegistrationForm = ({ hendleRegistration, setActiveModal }) => {
+const RegistrationForm = ({ setActiveModal }) => {
     const {register, handleSubmit, formState: {errors}} = useForm({mode: 'onBlur'});
     const [ type, setType] = useState(false);
    
@@ -54,7 +54,7 @@ const RegistrationForm = ({ hendleRegistration, setActiveModal }) => {
         console.log('result--->', {result});
         navigate("/login");
         } catch (error) {
-            console.log('errors--->', errors);
+            console.log('error--->', error);
          }
     };
 
@@ -65,9 +65,9 @@ const RegistrationForm = ({ hendleRegistration, setActiveModal }) => {
 
     return (
         <>
-        <Stack className={s.icon} direction="row" justifyContent="flex-end">
+        {/* <Stack className={s.icon} direction="row" justifyContent="flex-end">
         <CloseIcon fontSize="smoll"/>
-        </Stack>
+        </Stack> */}
         <form className={s.form} onSubmit={handleSubmit(sendData)}>
             <h3 className={s.title}>Регистрация</h3>
             <Input
@@ -100,7 +100,6 @@ const RegistrationForm = ({ hendleRegistration, setActiveModal }) => {
             {errors?.password && (
                 <p className={s.errorMessage}>{errors.password?.message}</p>
             )}
-
             <p className={s.description}>Регистрируясь на сайте, вы соглашаетесь с нашими Правилами и Политикой
                 конфиденциальности и соглашаетесь
                 на информационную рассылку.</p>
