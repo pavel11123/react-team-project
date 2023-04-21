@@ -2,7 +2,7 @@ import React from "react";
 import s from "./ProfilePage.module.scss";
 import cn from "classnames";
 import api from "../../utils/api";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Container } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
@@ -24,8 +24,11 @@ const ProfilePage = ({ slide, countLike, users, countSlide, countLikeMe }) => {
     setActiveModal,
   } = useContext(UserContext);
 
+  const navigate = useNavigate();
+
   const handleClickButtonEdit = (e) => {
     e.preventDefault();
+    navigate("/profileform");
     updateUserHandle({
       name: "React Team Project",
       about: "Front-end development team",
