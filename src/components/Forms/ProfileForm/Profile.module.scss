@@ -1,0 +1,24 @@
+.profile {
+    display: flex;
+    flex-direction: column;
+    // display: grid;
+    // grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 2rem;
+    cursor: pointer;
+
+    &__avatar {
+        padding: 1rem 0 2rem 0;
+        display: flex;
+        flex-direction: column;
+        // align-items: center;
+        gap: 2rem;
+    }
+
+    &__avatar__img {
+        margin: 0 auto;
+        width: 50%;
+        height: 50%;
+    }
+   
+}

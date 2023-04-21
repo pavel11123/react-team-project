@@ -1,5 +1,5 @@
 import s from "./AppHeader.module.css";
-import React from "react";
+import React, { useContext } from "react";
 import {
   AppBar,
   Container,
@@ -12,14 +12,24 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import LoginIcon from '@mui/icons-material/Login';
+import { UserContext } from "../../context/userContext";
+import LogoutIcon from '@mui/icons-material/Logout';
 
 const AppHeader = ({ user, updateUserHandle, setActiveModal }) => {
+  const { isAuth } = useContext(UserContext);
   const handleClickButtonEdit = (e) => {
     e.preventDefault();
     updateUserHandle({ name: "Анастасия Мысник", about: "Ученик" });
   };
+
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    navigate('/login');
+  }
 
   return (
     <AppBar position="sticky" className={s.header}>
@@ -41,6 +51,7 @@ const AppHeader = ({ user, updateUserHandle, setActiveModal }) => {
 
           <div className={s.toolbarInfo}>
             <IconButton
+              onClick={()=>setActiveModal(true)}
               className={s.userIcon}
               edge="start"
               size="large"
@@ -48,6 +59,7 @@ const AppHeader = ({ user, updateUserHandle, setActiveModal }) => {
             >
               <AccountCircleIcon />
             </IconButton>
+            
             <div className={s.user}>
               {user?.email && <span>{user?.email}</span>}
               {user?.name && <span>{user?.name}</span>}
@@ -57,16 +69,24 @@ const AppHeader = ({ user, updateUserHandle, setActiveModal }) => {
                 </Button>
               </Stack>
             </div>
+            
+           
             <Link to="/favourites" className={s.favourites}>
               <IconButton size="large" color="inherit">
                 <FavoriteIcon />
               </IconButton>
             </Link>
-            <Link to={"/registration"} onClick={()=>setActiveModal(true)}>
+            {!isAuth ? 
+            <Link to={"/login"} onClick={()=>setActiveModal(true)}>
               <IconButton size="large" color="inherit">
                 <LoginIcon fontSize="medium"/> 
               </IconButton>
-            </Link>
+            </Link> : (
+             <IconButton size="large" color="inherit" onClick={handleLogout}>
+                <LogoutIcon fontSize="medium"/> 
+              </IconButton>
+            )
+            }
           </div>
         </Toolbar>
       </Container>

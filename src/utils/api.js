@@ -10,6 +10,7 @@ const onResponse = (res) => {
   return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
 };
 
+
 class Api {
   constructor({ baseUrl, headers }) {
     this._headers = headers;
@@ -32,6 +33,28 @@ class Api {
       "Content-Type": "application/json",
           Authorization: token,
       },}).then(onResponse);
+  }
+ 
+  updateAvatar (avatar, token) {
+    return fetch(`${this._baseUrl}/users/me/avatar`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+      body: JSON.stringify(avatar),
+    }).then(onResponse);
+  }
+
+  updateUserInfo (body, token) {
+    return fetch(`${this._baseUrl}/users/me`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+      body: JSON.stringify(body),
+    }).then(onResponse);
   }
 
   getPostById(idPost) {
@@ -57,13 +80,38 @@ class Api {
     }).then(onResponse);
   }
 
-  registerUser(dataUser) {
+
+
+  registerUser(dataUser, setMessage, setError) {
     return fetch(`${this._baseUrl}/signup`, {
         method: 'POST',
         headers: this._headers,
         body: JSON.stringify(dataUser),
-    }).then(onResponse)
-}
+    }).then(onResponse);
+    
+    // .then(()=> {
+    //   setMessage({
+    //     severity: 'success',
+    //     text: 'Успешно',
+    //     onClose: ()=> {
+    //       window.location = '/';
+    //     },
+
+    //   })
+    // })
+    // .catch((err)=> {
+    //   err.then((data)=> {
+    //     const res = JSON.parse(data);
+    //     setMessage({
+    //       severity: 'error',
+    //       text: res.message,
+    //     });
+    //     res.validation?.keys?.forEach((field)=> {
+    //       setError(field);
+    //     });
+    //   });
+    // });
+};
 
   login(dataUser) {
   return fetch(`${this._baseUrl}/signin`, {
@@ -98,7 +146,7 @@ class Api {
 }
 
 const config = {
-  baseUrl: "https://api.react-learning.ru",
+  baseUrl: "https://api.react-learning.ru/v2/DN",
    headers: {
     "Content-Type": "application/json",
     Authorization:

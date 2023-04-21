@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import s from "./RegistrationForm.module.css";
 import { useForm } from "react-hook-form";
 import { Input } from "@mui/material";
@@ -11,11 +11,10 @@ import Button from '@mui/material/Button';
 import { useNavigate } from "react-router-dom";
 import api from "../../../utils/api";
 
-
 const RegistrationForm = ({ hendleRegistration, setActiveModal }) => {
     const {register, handleSubmit, formState: {errors}} = useForm({mode: 'onBlur'});
     const [ type, setType] = useState(false);
-
+   
     const navigate = useNavigate();
 
     const nameRegister = register('name', {
