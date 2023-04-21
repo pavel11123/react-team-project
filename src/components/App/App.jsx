@@ -19,10 +19,13 @@ import LoginForm from "../Forms/LoginForm/LoginForm";
 import ResetPasswordForm from "../Forms/ResetPasswordForm/ResetPasswordForm";
 import s from "./App.module.css";
 import notRegistration from "./image/images.jpg";
+import ProfilePage from "../../pages/ProfilePage/ProfilePage";
 
 function App() {
   const [posts, setPosts] = useState([]);
+  const [users, setUsers] = useState([]);
   const [slide, setSlide] = useState([]);
+  // const [countLike, setCountLike] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [favourites, setFavourites] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
@@ -36,18 +39,32 @@ function App() {
 
   const token = localStorage.getItem("token");
 
+  let countLike = 0;
+  let countSlide = 0;
+  let countLikeMe = 0;
+  slide.forEach((el) => {
+    countLike += el.likes.length;
+
+    if (el.author._id === "63ecab9c59b98b038f77b633") {
+      countSlide += 1;
+      countLikeMe += el.likes.length;
+    }
+  });
+
   useEffect(() => {
     if (token) {
       Promise.all([
         api.getUserInfo(token),
         api.getPostsList(page, token),
         api.getSlide(token),
+        api.getUsers(token),
       ])
-        .then(([userData, postData, slideData]) => {
+        .then(([userData, postData, slideData, usersData]) => {
           setCurrentUser(userData);
           setIsAuth(true);
           setPosts(postData.posts);
           setSlide(slideData);
+          setUsers(usersData);
           const favouritesPosts = slideData.filter((item) =>
             isLiked(item.likes, userData._id)
           );
@@ -102,35 +119,46 @@ function App() {
     [posts, currentUser]
   );
 
-  const authRoutes = <>   
-    <Route
+  const authRoutes = (
+    <>
+      <Route
         path="/login"
         element={
-        <ModalRegistration activeModal={activeModal} setActiveModal={setActiveModal}>
-            <LoginForm setActiveModal={setActiveModal}/>
-        </ModalRegistration>
+          <ModalRegistration
+            activeModal={activeModal}
+            setActiveModal={setActiveModal}
+          >
+            <LoginForm setActiveModal={setActiveModal} />
+          </ModalRegistration>
         }
-    />
-    <Route
+      />
+      <Route
         path="/registration"
         element={
-        <ModalRegistration activeModal={activeModal} setActiveModal={setActiveModal}>
-            <RegistrationForm setActiveModal={setActiveModal}/>
-        </ModalRegistration>
+          <ModalRegistration
+            activeModal={activeModal}
+            setActiveModal={setActiveModal}
+          >
+            <RegistrationForm setActiveModal={setActiveModal} />
+          </ModalRegistration>
         }
-    />
-    <Route
+      />
+      <Route
         path="/reset-password"
         element={
-        <ModalRegistration activeModal={activeModal} setActiveModal={setActiveModal}>
-            <ResetPasswordForm setActiveModal={setActiveModal}/>
-        </ModalRegistration>
+          <ModalRegistration
+            activeModal={activeModal}
+            setActiveModal={setActiveModal}
+          >
+            <ResetPasswordForm setActiveModal={setActiveModal} />
+          </ModalRegistration>
         }
-    />
-  </>
+      />
+    </>
+  );
 
   return (
-    <UserContext.Provider value={{ user: currentUser, isLoading,  isAuth }}>
+    <UserContext.Provider value={{ user: currentUser, isLoading, isAuth }}>
       <CardContext.Provider
         value={{
           posts,
@@ -173,6 +201,18 @@ function App() {
                   />
                   <Route path="/post/:postId" element={<PostPage />} />
                   <Route path="/favourites" element={<FavouritesPostPage />} />
+                  <Route
+                    path="/profile"
+                    element={
+                      <ProfilePage
+                        slide={slide.length}
+                        countLike={countLike}
+                        countLikeMe={countLikeMe}
+                        countSlide={countSlide}
+                        users={users.length}
+                      />
+                    }
+                  />
                   <Route path="*" element={<NotFoundPage />} />
                   {authRoutes}
                 </Routes>
@@ -189,9 +229,7 @@ function App() {
             />
           </div>
         )}
-        <Routes>
-          {authRoutes}
-        </Routes>
+        <Routes>{authRoutes}</Routes>
 
         <Footer />
       </CardContext.Provider>
