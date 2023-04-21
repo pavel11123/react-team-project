@@ -11,7 +11,6 @@ import PostPage from "../../pages/PostPage/PostPage";
 import { CardContext } from "../../context/cardContext";
 import { UserContext } from "../../context/userContext";
 import { SlideContext } from "../../context/slideContext";
-// import { SnackbarContent } from "@mui/material";
 import NotFoundPage from "../../pages/NotFoundPage/NotFoundPage";
 import HomePage from "../../pages/HomePage/HomePage";
 import RegistrationForm from "../Forms/RegistrationForm/RegistrationForm";
@@ -19,12 +18,9 @@ import ModalRegistration from "../ModalRegistration/ModalRegistration";
 import LoginForm from "../Forms/LoginForm/LoginForm";
 import ResetPasswordForm from "../Forms/ResetPasswordForm/ResetPasswordForm";
 import s from "./App.module.css";
-import notRegistration from "./image/images.jpg";
-import Profile from "../Forms/ProfileForm/ProfileForm";
-// import Snack from "../Snack";
-// import { Alert } from '@mui/material';
-// import Snackbar from '@mui/material/Snackbar';
-
+import notRegistration from "./image/img_ion.jpg";
+import ProfilePage from "../../pages/ProfilePage/ProfilePage";
+import ProfileForm from "../Forms/ProfileForm/ProfileForm";
 
 function App() {
   const [posts, setPosts] = useState([]);
@@ -41,9 +37,6 @@ function App() {
   const [isAuth, setIsAuth] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
-
-  // const [isSnackOpen, setSnackOpen] = useState(false);
-  // const [message, setMessage] = useState();
 
   const token = localStorage.getItem("token");
 
@@ -180,7 +173,6 @@ function App() {
           token,
         }}
       >
-        {/* <SnackbarContent.Provider value={{ message, setMessage }}> */}
         <AppHeader
           user={currentUser}
           updateUserHandle={handleUpdataUser}
@@ -211,7 +203,7 @@ function App() {
                   />
                   <Route path="/post/:postId" element={<PostPage />} />
                   <Route path="/favourites" element={<FavouritesPostPage />} />
-                  <Route path="/profile" element={<Profile />} />
+                  <Route path="/profileform" element={<ProfileForm />} />
                   <Route
                     path="/profile"
                     element={
@@ -243,28 +235,7 @@ function App() {
         <Routes>{authRoutes}</Routes>
 
         <Footer />
-        {/* <Snackbar
-            anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'center',
-            }}
-            open={Boolean(message) && !message.hide}
-            // open={isOpen}
-            onClose={handleSnackbarClose}
-            autoHideDuration={3000}
-        >
-            <Alert
-                // severity="success"
-                severity={message?.severity || 'error'}>
-                {message?.text || "Произошла ошибка"}
-               </Alert>
-        </Snackbar> */}
-        
-        {/* <Snack
-            isOpen={isSnackOpen}
-            handleClose={()=> setSnackOpen(false)}
-        /> */}
-        {/* </SnackbarContent.Provider> */}
+       
       </CardContext.Provider>
     </UserContext.Provider>
   );

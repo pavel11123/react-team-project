@@ -2,14 +2,6 @@ const onResponse = (res) => {
   return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
 };
 
-// const onResponse =  (res) => {
-//   const errMessage = res.json().then((value)=> {
-//   console.log("Сообщение об ошибке---->>>", value.message);
-//     //  return value.message;
-//     })
-//    return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
-// };
-
 class Api {
   constructor({ baseUrl, headers }) {
     this._headers = headers;
@@ -103,29 +95,6 @@ class Api {
       body: JSON.stringify(dataUser),
     }).then(onResponse);
   }
-    
-    // .then(()=> {
-    //   setMessage({
-    //     severity: 'success',
-    //     text: 'Успешно',
-    //     onClose: ()=> {
-    //       window.location = '/';
-    //     },
-
-    //   })
-    // })
-    // .catch((err)=> {
-    //   err.then((data)=> {
-    //     const res = JSON.parse(data);
-    //     setMessage({
-    //       severity: 'error',
-    //       text: res.message,
-    //     });
-    //     res.validation?.keys?.forEach((field)=> {
-    //       setError(field);
-    //     });
-    //   });
-    // });
 
   login(dataUser) {
     return fetch(`${this._baseUrl}/signin`, {
@@ -189,7 +158,7 @@ class Api {
 
 
 const config = {
-  baseUrl: "https://api.react-learning.ru",
+  baseUrl: "https://api.react-learning.ru/v2/DN",
    headers: {
     "Content-Type": "application/json",
     Authorization: localStorage.getItem("token"),

@@ -23,10 +23,10 @@ const Profile = ({handleClose}) => {
          const newUser = await api.updateUserInfo({name: data.name, about: data.about}, token);
          console.log({newUser});
          setCurrentUser({...newUser})
-         handleClose(true);
         }catch(error) {
             console.log(error);
         }
+        navigate('/profile');
     };
 
     const sendAvatar = async ({avatar}) => {
@@ -46,14 +46,14 @@ const Profile = ({handleClose}) => {
 
 return (
     <Container>
-        {/* <div>
+        <div>
         <Button
           sx={{ marginBottom: "10px" }}
           variant="contained"
           onClick={() => navigate(-1)}>
           Назад
         </Button>
-      </div> */}
+      </div>
       <Typography variant="h3" color="title">Мои данные</Typography>
        
         {user?.name && user?.about && user?.avatar && (<>
