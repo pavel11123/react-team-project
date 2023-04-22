@@ -1,19 +1,21 @@
 {
   "files": {
-    "main.css": "/react-team-project/static/css/main.802ff4b5.css",
-    "main.js": "/react-team-project/static/js/main.f0bdaa9b.js",
+    "main.css": "/react-team-project/static/css/main.565101f0.css",
+    "main.js": "/react-team-project/static/js/main.4f1065ae.js",
     "static/media/mainSculpture.png": "/react-team-project/static/media/mainSculpture.c9a21126a3ca0276b723.png",
     "static/media/notFound.svg": "/react-team-project/static/media/notFound.996fb798508040f36bf83344fb2bc1d8.svg",
-    "static/media/girl.png": "/react-team-project/static/media/girl.8471bf43dc65cfdf45d9.png",
+    "static/media/nastya.jpg": "/react-team-project/static/media/nastya.b7e9c0a15b30cef9784f.jpg",
+    "static/media/pavel.jpg": "/react-team-project/static/media/pavel.152e36befae6585295f0.jpg",
+    "static/media/images.jpg": "/react-team-project/static/media/images.a42ba36590a5c20b06de.jpg",
     "index.html": "/react-team-project/index.html",
     "static/media/arrow.svg": "/react-team-project/static/media/arrow.a3b981cc6933314a6086.svg",
     "static/media/arrowPrev.svg": "/react-team-project/static/media/arrowPrev.d03f87bf3f94141e4e15.svg",
     "static/media/arrowNext.svg": "/react-team-project/static/media/arrowNext.3821668be7588a6899ea.svg",
-    "main.802ff4b5.css.map": "/react-team-project/static/css/main.802ff4b5.css.map",
-    "main.f0bdaa9b.js.map": "/react-team-project/static/js/main.f0bdaa9b.js.map"
+    "main.565101f0.css.map": "/react-team-project/static/css/main.565101f0.css.map",
+    "main.4f1065ae.js.map": "/react-team-project/static/js/main.4f1065ae.js.map"
   },
   "entrypoints": [
-    "static/css/main.802ff4b5.css",
-    "static/js/main.f0bdaa9b.js"
+    "static/css/main.565101f0.css",
+    "static/js/main.4f1065ae.js"
   ]
 }
