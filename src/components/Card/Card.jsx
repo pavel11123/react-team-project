@@ -95,9 +95,8 @@ const RecipeReviewCard = ({
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
+        <IconButton aria-label="add to favorites" onClick={handleLikeClick}>
           <FavoriteIcon
-            onClick={handleLikeClick}
             sx={liked ? { color: red[500] } : { color: grey[500] }}
           />
           {likes.length !== 0 && <span>{likes.length}</span>}

@@ -1,18 +1,11 @@
 @use "sass:math";
 
 @import "../../scss/mixins";
-@import "../../scss/fonts";
 @import "../../scss/variables";
 
-html {
-  @media (max-width: 360px) {
-    font-size: calc(100vw / 360 * 16);
-  }
-}
-
 .card {
+  // max-width: rem(265);
   max-height: rem(390);
-  max-width: rem(265);
   flex: 1 1 auto;
   position: relative;
 }

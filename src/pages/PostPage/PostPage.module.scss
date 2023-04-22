@@ -1,0 +1,15 @@
+@use "sass:math";
+
+@import "../../scss/mixins";
+@import "../../scss/variables";
+
+.wrapper {
+  width: 100%;
+  margin: rem(40);
+}
+
+.containerPost {
+  @media (max-width: 1270px) {
+    padding: 0 !important;
+  }
+}

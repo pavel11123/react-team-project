@@ -1,0 +1,8 @@
+@use "sass:math";
+
+@import "../../scss/mixins";
+@import "../../scss/variables";
+
+.wrapper {
+  margin: rem(40) 0;
+}

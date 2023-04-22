@@ -1,8 +1,7 @@
 import React from "react";
-import s from "./Modal.module.css";
+import s from "./Modal.module.scss";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-// import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import CreatePostForm from "../Forms/CreatePostForm/CreatePostForm";
 
@@ -13,7 +12,8 @@ const style = {
   transform: "translate(-50%, -50%)",
   width: 800,
   bgcolor: "background.paper",
-  border: "2px solid #000",
+  border: "2px solid #fff",
+  borderRadius: "20px",
   boxShadow: 24,
   p: 4,
 };
@@ -24,18 +24,19 @@ export default function BasicModal() {
   const handleClose = () => setOpen(false);
 
   return (
-    <>
+    <div className={s.wrapper}>
       <Button onClick={handleOpen}>Добавить пост</Button>
       <Modal
+        className={s.modal}
         open={open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <CreatePostForm handleClose={handleClose}/>
+          <CreatePostForm handleClose={handleClose} />
         </Box>
       </Modal>
-    </>
+    </div>
   );
 }

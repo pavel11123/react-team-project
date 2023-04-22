@@ -1,0 +1,94 @@
+@use "sass:math";
+
+@import "./scss/mixins";
+@import "./scss/fonts";
+@import "./scss/variables";
+@import "./scss/base";
+
+/* обертка */
+.wrapper {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+@media (min-width: 600px) {
+  .container__main {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+
+/* обертка */
+
+.main {
+  padding-top: rem(65);
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+[class*="__section"] {
+  // margin: 30px 0;
+}
+
+.main__section {
+  flex: 1 1 auto;
+  display: flex;
+}
+
+/* slider */
+.slick-slider {
+  padding: 15px 0;
+}
+
+.slick-track {
+  display: flex;
+  gap: rem(20);
+}
+
+.slick-slide {
+  display: flex;
+}
+
+.slick-slide > div {
+  display: flex;
+  flex: 1 1 auto;
+}
+
+.slick-arrow {
+  @media (max-width: 725px) {
+    display: none !important;
+  }
+}
+
+.slick-next,
+.slick-prev {
+  position: absolute;
+  right: 0;
+  font-size: 0;
+  width: rem(30);
+  height: rem(30);
+  top: rem(18);
+
+  @media (max-width: 1440px) {
+    top: adaptiv-num-rem(12, 18, 1280, 725);
+  }
+}
+
+.slick-next {
+  background-image: url("../src/assets/image/arrowNext.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.slick-prev {
+  background-image: url("../src/assets/image/arrowPrev.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  right: 40px;
+}

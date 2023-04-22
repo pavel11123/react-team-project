@@ -5,7 +5,7 @@ import InfoHeader from "../InfoHeader/InfoHeader";
 import { useState, useEffect, useCallback } from "react";
 import api from "../../utils/api";
 import { isLiked } from "../../utils/posts";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import FavouritesPostPage from "../../pages/FavouritesPostPage/FavouritesPostPage";
 import PostPage from "../../pages/PostPage/PostPage";
 import { CardContext } from "../../context/cardContext";
@@ -13,31 +13,74 @@ import { UserContext } from "../../context/userContext";
 import { SlideContext } from "../../context/slideContext";
 import NotFoundPage from "../../pages/NotFoundPage/NotFoundPage";
 import HomePage from "../../pages/HomePage/HomePage";
+import RegistrationForm from "../Forms/RegistrationForm/RegistrationForm";
+import ModalRegistration from "../ModalRegistration/ModalRegistration";
+import LoginForm from "../Forms/LoginForm/LoginForm";
+import ResetPasswordForm from "../Forms/ResetPasswordForm/ResetPasswordForm";
+import s from "./App.module.css";
+import notRegistration from "./image/images.jpg";
+import ProfilePage from "../../pages/ProfilePage/ProfilePage";
+import EditProfileForm from "../Forms/EditProfileForm/EditProfileForm";
 
 function App() {
   const [posts, setPosts] = useState([]);
+  const [users, setUsers] = useState([]);
   const [slide, setSlide] = useState([]);
+  // const [countLike, setCountLike] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [favourites, setFavourites] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
   const [page, setPage] = useState(1);
   const [countPagination, setCountPagination] = useState(10);
 
+  const [activeModal, setActiveModal] = useState(false);
+  const [isAuth, setIsAuth] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const token = localStorage.getItem("token");
+
+  let countLike = 0;
+  let countSlide = 0;
+  let countLikeMe = 0;
+  slide.forEach((el) => {
+    countLike += el.likes.length;
+
+    if (el.author._id === "63ecab9c59b98b038f77b633") {
+      countSlide += 1;
+      countLikeMe += el.likes.length;
+    }
+  });
+
   useEffect(() => {
-    Promise.all([api.getUserInfo(), api.getPostsList(page), api.getSlide()])
-      .then(([userData, postData, slideData]) => {
-        setCurrentUser(userData);
-        setPosts(postData.posts);
-        setSlide(slideData);
-        const favouritesPosts = postData.posts.filter((item) =>
-          isLiked(item.likes, userData._id)
-        );
-        setFavourites(favouritesPosts);
-        setCountPagination(Math.ceil(postData.total / 12));
-        // console.log(setSlide);
-      })
-      .catch((err) => console.log(err));
-  }, [page]);
+    if (token) {
+      Promise.all([
+        api.getUserInfo(token),
+        api.getPostsList(page, token),
+        api.getSlide(token),
+        api.getUsers(token),
+      ])
+        .then(([userData, postData, slideData, usersData]) => {
+          setCurrentUser(userData);
+          setIsAuth(true);
+          setPosts(postData.posts);
+          setSlide(slideData);
+          setUsers(usersData);
+          const favouritesPosts = slideData.filter((item) =>
+            isLiked(item.likes, userData._id)
+          );
+          setFavourites(favouritesPosts);
+          setCountPagination(Math.ceil(postData.total / 12));
+        })
+        .catch((err) => {
+          console.log(err);
+          setIsAuth(false);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    }
+  }, [page, token]);
 
   // Обновление пользователя
   const handleUpdataUser = (userUpdate) => {
@@ -46,9 +89,9 @@ function App() {
     });
   };
 
-  const handleDeletePost = async (postId) => {
+  const handleDeletePost = async (postId, token) => {
     console.log("works---->", postId);
-    await api.deletePost(postId).then((newPost) => {
+    await api.deletePost(postId, token).then((newPost) => {
       const newPosts = posts.filter((e) => e._id !== newPost._id);
       setPosts([...newPosts]);
     });
@@ -57,16 +100,16 @@ function App() {
   const handlePostLike = useCallback(
     (product) => {
       const liked = isLiked(product.likes, currentUser._id);
-      return api.changeLikePost(product._id, liked).then((newPost) => {
+      return api.changeLikePost(product._id, liked, token).then((newPost) => {
         const newPosts = posts.map((post) => {
           return post._id === newPost._id ? newPost : post;
         });
 
         if (!liked) {
-          setFavourites(prevState => [...prevState, newPost]);
+          setFavourites((prevState) => [...prevState, newPost]);
         } else {
-          setFavourites(prevState =>
-            prevState.filter(post => post._id !== newPost._id)
+          setFavourites((prevState) =>
+            prevState.filter((post) => post._id !== newPost._id)
           );
         }
 
@@ -77,47 +120,118 @@ function App() {
     [posts, currentUser]
   );
 
+  const authRoutes = (
+    <>
+      <Route
+        path="/login"
+        element={
+          <ModalRegistration
+            activeModal={activeModal}
+            setActiveModal={setActiveModal}
+          >
+            <LoginForm setActiveModal={setActiveModal} />
+          </ModalRegistration>
+        }
+      />
+      <Route
+        path="/registration"
+        element={
+          <ModalRegistration
+            activeModal={activeModal}
+            setActiveModal={setActiveModal}
+          >
+            <RegistrationForm setActiveModal={setActiveModal} />
+          </ModalRegistration>
+        }
+      />
+      <Route
+        path="/reset-password"
+        element={
+          <ModalRegistration
+            activeModal={activeModal}
+            setActiveModal={setActiveModal}
+          >
+            <ResetPasswordForm setActiveModal={setActiveModal} />
+          </ModalRegistration>
+        }
+      />
+    </>
+  );
+
   return (
-    <UserContext.Provider value={{ user: currentUser, isLoading }}>
+    <UserContext.Provider value={{ user: currentUser, isLoading, isAuth }}>
       <CardContext.Provider
         value={{
           posts,
+          setPosts,
           favourites,
           handleLike: handlePostLike,
           isLoading,
           handleDeletePost,
           currentUser,
+          token,
         }}
       >
-        <AppHeader user={currentUser} updateUserHandle={handleUpdataUser} />
-        <main className="main">
-          <Routes>
-            <Route path="/cards" element={<InfoHeader />} />
-          </Routes>
+        <AppHeader
+          user={currentUser}
+          updateUserHandle={handleUpdataUser}
+          setActiveModal={setActiveModal}
+        />
 
-          <section className="main__section">
-            <SlideContext.Provider value={{ slide }}>
-              <Routes>
-                <Route index element={<HomePage />} />
-                <Route
-                  path="/cards"
-                  element={
-                    <CardList
-                      posts={posts}
-                      page={page}
-                      setPage={setPage}
-                      countPagination={countPagination}
-                      currentUser={currentUser}
-                    />
-                  }
-                />
-                <Route path="/post/:postId" element={<PostPage />} />
-                <Route path="/favourites" element={<FavouritesPostPage />} />
-                <Route path="*" element={<NotFoundPage />} />
-              </Routes>
-            </SlideContext.Provider>
-          </section>
-        </main>
+        {token || isAuth ? (
+          <main className="main">
+            <Routes>
+              <Route path="/cards" element={<InfoHeader />} />
+            </Routes>
+
+            <section className="main__section">
+              <SlideContext.Provider value={{ slide, isLoading }}>
+                <Routes>
+                  <Route index element={<HomePage />} />
+                  <Route
+                    path="/cards"
+                    element={
+                      <CardList
+                        posts={posts}
+                        page={page}
+                        setPage={setPage}
+                        countPagination={countPagination}
+                        currentUser={currentUser}
+                      />
+                    }
+                  />
+                  <Route path="/post/:postId" element={<PostPage />} />
+                  <Route path="/favourites" element={<FavouritesPostPage />} />
+                  <Route path="/profileform" element={<EditProfileForm />} />
+                  <Route
+                    path="/profile"
+                    element={
+                      <ProfilePage
+                        slide={slide.length}
+                        countLike={countLike}
+                        countLikeMe={countLikeMe}
+                        countSlide={countSlide}
+                        users={users.length}
+                      />
+                    }
+                  />
+                  <Route path="*" element={<NotFoundPage />} />
+                  {authRoutes}
+                </Routes>
+              </SlideContext.Provider>
+            </section>
+          </main>
+        ) : (
+          <div className={s.notAuth}>
+            Пожалуйста, авторизуйтесь!
+            <img
+              src={notRegistration}
+              className={s.img}
+              alt="Пожалуйста, авторизуйтесь!"
+            />
+          </div>
+        )}
+        <Routes>{authRoutes}</Routes>
 
         <Footer />
       </CardContext.Provider>

@@ -41,10 +41,11 @@ export default function ModalEdit() {
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Edit Post
+            Форма Редактирования поста
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Here will be editing the post, maybe if we have time
+            Если у нас останется время мы обязательно сделаем эту фичу, но пока
+            что имеем то что имеем
           </Typography>
         </Box>
       </Modal>

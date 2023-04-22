@@ -1,0 +1,45 @@
+@use "sass:math";
+
+@import "../../../scss/mixins";
+@import "../../../scss/variables";
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: rem(20);
+  margin: rem(40) 0;
+}
+
+.profile {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 2rem;
+  cursor: pointer;
+
+  &__avatar {
+    padding: 1rem 0 2rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+}
+
+.form {
+  width: 100%;
+  max-width: rem(600);
+  margin: 0 auto;
+}
+
+.img {
+  position: relative;
+  max-width: rem(300);
+  max-height: rem(250);
+  margin: 0 auto;
+
+  & img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}

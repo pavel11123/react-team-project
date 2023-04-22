@@ -27,7 +27,7 @@ html {
 
 .list {
   gap: rem(40);
-  margin-top: rem(100);
+  margin-top: rem(80);
   justify-content: center;
 }
 
@@ -40,7 +40,9 @@ html {
   -ms-border-radius: rem(8);
   -o-border-radius: rem(8);
   position: relative;
-  padding: rem(80) rem(30) rem(30) rem(30);
+  padding: clamp(rem(70), 5.56vw, rem(80)) clamp(rem(15), 2.08vw, rem(30))
+    clamp(rem(15), 2.08vw, rem(30)) clamp(rem(15), 2.08vw, rem(30));
+  margin-top: rem(20);
 }
 
 .img {
@@ -54,8 +56,15 @@ html {
   img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
   }
+
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  overflow: hidden;
 }
 
 .description {
@@ -63,12 +72,16 @@ html {
   margin-bottom: rem(10);
   font-weight: 400;
   font-size: rem(14);
-  line-height: rem(16);
+  line-height: rem(18);
   max-width: rem(275);
+  letter-spacing: rem(1);
+  flex: 1 1 auto;
 }
 
 .info {
   padding-top: rem(15);
+  flex: 0 0 auto;
+
   h5 {
     font-family: "Josefin Sans";
     font-weight: 600;

@@ -1,18 +1,19 @@
 @use "sass:math";
 
 @import "../../scss/mixins";
-@import "../../scss/fonts";
 @import "../../scss/variables";
-
-html {
-  @media (max-width: 360px) {
-    font-size: calc(100vw / 360 * 16);
-  }
-}
 
 .start__block {
   justify-content: space-between;
   gap: rem(30);
+  min-height: 100vh;
+  min-height: calc(var(--vh, 1vh) * 100); // делаем 100vh на телефоне + js
+  padding: rem(100) 0 rem(100) 0;
+
+  @media (max-width: 725px) {
+    gap: rem(60);
+    padding: rem(100) 0 rem(20) 0;
+  }
 }
 
 .start__info {
@@ -25,9 +26,17 @@ html {
 }
 
 .subtitle,
-.title,
-.description {
+.title {
   font-family: "Josefin Sans", sans-serif;
+  color: $colorMainBlue;
+}
+
+.link,
+.description {
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: clamp(rem(14), 1.11vw, rem(16));
+  line-height: clamp(rem(20), 1.94vw, rem(28));
+  color: $colorMainBlack;
 }
 
 .subtitle {
@@ -35,37 +44,27 @@ html {
   font-size: clamp(rem(18), 1.67vw, rem(24));
   line-height: clamp(rem(22), 2.29vw, rem(33));
   letter-spacing: 0.1em;
-  color: #ffffff;
-  color: $colorMainBlue;
 }
 
 .title {
   font-weight: 700;
-  font-size: clamp(rem(40), 4.86vw, rem(70));
+  font-size: clamp(rem(35), 4.86vw, rem(70));
   line-height: clamp(rem(40), 4.86vw, rem(70));
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: $colorMainBlue;
   margin-top: rem(10);
 }
 
 .description {
   font-weight: 400;
-  font-size: clamp(rem(14), 0.83vw, rem(16));
-  line-height: clamp(rem(20), 1.11vw, rem(28));
-  letter-spacing: -0.02em;
-  color: $colorMainBlack;
+  letter-spacing: rem(1);
 }
 
 .link {
-  font-family: "Josefin Sans", sans-serif;
   font-weight: 500;
-  font-size: clamp(rem(14), 0.83vw, rem(16));
-  line-height: clamp(rem(20), 1.11vw, rem(28));
   display: flex;
   align-items: center;
   align-self: flex-start;
-  color: $colorMainBlack;
 
   &::after {
     content: "";

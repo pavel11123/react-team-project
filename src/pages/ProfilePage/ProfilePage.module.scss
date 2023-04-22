@@ -1,0 +1,113 @@
+@use "sass:math";
+
+@import "../../scss/mixins";
+@import "../../scss/variables";
+
+.buttonLink {
+  margin-top: rem(40) !important;
+  align-self: flex-start;
+}
+
+.wrapper {
+  margin: rem(50) 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(rem(400), 1fr));
+
+  @media (max-width: 500px) {
+    grid-template-columns: repeat(auto-fit, minmax(rem(300), 1fr));
+  }
+}
+
+.wrapper,
+.info {
+  gap: rem(20);
+}
+
+.profile,
+.info {
+  flex: 1 1 auto;
+}
+
+.info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(rem(350), 1fr));
+
+  @media (max-width: 500px) {
+    grid-template-columns: repeat(auto-fit, minmax(rem(300), 1fr));
+  }
+}
+
+.card {
+  flex: 1 1 auto;
+}
+
+.img {
+  width: 100%;
+  max-height: rem(500);
+  flex: 1 1 auto;
+  min-height: rem(450);
+}
+
+.content {
+  gap: rem(15);
+}
+
+.portfolio {
+  justify-content: space-between;
+}
+
+.portfolio,
+.name,
+.description,
+.email {
+  gap: rem(10);
+  align-items: center;
+}
+
+.name,
+.description,
+.email {
+  border-bottom: rem(1) solid #0000001b;
+  gap: rem(15);
+}
+
+.subtitle {
+  flex: 1 1 auto;
+  max-width: rem(90);
+}
+
+.headerCard {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.subtitleCard {
+  font-size: clamp(rem(16), 1.39vw, rem(20)) !important;
+  line-height: clamp(rem(20), 1.94vw, rem(28)) !important;
+}
+
+.search {
+  gap: rem(5);
+  align-self: center;
+
+  @media (max-width: 900px) {
+    display: none;
+  }
+}
+
+.contentCard {
+  margin-top: rem(50);
+  gap: rem(50);
+  flex: 1 1 auto;
+}
+
+.contentCardBlock {
+  justify-content: space-between;
+  align-items: center;
+  gap: rem(15);
+}
+
+.chip {
+  width: rem(80) !important;
+  flex-shrink: 0;
+}
