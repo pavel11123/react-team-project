@@ -1,7 +1,6 @@
 @use "sass:math";
 
 @import "../../scss/mixins";
-@import "../../scss/fonts";
 @import "../../scss/variables";
 
 html {
@@ -14,27 +13,29 @@ html {
   margin-top: rem(70);
 }
 
-.title {
-  font-family: "Josefin Sans";
+.title,
+.description {
+  font-family: "IBM Plex Sans", sans-serif;
   font-style: normal;
-  font-weight: 700;
-  font-size: 48px;
-  line-height: 62px;
-  color: $colorMainBlue;
   text-align: center;
 }
 
+.title {
+  font-weight: 700;
+  font-size: clamp(rem(35), 3.33vw, rem(48));
+  line-height: clamp(rem(40), 4.31vw, rem(62));
+  color: $colorMainBlue;
+}
+
 .description {
-  font-family: "Josefin Sans";
-  font-style: normal;
   font-weight: 400;
-  font-size: 18px;
-  line-height: 28px;
-  text-align: center;
+  font-size: clamp(rem(14), 1.25vw, rem(18));
+  line-height: clamp(rem(20), 2.08vw, rem(30));
   color: $colorMainBlack;
   max-width: rem(700);
   margin: 0 auto;
-  padding: rem(5) 0;
+  padding: rem(20) 0;
+  letter-spacing: rem(1);
 }
 
 .form {
@@ -47,19 +48,23 @@ html {
   flex: 1 1 auto;
   position: relative;
   max-width: rem(700);
-  border: 1px solid $colorMainBlue;
+  border: rem(1) solid $colorMainBlue;
   overflow: hidden;
-  border-radius: 50px;
-  -webkit-border-radius: 50px;
-  -moz-border-radius: 50px;
-  -ms-border-radius: 50px;
-  -o-border-radius: 50px;
+  border-radius: rem(50);
+  -webkit-border-radius: rem(50);
+  -moz-border-radius: rem(50);
+  -ms-border-radius: rem(50);
+  -o-border-radius: rem(50);
   flex-direction: row-reverse;
+}
+
+.email,
+.submit {
+  padding: clamp(rem(15), 1.81vw, rem(26)) clamp(rem(20), 2.78vw, rem(40));
 }
 
 .email {
   flex: 1 1 auto;
-  padding: rem(26) rem(40);
   color: $colorMainBlack;
   transition: 0.1s;
   -webkit-transition: 0.1s;
@@ -69,7 +74,7 @@ html {
 }
 
 .submit {
-  font-family: "Josefin Sans";
+  font-family: "IBM Plex Sans", sans-serif;
   background-color: $colorMainBlue;
   font-style: normal;
   font-weight: 500;
@@ -78,13 +83,7 @@ html {
   text-align: center;
   align-self: flex-end;
   color: #ffffff;
-  padding: rem(26) rem(30);
-  border: 1px solid $colorMainBlue;
-  border-radius: 50px 0 0 50px;
-  -webkit-border-radius: 50px 0 0 50px;
-  -moz-border-radius: 50px 0 0 50px;
-  -ms-border-radius: 50px 0 0 50px;
-  -o-border-radius: 50px 0 0 50px;
+  border: rem(1) solid $colorMainBlue;
 
   &:hover {
     width: 100%;
@@ -95,9 +94,15 @@ html {
     padding: 0;
     opacity: 0;
   }
+
   transition: 0.1s;
   -webkit-transition: 0.1s;
   -moz-transition: 0.1s;
   -ms-transition: 0.1s;
   -o-transition: 0.1s;
+  border-radius: rem(50) 0 0 rem(50);
+  -webkit-border-radius: rem(50) 0 0 rem(50);
+  -moz-border-radius: rem(50) 0 0 rem(50);
+  -ms-border-radius: rem(50) 0 0 rem(50);
+  -o-border-radius: rem(50) 0 0 rem(50);
 }

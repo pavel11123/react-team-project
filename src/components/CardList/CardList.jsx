@@ -3,10 +3,7 @@ import s from "./CardList.module.css";
 import RecipeReviewCard from "../Card/Card";
 import { useContext } from "react";
 import { UserContext } from "../../context/userContext";
-
 import { CardContext } from "../../context/cardContext";
-
-
 
 const CardList = ({ posts, page, setPage, countPagination }) => {
   const { user: currentUser } = useContext(UserContext);
@@ -27,7 +24,7 @@ const CardList = ({ posts, page, setPage, countPagination }) => {
                 <RecipeReviewCard
                   key={el._id}
                   {...el}
-                  currentUser={currentUser} 
+                  currentUser={currentUser}
                   onProductLike={handleLike}
                 />
               );

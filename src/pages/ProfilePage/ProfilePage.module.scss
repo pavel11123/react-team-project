@@ -1,18 +1,21 @@
 @use "sass:math";
 
 @import "../../scss/mixins";
-@import "../../scss/fonts";
 @import "../../scss/variables";
 
-html {
-  @media (max-width: 360px) {
-    font-size: calc(100vw / 360 * 16);
-  }
+.buttonLink {
+  margin-top: rem(40) !important;
+  align-self: flex-start;
 }
 
 .wrapper {
+  margin: rem(50) 0;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(rem(400), 1fr));
+
+  @media (max-width: 500px) {
+    grid-template-columns: repeat(auto-fit, minmax(rem(300), 1fr));
+  }
 }
 
 .wrapper,
@@ -25,9 +28,17 @@ html {
   flex: 1 1 auto;
 }
 
+.info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(rem(350), 1fr));
+
+  @media (max-width: 500px) {
+    grid-template-columns: repeat(auto-fit, minmax(rem(300), 1fr));
+  }
+}
+
 .card {
   flex: 1 1 auto;
-  // max-width: rem(542);
 }
 
 .img {
@@ -70,22 +81,33 @@ html {
   align-items: center;
 }
 
+.subtitleCard {
+  font-size: clamp(rem(16), 1.39vw, rem(20)) !important;
+  line-height: clamp(rem(20), 1.94vw, rem(28)) !important;
+}
+
 .search {
   gap: rem(5);
   align-self: center;
+
+  @media (max-width: 900px) {
+    display: none;
+  }
 }
 
 .contentCard {
   margin-top: rem(50);
   gap: rem(50);
+  flex: 1 1 auto;
 }
 
 .contentCardBlock {
   justify-content: space-between;
   align-items: center;
+  gap: rem(15);
 }
 
 .chip {
-  flex: 1 1 auto;
-  max-width: rem(80) !important;
+  width: rem(80) !important;
+  flex-shrink: 0;
 }
