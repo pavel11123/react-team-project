@@ -50,7 +50,7 @@ const RegistrationForm = ({ setActiveModal }) => {
     const sendData = async (dataAuth) => {
         try {
         console.log('dataAuth--->', dataAuth);
-        const result = await api.registerUser({...dataAuth, group:'group-10'});
+        const result = await api.registerUser({...dataAuth, group:'DN'});
         console.log('result--->', {result});
         navigate("/login");
         } catch (error) {
