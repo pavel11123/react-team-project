@@ -1,8 +1,9 @@
 import React from "react";
 import s from "./About.module.scss";
 import cn from "classnames";
-import girl from "./image/girl.png";
+import nastya from "./image/nastya.jpg";
 import man from "./image/man.png";
+import pavel from "./image/pavel.jpg";
 import { motion } from "framer-motion";
 
 const oneBlockAbout = {
@@ -52,16 +53,15 @@ export default function About() {
             custom={2}
           >
             <div className={cn(s.img)}>
-              <img src={girl} alt="girl" />
+              <img src={nastya} alt="nastya" />
             </div>
             <p className={cn(s.description)}>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-              Aspernatur magnam itaque, iste quisquam quibusdam officiis nemo
-              voluptate at sunt eveniet recusandae eos, reiciendis placeat
-              repudiandae, inventore pariatur! Neque, alias iure?
+              Всем знаком этап «бета-тестирования» софта перед официальным
+              релизом. Но мало кто знает, что «бета» с латыни переводится «до
+              сих пор не работает»
             </p>
             <div className={cn(s.info, "d-fl-col")}>
-              <h5>Anastasia Mysnik</h5>
+              <h5>Анастасия Мысник</h5>
               <span>Front-end developer</span>
             </div>
           </motion.div>
@@ -72,16 +72,15 @@ export default function About() {
             custom={2.5}
           >
             <div className={cn(s.img)}>
-              <img src={man} alt="girl" />
+              <img src={man} alt="man" />
             </div>
             <p className={cn(s.description)}>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-              Aspernatur magnam itaque, iste quisquam quibusdam officiis nemo
-              voluptate at sunt eveniet recusandae eos, reiciendis placeat
-              repudiandae, inventore pariatur! Neque, alias iure?
+              Если бы строители работали так же, как программисты кодят, то
+              любая птица, присевшая отдохнуть на крыше дома, могла бы стать
+              причиной гибели цивилизации.
             </p>
             <div className={cn(s.info, "d-fl-col")}>
-              <h5>Arseny Filimonov</h5>
+              <h5>Арсений Филимонов</h5>
               <span>Front-end developer</span>
             </div>
           </motion.div>
@@ -92,16 +91,15 @@ export default function About() {
             custom={3}
           >
             <div className={cn(s.img)}>
-              <img src={man} alt="girl" />
+              <img src={pavel} alt="pavel" />
             </div>
             <p className={cn(s.description)}>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-              Aspernatur magnam itaque, iste quisquam quibusdam officiis nemo
-              voluptate at sunt eveniet recusandae eos, reiciendis placeat
-              repudiandae, inventore pariatur! Neque, alias iure?
+              Написание комментариев в коде чем-то похоже на мытье унитаза –
+              крайне неприятно, совсем не хочется этого делать, но необходимо,
+              чтобы не опозориться перед гостями.
             </p>
             <div className={cn(s.info, "d-fl-col")}>
-              <h5>Pavel Korobko</h5>
+              <h5>Павел Коробко</h5>
               <span>Front-end developer</span>
             </div>
           </motion.div>

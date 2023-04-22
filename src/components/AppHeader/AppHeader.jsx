@@ -1,4 +1,5 @@
-import s from "./AppHeader.module.css";
+import s from "./AppHeader.module.scss";
+import cn from "classnames";
 import React, { useContext } from "react";
 import {
   AppBar,
@@ -9,15 +10,13 @@ import {
 } from "@mui/material";
 import CookieIcon from "@mui/icons-material/Cookie";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { Link, useNavigate } from "react-router-dom";
 import LoginIcon from "@mui/icons-material/Login";
 import { UserContext } from "../../context/userContext";
 import LogoutIcon from "@mui/icons-material/Logout";
 
-const AppHeader = ({ user, updateUserHandle, setActiveModal }) => {
+const AppHeader = ({ setActiveModal }) => {
   const { isAuth } = useContext(UserContext);
 
   const navigate = useNavigate();
@@ -30,19 +29,19 @@ const AppHeader = ({ user, updateUserHandle, setActiveModal }) => {
     <AppBar position="sticky" className={s.header}>
       <Container>
         <Toolbar className={s.toolbar}>
-          <IconButton
-            edge="start"
-            size="large"
-            color="inherit"
-            aria-label="menu"
-          >
-            <Link to="/">
+          <Link to="/" className={cn(s.logo, "d-fl")}>
+            <IconButton
+              edge="start"
+              size="large"
+              color="inherit"
+              aria-label="menu"
+            >
               <CookieIcon />
-            </Link>
-          </IconButton>
-          <Typography className={s.title} variant="h6" sx={{ flexGrow: 1 }}>
-            React-team-project
-          </Typography>
+            </IconButton>
+            <Typography className={s.title} variant="h6" sx={{ flexGrow: 1 }}>
+              React-team-project
+            </Typography>
+          </Link>
 
           <div className={s.toolbarInfo}>
             <Link to="/profile">

@@ -24,7 +24,16 @@ import ShareIcon from "@mui/icons-material/Share";
 import { isLiked } from "../../utils/posts";
 
 import dayjs from "dayjs";
-const Post = ({ image, likes, title, text, author, created_at, _id, onProductLike }) => {
+const Post = ({
+  image,
+  likes,
+  title,
+  text,
+  author,
+  created_at,
+  _id,
+  onProductLike,
+}) => {
   const navigate = useNavigate();
   const { handleDeletePost, currentUser } = useContext(CardContext);
 
@@ -35,7 +44,7 @@ const Post = ({ image, likes, title, text, author, created_at, _id, onProductLik
   };
 
   return (
-    <Container>
+    <div className="container__main">
       <div>
         <Button
           sx={{ marginBottom: "10px" }}
@@ -89,7 +98,7 @@ const Post = ({ image, likes, title, text, author, created_at, _id, onProductLik
           </CardActions>
         </Box>
       </Card>
-    </Container>
+    </div>
   );
 };
 

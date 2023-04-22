@@ -1,0 +1,64 @@
+@use "sass:math";
+
+@import "../../scss/mixins";
+@import "../../scss/variables";
+
+.header {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+}
+
+.toolbar {
+  justify-content: space-between;
+}
+
+.logo {
+  align-items: center;
+  transition: 0.3s;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -ms-transition: 0.3s;
+  -o-transition: 0.3s;
+
+  &:hover {
+    opacity: 0.7;
+  }
+
+  & > button {
+    &:hover {
+      background-color: transparent !important;
+    }
+  }
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.toolbarInfo {
+  display: flex;
+}
+
+@media (max-width: 700px) {
+  .user {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+}
+
+@media (max-width: 800px) {
+  .user {
+    display: none;
+  }
+  .title {
+    display: none;
+  }
+  .toolbar {
+    justify-content: space-between;
+  }
+}

@@ -37,15 +37,15 @@ export default function Feedback() {
         viewport={{ once: true }}
       >
         <motion.h2 className={s.title} variants={leftBlockFeedback} custom={2}>
-          Don't miss this unique offer!
+          Не упустите уникальную возможность!
         </motion.h2>
         <motion.p
           className={s.description}
           variants={leftBlockFeedback}
           custom={2}
         >
-          Subscribe to our ultra-exclusive drop list and be the first to know
-          about upcoming dolby drops.
+          Подпишитесь на наш эксклюзивный дроп-лист и узнавайте первыми о
+          предстоящих выпусках ReactTeamProject.
         </motion.p>
         <motion.form
           className={s.form}
@@ -54,12 +54,8 @@ export default function Feedback() {
           custom={2}
         >
           <div className={cn(s.form__wrapper, "d-fl")}>
-            <button className={s.submit}>Subscribe</button>
-            <input
-              className={s.email}
-              type="text"
-              placeholder="Email Address"
-            />
+            <button className={s.submit}>Подписаться</button>
+            <input className={s.email} type="text" placeholder="Email" />
           </div>
         </motion.form>
       </motion.section>

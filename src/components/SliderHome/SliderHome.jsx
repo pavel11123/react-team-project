@@ -22,19 +22,19 @@ export default function SliderHome() {
 
     responsive: [
       {
-        breakpoint: 1200,
+        breakpoint: 1135,
         settings: {
           slidesToShow: 3,
         },
       },
       {
-        breakpoint: 900,
+        breakpoint: 860,
         settings: {
           slidesToShow: 2,
         },
       },
       {
-        breakpoint: 640,
+        breakpoint: 515,
         settings: {
           slidesToShow: 1,
         },
@@ -46,9 +46,9 @@ export default function SliderHome() {
     <>
       <div className={s.slider}>
         <div className={cn(s.header, "d-fl")}>
-          <h3 className={s.title}>Our posts</h3>
+          <h3 className={s.title}>Мои посты</h3>
           <Link to="/cards" className={s.link}>
-            Show more
+            Посмотреть больше
           </Link>
         </div>
         <Slider {...settings}>

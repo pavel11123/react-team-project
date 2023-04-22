@@ -1,3 +1,4 @@
+/* базовые стили */
 * {
   padding: 0px;
   margin: 0px;
@@ -73,8 +74,46 @@ hr {
   margin: 0 auto;
 }
 
+.d-fl {
+  display: flex;
+}
+
+.d-fl-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.d-fl-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.d-fl-wrap {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.d-fl-wrap--reverse {
+  display: flex;
+  flex-wrap: wrap-reverse;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+/* базовые стили */
+
 html {
-  @media (max-width: 360px) {
-    font-size: calc(100vw / 360 * 16);
+  @media (max-width: 375px) {
+    font-size: calc(100vw / 375 * 16);
   }
 }

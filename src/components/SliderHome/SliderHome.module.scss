@@ -1,20 +1,7 @@
 @use "sass:math";
 
 @import "../../scss/mixins";
-@import "../../scss/fonts";
 @import "../../scss/variables";
-
-html {
-  @media (max-width: 360px) {
-    font-size: calc(100vw / 360 * 16);
-  }
-}
-
-.slider__grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 10px;
-}
 
 .slider {
   margin: rem(50) 0;
@@ -25,6 +12,10 @@ html {
   justify-content: space-between;
   align-items: center;
   padding-right: rem(100);
+
+  @media (max-width: 725px) {
+    padding-right: 0;
+  }
 }
 
 .title {
@@ -33,14 +24,13 @@ html {
   line-height: clamp(rem(22), 2.29vw, rem(33));
   color: $colorMainBlue;
   padding: rem(15) rem(5);
-
-  font-family: "Josefin Sans";
+  font-family: "IBM Plex Sans", sans-serif;
   font-style: normal;
   font-weight: 700;
 }
 
 .link {
-  font-family: "Josefin Sans";
+  font-family: "IBM Plex Sans", sans-serif;
   font-weight: 500;
   font-size: clamp(rem(14), 0.83vw, rem(16));
   line-height: clamp(rem(20), 1.11vw, rem(28));
