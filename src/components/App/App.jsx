@@ -20,6 +20,7 @@ import ResetPasswordForm from "../Forms/ResetPasswordForm/ResetPasswordForm";
 import s from "./App.module.css";
 import notRegistration from "./image/images.jpg";
 import ProfilePage from "../../pages/ProfilePage/ProfilePage";
+import EditProfileForm from "../Forms/EditProfileForm/EditProfileForm";
 
 function App() {
   const [posts, setPosts] = useState([]);
@@ -201,6 +202,7 @@ function App() {
                   />
                   <Route path="/post/:postId" element={<PostPage />} />
                   <Route path="/favourites" element={<FavouritesPostPage />} />
+                  <Route path="/profileform" element={<EditProfileForm />} />
                   <Route
                     path="/profile"
                     element={

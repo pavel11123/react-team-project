@@ -2,14 +2,6 @@ const onResponse = (res) => {
   return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
 };
 
-// const onResponse =  (res) => {
-//   const errMessage = res.json().then((value)=> {
-//   console.log("Сообщение об ошибке---->>>", value.message);
-//     //  return value.message;
-//     })
-//    return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
-// };
-
 class Api {
   constructor({ baseUrl, headers }) {
     this._headers = headers;
@@ -41,6 +33,28 @@ class Api {
         "Content-Type": "application/json",
         Authorization: token,
       },
+    }).then(onResponse);
+  }
+
+  updateAvatar (avatar, token) {
+    return fetch(`${this._baseUrl}/users/me/avatar`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+      body: JSON.stringify(avatar),
+    }).then(onResponse);
+  }
+
+  updateUserInfo (body, token) {
+    return fetch(`${this._baseUrl}/users/me`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+      body: JSON.stringify(body),
     }).then(onResponse);
   }
 
@@ -142,7 +156,7 @@ class Api {
 }
 
 const config = {
-  baseUrl: "https://api.react-learning.ru",
+  baseUrl: "https://api.react-learning.ru/v2/DN",
   headers: {
     "Content-Type": "application/json",
     Authorization: localStorage.getItem("token"),
