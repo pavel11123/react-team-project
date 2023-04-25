@@ -16,7 +16,7 @@ const CreatePostForm = ({ handleClose }) => {
     return api
       .addNewPost({ ...data, tags: data.tags.split(",") }, token)
       .then((newPost) => {
-        setPosts([...posts, newPost]);
+        setPosts([newPost, ...posts]);
         handleClose(true);
       });
   };

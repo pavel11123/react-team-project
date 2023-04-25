@@ -143,6 +143,17 @@ class Api {
     }).then(onResponse);
   }
 
+  editPost(token, data, postId) {
+    return fetch(`${this._baseUrl}/posts/${postId}`, {
+      method: "PATCH",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+    }).then(onResponse);
+  }  
+
   deletePost(postId) {
     const token = localStorage.getItem("token");
     return fetch(`${this._baseUrl}/posts/${postId}`, {
