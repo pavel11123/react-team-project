@@ -23,7 +23,6 @@ export default function Slide({
   return (
     <>
       <Card className={cn(s.card, "d-fl-col")}>
-        {/* <ModalEdit /> */}
         <Link to={`/post/${_id}`} className={s.link}>
           <CardActionArea className={cn(s.card__wrapper)}>
             <CardMedia
