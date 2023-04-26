@@ -6,33 +6,50 @@ import Modal from "@mui/material/Modal";
 import { IconButton } from "@mui/material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import cn from "classnames";
+import EditIcon from '@mui/icons-material/Edit';
+import EditPostForm from "../Forms/EditPostForm/EditPostForm";
 
 const style = {
   position: "absolute",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 800,
+  // width: 800,
   bgcolor: "background.paper",
-  border: "2px solid #000",
+  border: "2px solid #fff",
+  borderRadius: "20px",
   boxShadow: 24,
   p: 4,
 };
 
-export default function ModalEdit() {
+export default function ModalEdit({postInfo}) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  console.log("postInfoModal", postInfo);
+
+  // const editPostOnClick = () => {
+  //   // handleDeletePost();
+  //   handleClose(true);
+  //   // navigate(-1);
+  // }
+
   return (
     <>
+      <EditIcon 
+        sx={{ fontSize: 26 }}
+        onClick={handleOpen}
+        color="action"
+      />
+{/*       
       <IconButton
         aria-label="settings"
         className={cn(s.settings)}
         onClick={handleOpen}
       >
         <MoreVertIcon />
-      </IconButton>
+      </IconButton> */}
       <Modal
         open={open}
         onClose={handleClose}
@@ -40,13 +57,7 @@ export default function ModalEdit() {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Форма Редактирования поста
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Если у нас останется время мы обязательно сделаем эту фичу, но пока
-            что имеем то что имеем
-          </Typography>
+          <EditPostForm {...postInfo} handleClose={handleClose}/>
         </Box>
       </Modal>
     </>

@@ -6,6 +6,7 @@ import ModalDelete from "./../Modal/ModalDelete";
 import { CardContext } from "../../context/cardContext";
 import cn from "classnames";
 import { grey, red } from "@mui/material/colors";
+import ModalEdit from "../ModalEdit/ModalEdit";
 
 import {
   Typography,
@@ -32,10 +33,19 @@ const Post = ({
   author,
   created_at,
   _id,
+  tags,
   onProductLike,
 }) => {
   const navigate = useNavigate();
   const { handleDeletePost, currentUser } = useContext(CardContext);
+
+  const postInfo = {
+    image,
+    title,
+    text,
+    tags,
+    _id,
+  };
 
   const liked = isLiked(likes, currentUser?._id);
   const { handleLike } = useContext(CardContext);
@@ -93,6 +103,9 @@ const Post = ({
             </IconButton>
             <IconButton aria-label="share">
               <ShareIcon />
+            </IconButton>
+            <IconButton aria-label="share">
+            <ModalEdit postInfo={postInfo}/>
             </IconButton>
             <ModalDelete handleDeletePost={() => handleDeletePost(_id)} />
           </CardActions>
