@@ -5,7 +5,13 @@ import InfoHeader from "../InfoHeader/InfoHeader";
 import { useState, useEffect, useCallback } from "react";
 import api from "../../utils/api";
 import { isLiked } from "../../utils/posts";
-import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import {
+  Route,
+  Routes,
+  useLocation,
+  useNavigate,
+  Link,
+} from "react-router-dom";
 import FavouritesPostPage from "../../pages/FavouritesPostPage/FavouritesPostPage";
 import PostPage from "../../pages/PostPage/PostPage";
 import { CardContext } from "../../context/cardContext";
@@ -17,10 +23,13 @@ import RegistrationForm from "../Forms/RegistrationForm/RegistrationForm";
 import ModalRegistration from "../ModalRegistration/ModalRegistration";
 import LoginForm from "../Forms/LoginForm/LoginForm";
 import ResetPasswordForm from "../Forms/ResetPasswordForm/ResetPasswordForm";
-import s from "./App.module.css";
-import notRegistration from "./image/images.jpg";
+import s from "./App.module.scss";
 import ProfilePage from "../../pages/ProfilePage/ProfilePage";
 import EditProfileForm from "../Forms/EditProfileForm/EditProfileForm";
+
+import poster from "./image/images.jpg";
+import videoMp4 from "./video/main-video.mp4";
+import videoWebm from "./video/main-video.webm";
 
 function App() {
   const [posts, setPosts] = useState([]);
@@ -172,11 +181,13 @@ function App() {
           token,
         }}
       >
-        <AppHeader
-          user={currentUser}
-          updateUserHandle={handleUpdataUser}
-          setActiveModal={setActiveModal}
-        />
+        {token || isAuth ? (
+          <AppHeader
+            user={currentUser}
+            updateUserHandle={handleUpdataUser}
+            setActiveModal={setActiveModal}
+          />
+        ) : null}
 
         {token || isAuth ? (
           <main className="main">
@@ -223,17 +234,34 @@ function App() {
           </main>
         ) : (
           <div className={s.notAuth}>
-            Пожалуйста, авторизуйтесь!
-            <img
-              src={notRegistration}
-              className={s.img}
-              alt="Пожалуйста, авторизуйтесь!"
-            />
+            <video
+              poster={poster}
+              preload="auto"
+              autoplay
+              muted
+              loop
+              class={s.start__video}
+              autoPlay="true"
+              controls="controls"
+            >
+              <source type="video/webm" src={videoWebm} />
+              <source type="video/mp4" src={videoMp4} />
+            </video>
+            <div class={s.start__video__back}></div>
+
+            <h2 className={s.textAuth}>Пожалуйста, авторизуйтесь!</h2>
+            <Link to="/login" className={s.btnAuth}>
+              <span className={s.borderBtn}></span>
+              <span className={s.borderBtn}></span>
+              <span className={s.borderBtn}></span>
+              <span className={s.borderBtn}></span>
+              Войти
+            </Link>
           </div>
         )}
         <Routes>{authRoutes}</Routes>
 
-        <Footer />
+        {token || isAuth ? <Footer /> : null}
       </CardContext.Provider>
     </UserContext.Provider>
   );

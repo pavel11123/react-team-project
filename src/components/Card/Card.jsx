@@ -11,7 +11,7 @@ import {
   IconButton,
 } from "@mui/material";
 
-import s from "./Card.module.css";
+import s from "./Card.module.scss";
 
 import { styled } from "@mui/material/styles";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -86,12 +86,12 @@ const RecipeReviewCard = ({
           alt="Paella dish"
         />
       </Link>
-      <CardContent>
+      <CardContent className={s.description}>
         <Typography variant="h7" color="title">
-          {title}
+          {title.length >= 20 ? title.substr(0, 20) + "..." : title}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          {text}
+          {text.length >= 100 ? text.substr(0, 100) + "..." : text}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
