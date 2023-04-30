@@ -1,4 +1,4 @@
-# [![Typing SVG](https://readme-typing-svg.herokuapp.com?color=%2336BCF7&lines=React+Team+Project)](https://pavel11123.github.io/react-team-project/) 
+# [![Typing SVG](https://readme-typing-svg.herokuapp.com?color=%2336BCF7&lines=REACT+TEAM+PROJECT)](https://pavel11123.github.io/react-team-project/) 
 
 Командный проект реализованный в ходе обучения в СберУниверситете.
 На главной странице нашего веб приложения есть информация о проекте с выводом постов получаемых по API. В каждый слайд вы можете провалиться и посмотреть более детальную информацию по каждому посту и оставить свой замечательный LIKE!
