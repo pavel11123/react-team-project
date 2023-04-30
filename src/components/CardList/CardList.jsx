@@ -17,7 +17,7 @@ const CardList = ({ posts, page, setPage, countPagination }) => {
   return (
     <Container>
       <div className="container__main">
-        <Stack spacing={2}>
+        <Stack spacing={2} className={s.stack}>
           <div className={s.list__grid}>
             {posts.map((el) => {
               return (
