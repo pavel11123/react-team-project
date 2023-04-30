@@ -21,7 +21,6 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { grey, red } from "@mui/material/colors";
 import { isLiked } from "../../utils/posts";
 import { useContext } from "react";
-import { UserContext } from "../../context/userContext";
 import { CardContext } from "../../context/cardContext";
 import dayjs from "dayjs";
 import "dayjs/locale/ru";

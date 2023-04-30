@@ -1,5 +1,5 @@
 import { Container, Stack, Pagination } from "@mui/material";
-import s from "./CardList.module.css";
+import s from "./CardList.module.scss";
 import RecipeReviewCard from "../Card/Card";
 import { useContext } from "react";
 import { UserContext } from "../../context/userContext";

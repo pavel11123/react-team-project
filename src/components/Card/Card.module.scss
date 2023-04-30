@@ -1,3 +1,8 @@
+@use "sass:math";
+
+@import "../../scss/mixins";
+@import "../../scss/variables";
+
 .avatar__image {
   object-fit: cover;
   width: 100%;

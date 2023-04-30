@@ -12,6 +12,9 @@
 
 .toolbar {
   justify-content: space-between;
+  @media (max-width: 600px) {
+    padding: 0 !important;
+  }
 }
 
 .logo {

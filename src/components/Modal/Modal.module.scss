@@ -6,3 +6,19 @@
 .wrapper {
   margin: rem(40) 0;
 }
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  padding: rem(15);
+  align-items: center;
+  justify-content: center;
+}
+
+.box {
+  display: flex;
+  flex-direction: column;
+  max-width: rem(470);
+  width: 100%;
+  padding: rem(15);
+}

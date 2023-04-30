@@ -6,6 +6,10 @@
 .wrapper {
   width: 100%;
   margin: rem(40);
+
+  @media (max-width: 600px) {
+    margin: rem(40) rem(16);
+  }
 }
 
 .containerPost {

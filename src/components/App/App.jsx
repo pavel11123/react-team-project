@@ -35,7 +35,6 @@ function App() {
   const [posts, setPosts] = useState([]);
   const [users, setUsers] = useState([]);
   const [slide, setSlide] = useState([]);
-  // const [countLike, setCountLike] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [favourites, setFavourites] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);

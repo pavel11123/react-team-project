@@ -105,7 +105,7 @@ const Post = ({
               <ShareIcon />
             </IconButton>
             <IconButton aria-label="share">
-            <ModalEdit postInfo={postInfo}/>
+              <ModalEdit postInfo={postInfo} />
             </IconButton>
             <ModalDelete handleDeletePost={() => handleDeletePost(_id)} />
           </CardActions>
