@@ -1,13 +1,10 @@
-/* eslint-disable no-undef */
-/* eslint-disable no-restricted-globals */
-// This is the "Offline page" service worker
+// This is the service worker with the combined offline experience (Offline page + Offline copy of pages)
 
-// eslint-disable-next-line no-undef
+const CACHE = "pwabuilder-offline-page";
+
 importScripts(
   "https://storage.googleapis.com/workbox-cdn/releases/5.1.2/workbox-sw.js"
 );
-
-const CACHE = "pwabuilder-page";
 
 // TODO: replace the following with the correct offline fallback page i.e.: const offlineFallbackPage = "offline.html";
 const offlineFallbackPage = "index.html";
@@ -27,6 +24,13 @@ self.addEventListener("install", async (event) => {
 if (workbox.navigationPreload.isSupported()) {
   workbox.navigationPreload.enable();
 }
+
+workbox.routing.registerRoute(
+  new RegExp("/*"),
+  new workbox.strategies.StaleWhileRevalidate({
+    cacheName: CACHE,
+  })
+);
 
 self.addEventListener("fetch", (event) => {
   if (event.request.mode === "navigate") {
