@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/react-team-project/static/css/main.4eaabbf2.css",
-    "main.js": "/react-team-project/static/js/main.689d8555.js",
+    "main.css": "/react-team-project/static/css/main.a70e5d67.css",
+    "main.js": "/react-team-project/static/js/main.b8be8e86.js",
     "static/media/main-video.mp4": "/react-team-project/static/media/main-video.f07d75f96b0ec0893b0f.mp4",
     "static/media/main-video.webm": "/react-team-project/static/media/main-video.c426f87665b7703c3e11.webm",
     "static/media/images.jpg": "/react-team-project/static/media/images.cc29b59fc5dd922c323a.jpg",
@@ -13,11 +13,11 @@
     "static/media/arrow.svg": "/react-team-project/static/media/arrow.a3b981cc6933314a6086.svg",
     "static/media/arrowPrev.svg": "/react-team-project/static/media/arrowPrev.d03f87bf3f94141e4e15.svg",
     "static/media/arrowNext.svg": "/react-team-project/static/media/arrowNext.3821668be7588a6899ea.svg",
-    "main.4eaabbf2.css.map": "/react-team-project/static/css/main.4eaabbf2.css.map",
-    "main.689d8555.js.map": "/react-team-project/static/js/main.689d8555.js.map"
+    "main.a70e5d67.css.map": "/react-team-project/static/css/main.a70e5d67.css.map",
+    "main.b8be8e86.js.map": "/react-team-project/static/js/main.b8be8e86.js.map"
   },
   "entrypoints": [
-    "static/css/main.4eaabbf2.css",
-    "static/js/main.689d8555.js"
+    "static/css/main.a70e5d67.css",
+    "static/js/main.b8be8e86.js"
   ]
 }
