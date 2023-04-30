@@ -35,7 +35,6 @@ function App() {
   const [posts, setPosts] = useState([]);
   const [users, setUsers] = useState([]);
   const [slide, setSlide] = useState([]);
-  // const [countLike, setCountLike] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [favourites, setFavourites] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
@@ -168,7 +167,9 @@ function App() {
   );
 
   return (
-    <UserContext.Provider value={{ user: currentUser, isLoading, isAuth }}>
+    <UserContext.Provider
+      value={{ user: currentUser, isLoading, isAuth, setCurrentUser }}
+    >
       <CardContext.Provider
         value={{
           posts,
@@ -196,7 +197,7 @@ function App() {
             </Routes>
 
             <section className="main__section">
-              <SlideContext.Provider value={{ slide, isLoading }}>
+              <SlideContext.Provider value={{ slide, isLoading, setSlide }}>
                 <Routes>
                   <Route index element={<HomePage />} />
                   <Route

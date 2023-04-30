@@ -1,6 +1,6 @@
 import React, { useCallback, useContext } from "react";
 import { useForm } from "react-hook-form";
-import s from "./CreatePostForm.module.css";
+import s from "./CreatePostForm.module.scss";
 import cn from "classnames";
 import api from "../../../utils/api";
 import Stack from "@mui/material/Stack";

@@ -18,7 +18,7 @@ const PostPage = () => {
     [postId, token]
   );
   const { data: post, setData: setPost } = useApi(handleGetPost);
- 
+
   const handleProductLike = useCallback(() => {
     handleLike(post).then((updatePost) => {
       setPost(updatePost);

@@ -25,6 +25,11 @@
   }
 }
 
+.title {
+  font-size: clamp(rem(25), 2.43vw, rem(35)) !important;
+  line-height: clamp(rem(30), 2.78vw, rem(40)) !important;
+}
+
 .form {
   width: 100%;
   max-width: rem(600);

@@ -60,7 +60,7 @@ const EditProfileForm = ({ handleClose }) => {
           Назад
         </Button>
       </div>
-      <Typography variant="h3" color="title">
+      <Typography variant="h3" color="title" className={s.title}>
         Мои данные
       </Typography>
 

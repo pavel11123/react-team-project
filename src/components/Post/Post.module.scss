@@ -1,3 +1,8 @@
+@use "sass:math";
+
+@import "../../scss/mixins";
+@import "../../scss/variables";
+
 .avatar__image {
   object-fit: cover;
   width: 100%;
@@ -7,14 +12,18 @@
 .post__container {
   display: grid;
   grid-template-columns: minmax(400px, 600px) minmax(200px, 350px);
-  gap: 5px;
+  gap: rem(5);
   overflow: hidden;
 }
 .img {
-  flex: 1 1 750px;
-  max-height: 500px;
+  flex: 1 1 rem(750);
+  max-height: rem(500);
 }
 
 .content {
-  flex: 1 1 300px;
+  flex: 1 1 rem(300);
+  @media (max-width: 1170px) {
+    padding-left: 0 !important;
+    padding-bottom: 0 !important;
+  }
 }

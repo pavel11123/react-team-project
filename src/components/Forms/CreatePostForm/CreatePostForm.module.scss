@@ -1,0 +1,91 @@
+@use "sass:math";
+
+@import "../../../scss/mixins";
+@import "../../../scss/variables";
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: rem(15);
+}
+
+.title {
+  text-align: center;
+  font-size: clamp(rem(16), 1.67vw, rem(24));
+  line-height: clamp(rem(18), 2.08vw, rem(30));
+}
+
+.input {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: rem(15);
+  background: #ffffff;
+  position: static;
+  flex: 1 1 auto;
+  border: rem(1) solid #cfd8dc;
+  box-sizing: border-box;
+  border-radius: rem(12);
+  -webkit-border-radius: rem(12);
+  -moz-border-radius: rem(12);
+  -ms-border-radius: rem(12);
+  -o-border-radius: rem(12);
+  font-size: clamp(rem(14), 1.11vw, rem(16));
+  line-height: clamp(rem(16), 1.25vw, rem(18));
+}
+
+input:focus {
+  outline: none;
+  border-color: #4d6eff;
+}
+
+.textarea {
+  height: auto;
+  min-height: rem(100);
+  resize: none;
+}
+
+textarea:focus {
+  outline: none;
+  border-color: #4d6eff;
+}
+
+.button {
+  padding: rem(15);
+  font-size: rem(16);
+  font-weight: 700;
+  line-height: rem(20);
+  border-radius: rem(55);
+  border: rem(1) solid #7b8e98;
+  color: #423d3d;
+  text-decoration: none;
+  text-align: center;
+  display: inline-block;
+  transition: background-color 0.3s;
+  cursor: pointer;
+  flex: 1 1 auto;
+  -webkit-border-radius: rem(55);
+  -moz-border-radius: rem(55);
+  -ms-border-radius: rem(55);
+  -o-border-radius: rem(55);
+}
+
+.button:hover {
+  background-color: hsl(214, 56%, 47%);
+  color: #ffffff;
+}
+
+.icon {
+  cursor: pointer;
+}
+
+.icon:hover {
+  opacity: 0.6;
+}

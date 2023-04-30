@@ -1,5 +1,5 @@
 import { Container, Stack, Pagination } from "@mui/material";
-import s from "./CardList.module.css";
+import s from "./CardList.module.scss";
 import RecipeReviewCard from "../Card/Card";
 import { useContext } from "react";
 import { UserContext } from "../../context/userContext";
@@ -17,7 +17,7 @@ const CardList = ({ posts, page, setPage, countPagination }) => {
   return (
     <Container>
       <div className="container__main">
-        <Stack spacing={2}>
+        <Stack spacing={2} className={s.stack}>
           <div className={s.list__grid}>
             {posts.map((el) => {
               return (
