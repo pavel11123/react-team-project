@@ -1,5 +1,5 @@
 import React, { Children } from "react";
-import s from "./ModalRegistration.module.css";
+import s from "./ModalRegistration.module.scss";
 import cn from "classnames";
 
 const ModalRegistration = ({ activeModal, children, setActiveModal }) => {
@@ -9,7 +9,6 @@ const ModalRegistration = ({ activeModal, children, setActiveModal }) => {
         className={cn(s.modal, {
           [s.active]: activeModal,
         })}
-        // onClick={()=> setActiveModal(false)}
       >
         <div
           className={cn(s.modalContent, {

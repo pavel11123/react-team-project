@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import s from "./RegistrationForm.module.css";
+import s from "./RegistrationForm.module.scss";
 import { useForm } from "react-hook-form";
 import { Input } from "@mui/material";
 import {
@@ -9,7 +9,6 @@ import {
 } from "../../../utils/constants";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import CloseIcon from "@mui/icons-material/Close";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
@@ -72,9 +71,6 @@ const RegistrationForm = ({ setActiveModal }) => {
 
   return (
     <>
-      {/* <Stack className={s.icon} direction="row" justifyContent="flex-end">
-        <CloseIcon fontSize="smoll"/>
-        </Stack> */}
       <form className={s.form} onSubmit={handleSubmit(sendData)}>
         <h3 className={s.title}>Регистрация</h3>
         <Input {...nameRegister} placeholder="name" />
@@ -87,6 +83,7 @@ const RegistrationForm = ({ setActiveModal }) => {
         )}
         <div className={s.form__eyeWrapper}>
           <Input
+            className={s.inputPassword}
             type={type ? "text" : "password"}
             {...passwordRegister}
             placeholder="password"
@@ -120,7 +117,3 @@ const RegistrationForm = ({ setActiveModal }) => {
 };
 
 export default RegistrationForm;
-
-// "donya1@mail.ru"
-// "Boris"
-// password:"123qweasd"
