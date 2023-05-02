@@ -1,10 +1,17 @@
 # [![Typing SVG](https://readme-typing-svg.herokuapp.com?color=%2336BCF7&lines=REACT+TEAM+PROJECT)](https://pavel11123.github.io/react-team-project/) 
 
 Командный проект реализованный в ходе обучения в СберУниверситете.
+Для того чтобы войти в приложение необходимо пройти авторизацию или зарегистрироваться в приложении. Так же реализована возможность сброса пароля.
+
+![image](https://github.com/pavel11123/react-team-project/blob/master/gif/login.gif)
+
 На главной странице нашего веб приложения есть информация о проекте с выводом постов получаемых по API. В каждый слайд вы можете провалиться и посмотреть более детальную информацию по каждому посту и оставить свой замечательный LIKE!
 
-
 ![image](https://github.com/pavel11123/react-team-project/blob/master/gif/ezgif.com-optimize.gif)
+
+Реализована возможность просмотра всех созданных постов с добавлением, редактированием и удалением поста. Также на странице реализована пагинация для удобного использования и оптимизированной загрузки данных.
+
+![image](https://github.com/pavel11123/react-team-project/blob/master/gif/add-post.gif)
 
 Проект реализован с помощью технологий:
 - React Js <img src="https://github.com/devicons/devicon/blob/master/icons/react/react-original-wordmark.svg" title="React" alt="React" width="15" height="15" alt="React"/>
