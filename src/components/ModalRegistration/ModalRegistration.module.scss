@@ -1,3 +1,8 @@
+@use "sass:math";
+
+@import "../../scss/mixins";
+@import "../../scss/variables";
+
 .modal {
   width: 100%;
   height: 100%;
@@ -13,6 +18,7 @@
   opacity: 0;
   pointer-events: none;
   transition: 0.5s;
+  padding: rem(15);
 }
 
 .modal.active {
@@ -28,6 +34,8 @@
     0px 20px 32px rgba(96, 97, 112, 0.24);
   transform: scale(0.5);
   transition: 0.4s all;
+  width: 100%;
+  max-width: rem(400);
 }
 
 .modalContent.active {

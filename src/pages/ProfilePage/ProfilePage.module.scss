@@ -68,12 +68,13 @@
 .description,
 .email {
   border-bottom: rem(1) solid #0000001b;
-  gap: rem(15);
+  // gap: rem(15);
 }
 
 .subtitle {
-  flex: 1 1 auto;
-  max-width: rem(90);
+  flex: 1 0 auto;
+  max-width: rem(105);
+  padding: 0 rem(15) 0 0;
 }
 
 .headerCard {

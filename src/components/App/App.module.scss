@@ -14,8 +14,9 @@
 .textAuth {
   color: #ffffff;
   font-weight: 700;
-  font-size: rem(60);
   z-index: 1;
+  font-size: clamp(rem(25), 4.17vw, rem(60));
+  line-height: clamp(rem(30), 4.86vw, rem(70));
 }
 
 .start__video {
@@ -49,7 +50,8 @@
   text-decoration: none;
   color: #ffffff;
   font-weight: 700;
-  font-size: rem(60);
+  font-size: clamp(rem(30), 4.17vw, rem(60));
+  line-height: clamp(rem(35), 4.86vw, rem(70));
   overflow: hidden;
   transition: 0.2s;
   z-index: 1;
