@@ -17,11 +17,13 @@
 - React Js <img src="https://github.com/devicons/devicon/blob/master/icons/react/react-original-wordmark.svg" title="React" alt="React" width="15" height="15" alt="React"/>
 - HTML5 <img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/html5-colored.svg" width="15" height="15" alt="HTML5" />
 - SCSS <img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/sass-colored.svg" width="15" height="15" alt="Sass" />
-
-Слайдер на главной странице реализован с помощью библиотеки slick-slider. <br/> Анимация на главной странице реализована с помощью библиотеки animation-react
+- React Router Dom <img src="https://static-00.iconduck.com/assets.00/react-router-icon-512x279-zswz065s.png" width="15" height="15" alt="dom" /> 
+- React Hook Form <img src="https://images.velog.io/images/rjsdnql123/post/efeffb05-ffea-4592-a238-a7e3905d28b1/logo.png" width="15" height="15" alt="forms" />
+- Slick-slider <img src="https://kenwheeler.github.io/slick/img/slick.gif" width="15" height="15" alt="slider" />
+- GIT <img src="https://git-scm.com/images/logos/downloads/Git-Icon-1788C.png" width="15" height="15" alt="GIT" />
+- Framer Motion <img src="https://camo.githubusercontent.com/179d66ab2b0321726c88a586c4ad38802e7113a3c98c6fd3f0156c01c98cfd14/68747470733a2f2f6672616d657275736572636f6e74656e742e636f6d2f696d616765732f34386861395a52396f5a51475136675a38595566456c50335430412e706e67" width="15" height="15" alt="motion" />
 
 [![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=pavel11123&repo=react-team-project)](https://pavel11123.github.io/react-team-project/)
-
 
 Проект можно посмотреть по ссылке
 <a href="https://pavel11123.github.io/react-team-project/" target="_blank" rel="noreferrer">pavel11123.github.io/react-team-project/</a>
